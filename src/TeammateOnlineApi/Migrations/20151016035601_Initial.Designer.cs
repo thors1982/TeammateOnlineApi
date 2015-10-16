@@ -4,7 +4,6 @@ using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
 using TeammateOnlineApi.Database;
-using TeammateOnlineApi.Models;
 using Microsoft.Data.Entity.SqlServer.Metadata;
 
 namespace TeammateOnlineApi.Migrations
@@ -14,7 +13,7 @@ namespace TeammateOnlineApi.Migrations
     {
         public override string Id
         {
-            get { return "20151010173108_Initial"; }
+            get { return "20151016035601_Initial"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +22,9 @@ namespace TeammateOnlineApi.Migrations
                 .Annotation("ProductVersion", "7.0.0-beta7-15540")
                 .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TeammateOnlineApi.Models.GameService", b =>
+            modelBuilder.Entity("TeammateOnlineApi.Models.GamePlatform", b =>
                 {
-                    b.Property<int>("GameServiceId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
@@ -34,12 +33,12 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<string>("Url")
                         .Required();
 
-                    b.Key("GameServiceId");
+                    b.Key("Id");
                 });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.UserProfile", b =>
                 {
-                    b.Property<int>("UserProfileId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("EmailAddress")
@@ -51,7 +50,7 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<string>("LastName")
                         .Required();
 
-                    b.Key("UserProfileId");
+                    b.Key("Id");
                 });
         }
     }

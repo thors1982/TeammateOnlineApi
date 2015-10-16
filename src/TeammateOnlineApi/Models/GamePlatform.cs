@@ -2,10 +2,10 @@
 
 namespace TeammateOnlineApi.Models
 {
-    public class GameService
+    public class GamePlatform
     {
         [Key]
-        public int GameServiceId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Name")]

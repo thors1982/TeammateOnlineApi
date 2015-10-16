@@ -31,13 +31,13 @@ namespace TeammateOnlineApi.Controllers
             var result = TeammateOnlineContext.UserProfiles.Add(newUserProfile);
             TeammateOnlineContext.SaveChanges();
 
-            return CreatedAtRoute("GetDetail", new { controller = "UserProfilesController", userProfileId = result.Entity.UserProfileId }, result.Entity);
+            return CreatedAtRoute("GetDetail", new { controller = "UserProfilesController", userProfileId = result.Entity.Id }, result.Entity);
         }
 
         [HttpGet("{userProfileId}")]
         public IActionResult GetDetail(int userProfileId)
         {
-            var userProfile = TeammateOnlineContext.UserProfiles.First(x => x.UserProfileId == userProfileId);
+            var userProfile = TeammateOnlineContext.UserProfiles.First(x => x.Id == userProfileId);
 
             return new HttpOkObjectResult(userProfile);
         }
@@ -46,7 +46,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int userProfileId, [FromBody]UserProfile newUserProfile)
         {
-            var userProfile = TeammateOnlineContext.UserProfiles.First(x => x.UserProfileId == userProfileId);
+            var userProfile = TeammateOnlineContext.UserProfiles.First(x => x.Id == userProfileId);
 
             if (userProfile == null)
             {

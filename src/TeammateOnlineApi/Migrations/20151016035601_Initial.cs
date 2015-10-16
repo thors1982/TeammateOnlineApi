@@ -10,23 +10,23 @@ namespace TeammateOnlineApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "GameService",
+                name: "GamePlatform",
                 columns: table => new
                 {
-                    GameServiceId = table.Column<int>(isNullable: false)
+                    Id = table.Column<int>(isNullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
                     Name = table.Column<string>(isNullable: false),
                     Url = table.Column<string>(isNullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameService", x => x.GameServiceId);
+                    table.PrimaryKey("PK_GamePlatform", x => x.Id);
                 });
             migrationBuilder.CreateTable(
                 name: "UserProfile",
                 columns: table => new
                 {
-                    UserProfileId = table.Column<int>(isNullable: false)
+                    Id = table.Column<int>(isNullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
                     EmailAddress = table.Column<string>(isNullable: false),
                     FirstName = table.Column<string>(isNullable: false),
@@ -34,13 +34,13 @@ namespace TeammateOnlineApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserProfile", x => x.UserProfileId);
+                    table.PrimaryKey("PK_UserProfile", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable("GameService");
+            migrationBuilder.DropTable("GamePlatform");
             migrationBuilder.DropTable("UserProfile");
         }
     }

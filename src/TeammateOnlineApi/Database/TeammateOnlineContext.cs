@@ -5,7 +5,7 @@ namespace TeammateOnlineApi.Database
 {
     public class TeammateOnlineContext : DbContext
     {
-        public DbSet<GameService> GameServices { get; set; }
+        public DbSet<GamePlatform> GamePlatforms { get; set; }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
