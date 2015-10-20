@@ -57,13 +57,29 @@ namespace TeammateOnlineApi.Controllers
                 return HttpNotFound();
             }
 
+            gameAccount.UserProfileId = userProfileId;
             gameAccount.GamePlatformId = newGameAccount.GamePlatformId;
-            gameAccount.UserProfileId = newGameAccount.UserProfileId;
             gameAccount.UserName = newGameAccount.UserName;
             TeammateOnlineContext.GameAccounts.Update(gameAccount);
             TeammateOnlineContext.SaveChanges();
 
             return new HttpOkResult();
+        }
+
+        [HttpDelete("{gameAccountId}")]
+        public IActionResult Delete(int userProfileId, int gameAccountId)
+        {
+            var gameAccount = TeammateOnlineContext.GameAccounts.FirstOrDefault(x => x.Id == gameAccountId && x.UserProfileId == userProfileId);
+
+            if (gameAccount == null)
+            {
+                return HttpNotFound();
+            }
+
+            var result = TeammateOnlineContext.GameAccounts.Remove(gameAccount);
+            TeammateOnlineContext.SaveChanges();
+
+            return new NoContentResult();
         }
     }
 }

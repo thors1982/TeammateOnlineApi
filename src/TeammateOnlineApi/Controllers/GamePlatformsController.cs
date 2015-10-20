@@ -54,6 +54,7 @@ namespace TeammateOnlineApi.Controllers
 
             gamePlatform.Name = newGamePlatform.Name;
             gamePlatform.Url = newGamePlatform.Url;
+            gamePlatform.Active = newGamePlatform.Active;
             TeammateOnlineContext.GamePlatforms.Update(gamePlatform);
             TeammateOnlineContext.SaveChanges();
 
