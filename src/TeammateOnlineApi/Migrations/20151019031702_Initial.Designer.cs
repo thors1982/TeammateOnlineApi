@@ -13,7 +13,7 @@ namespace TeammateOnlineApi.Migrations
     {
         public override string Id
         {
-            get { return "20151016035601_Initial"; }
+            get { return "20151019031702_Initial"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,21 @@ namespace TeammateOnlineApi.Migrations
             modelBuilder
                 .Annotation("ProductVersion", "7.0.0-beta7-15540")
                 .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn);
+
+            modelBuilder.Entity("TeammateOnlineApi.Models.GameAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GamePlatformId");
+
+                    b.Property<string>("UserName")
+                        .Required();
+
+                    b.Property<int>("UserProfileId");
+
+                    b.Key("Id");
+                });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.GamePlatform", b =>
                 {

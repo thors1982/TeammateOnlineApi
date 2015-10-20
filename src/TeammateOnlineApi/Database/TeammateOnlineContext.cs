@@ -8,5 +8,7 @@ namespace TeammateOnlineApi.Database
         public DbSet<GamePlatform> GamePlatforms { get; set; }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        public DbSet<GameAccount> GameAccounts { get; set; }
     }
 }

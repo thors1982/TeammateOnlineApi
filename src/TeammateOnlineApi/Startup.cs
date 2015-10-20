@@ -12,7 +12,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using TeammateOnlineApi.Database;
 using Microsoft.Dnx.Runtime;
-
+using Microsoft.AspNet.Mvc;
 
 namespace TeammateOnlineApi
 {

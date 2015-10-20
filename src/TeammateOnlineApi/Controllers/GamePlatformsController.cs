@@ -31,7 +31,12 @@ namespace TeammateOnlineApi.Controllers
         [HttpGet("{gamePlatformId}")]
         public IActionResult GetDetail(int gamePlatformId)
         {
-            var gamePlatform = TeammateOnlineContext.GamePlatforms.First(x => x.Id == gamePlatformId);
+            var gamePlatform = TeammateOnlineContext.GamePlatforms.FirstOrDefault(x => x.Id == gamePlatformId);
+
+            if(gamePlatform == null)
+            {
+                return HttpNotFound();
+            }
 
             return new HttpOkObjectResult(gamePlatform);
         }
@@ -40,7 +45,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int gamePlatformId, [FromBody]GamePlatform newGamePlatform)
         {
-            var gamePlatform = TeammateOnlineContext.GamePlatforms.First(x => x.Id == gamePlatformId);
+            var gamePlatform = TeammateOnlineContext.GamePlatforms.FirstOrDefault(x => x.Id == gamePlatformId);
 
             if (gamePlatform == null)
             {
@@ -58,7 +63,7 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{gamePlatformId}")]
         public IActionResult Delete(int gamePlatformId)
         {
-            var gamePlatform = TeammateOnlineContext.GamePlatforms.First(x => x.Id == gamePlatformId);
+            var gamePlatform = TeammateOnlineContext.GamePlatforms.FirstOrDefault(x => x.Id == gamePlatformId);
 
             if(gamePlatform == null)
             {

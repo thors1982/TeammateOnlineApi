@@ -17,6 +17,21 @@ namespace TeammateOnlineApi.Migrations
                 .Annotation("ProductVersion", "7.0.0-beta7-15540")
                 .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn);
 
+            modelBuilder.Entity("TeammateOnlineApi.Models.GameAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GamePlatformId");
+
+                    b.Property<string>("UserName")
+                        .Required();
+
+                    b.Property<int>("UserProfileId");
+
+                    b.Key("Id");
+                });
+
             modelBuilder.Entity("TeammateOnlineApi.Models.GamePlatform", b =>
                 {
                     b.Property<int>("Id")

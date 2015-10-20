@@ -22,7 +22,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Post([FromBody]UserProfile newUserProfile)
         {
-            if (TeammateOnlineContext.UserProfiles.First<UserProfile>(x => x.EmailAddress == newUserProfile.EmailAddress) != null)
+            if (TeammateOnlineContext.UserProfiles.FirstOrDefault(x => x.EmailAddress == newUserProfile.EmailAddress) != null)
             {
                 ModelState.AddModelError("EmailAddress", "Email address already taken.");
                 return new BadRequestObjectResult(ModelState);
@@ -37,7 +37,12 @@ namespace TeammateOnlineApi.Controllers
         [HttpGet("{userProfileId}")]
         public IActionResult GetDetail(int userProfileId)
         {
-            var userProfile = TeammateOnlineContext.UserProfiles.First(x => x.Id == userProfileId);
+            var userProfile = TeammateOnlineContext.UserProfiles.FirstOrDefault(x => x.Id == userProfileId);
+
+            if (userProfile == null)
+            {
+                return HttpNotFound();
+            }
 
             return new HttpOkObjectResult(userProfile);
         }
@@ -46,14 +51,14 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int userProfileId, [FromBody]UserProfile newUserProfile)
         {
-            var userProfile = TeammateOnlineContext.UserProfiles.First(x => x.Id == userProfileId);
+            var userProfile = TeammateOnlineContext.UserProfiles.FirstOrDefault(x => x.Id == userProfileId);
 
             if (userProfile == null)
             {
                 return HttpNotFound();
             }
 
-            if (TeammateOnlineContext.UserProfiles.First<UserProfile>(x => x.EmailAddress == newUserProfile.EmailAddress) != null)
+            if (TeammateOnlineContext.UserProfiles.FirstOrDefault(x => x.EmailAddress == newUserProfile.EmailAddress) != null)
             {
                 ModelState.AddModelError("EmailAddress", "Email address already taken.");
                 return new BadRequestObjectResult(ModelState);
