@@ -58,7 +58,7 @@ namespace TeammateOnlineApi.Controllers
                 return HttpNotFound();
             }
 
-            if (TeammateOnlineContext.UserProfiles.FirstOrDefault(x => x.EmailAddress == newUserProfile.EmailAddress) != null)
+            if (userProfile.EmailAddress != newUserProfile.EmailAddress && TeammateOnlineContext.UserProfiles.FirstOrDefault(x => x.EmailAddress == newUserProfile.EmailAddress) != null)
             {
                 ModelState.AddModelError("EmailAddress", "Email address already taken.");
                 return new BadRequestObjectResult(ModelState);
