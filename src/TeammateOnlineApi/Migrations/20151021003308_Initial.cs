@@ -15,7 +15,9 @@ namespace TeammateOnlineApi.Migrations
                 {
                     Id = table.Column<int>(isNullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTime>(isNullable: false),
                     GamePlatformId = table.Column<int>(isNullable: false),
+                    ModifiedDate = table.Column<DateTime>(isNullable: false),
                     UserName = table.Column<string>(isNullable: false),
                     UserProfileId = table.Column<int>(isNullable: false)
                 },
@@ -29,6 +31,8 @@ namespace TeammateOnlineApi.Migrations
                 {
                     Id = table.Column<int>(isNullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTime>(isNullable: false),
+                    ModifiedDate = table.Column<DateTime>(isNullable: false),
                     Name = table.Column<string>(isNullable: false),
                     Url = table.Column<string>(isNullable: false)
                 },
@@ -42,9 +46,11 @@ namespace TeammateOnlineApi.Migrations
                 {
                     Id = table.Column<int>(isNullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTime>(isNullable: false),
                     EmailAddress = table.Column<string>(isNullable: false),
                     FirstName = table.Column<string>(isNullable: false),
-                    LastName = table.Column<string>(isNullable: false)
+                    LastName = table.Column<string>(isNullable: false),
+                    ModifiedDate = table.Column<DateTime>(isNullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TeammateOnlineApi.Models
 {
-    public class GameAccount
+    public class GameAccount : BaseModel
     {
         [Key]
         public int Id { get; set; }

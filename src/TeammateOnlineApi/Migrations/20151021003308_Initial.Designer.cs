@@ -13,7 +13,7 @@ namespace TeammateOnlineApi.Migrations
     {
         public override string Id
         {
-            get { return "20151019031702_Initial"; }
+            get { return "20151021003308_Initial"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,11 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreatedDate");
+
                     b.Property<int>("GamePlatformId");
+
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("UserName")
                         .Required();
@@ -41,6 +45,10 @@ namespace TeammateOnlineApi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Name")
                         .Required();
@@ -56,6 +64,8 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreatedDate");
+
                     b.Property<string>("EmailAddress")
                         .Required();
 
@@ -64,6 +74,8 @@ namespace TeammateOnlineApi.Migrations
 
                     b.Property<string>("LastName")
                         .Required();
+
+                    b.Property<DateTime>("ModifiedDate");
 
                     b.Key("Id");
                 });
