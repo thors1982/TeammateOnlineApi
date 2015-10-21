@@ -38,12 +38,13 @@ namespace TeammateOnlineApi
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
             // services.AddWebApiConventions();
 
-            //My stuff
+            // Configure SQL connection string
             services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetSection("Data:ConnectionString").Value);
             });
 
+            // Add swagger as a service
             services.AddSwagger();
         }
 
@@ -58,10 +59,11 @@ namespace TeammateOnlineApi
             // Add the following route for porting Web API 2 controllers.
             // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
 
-            //My stuff
+            // Seed data and add sample data for testing
             SeedData.Initialize(app.ApplicationServices);
             SampleData.Initialize(app.ApplicationServices);
 
+            // Setup swagger
             app.UseSwagger();
             app.UseSwaggerUi("docs/");
         }
