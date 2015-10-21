@@ -15,7 +15,5 @@ namespace TeammateOnlineApi.Models
         [Url]
         [Display(Name = "URL")]
         public string Url { get; set; }
-        
-        public bool Active { get; set; }
     }
 }
