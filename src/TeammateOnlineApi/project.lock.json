@@ -930,6 +930,25 @@
           "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta7"
         }
       },
+      "Microsoft.AspNet.Server.Kestrel/1.0.0-beta7": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.Hosting": "1.0.0-beta7",
+          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.AspNet.Server.Kestrel.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.AspNet.Server.Kestrel.dll": {}
+        }
+      },
       "Microsoft.AspNet.Server.WebListener/1.0.0-beta7": {
         "type": "package",
         "dependencies": {
@@ -2512,6 +2531,24 @@
         "Microsoft.AspNet.Server.IIS.nuspec"
       ]
     },
+    "Microsoft.AspNet.Server.Kestrel/1.0.0-beta7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "3sO/pJim533BKReqvrAMyBmYXHdqsEiPnPe/WuPnPQ+FxMSUEKMxVwxpR+OjU01xBsMXT+kapykrGB9h63mOZQ==",
+      "files": [
+        "lib/dnx451/Microsoft.AspNet.Server.Kestrel.dll",
+        "lib/dnx451/Microsoft.AspNet.Server.Kestrel.xml",
+        "lib/dnxcore50/Microsoft.AspNet.Server.Kestrel.dll",
+        "lib/dnxcore50/Microsoft.AspNet.Server.Kestrel.xml",
+        "Microsoft.AspNet.Server.Kestrel.1.0.0-beta7.nupkg",
+        "Microsoft.AspNet.Server.Kestrel.1.0.0-beta7.nupkg.sha512",
+        "Microsoft.AspNet.Server.Kestrel.nuspec",
+        "native/darwin/universal/libuv.dylib",
+        "native/windows/amd64/libuv.dll",
+        "native/windows/x86/libuv.dll",
+        "repo.json"
+      ]
+    },
     "Microsoft.AspNet.Server.WebListener/1.0.0-beta7": {
       "type": "package",
       "serviceable": true,
@@ -3755,6 +3792,7 @@
     "": [
       "Microsoft.AspNet.Mvc >= 6.0.0-beta7",
       "Microsoft.AspNet.Server.IIS >= 1.0.0-beta7",
+      "Microsoft.AspNet.Server.Kestrel >= 1.0.0-beta7",
       "Microsoft.AspNet.Server.WebListener >= 1.0.0-beta7",
       "Microsoft.AspNet.StaticFiles >= 1.0.0-beta7",
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta7",

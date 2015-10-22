@@ -5,6 +5,7 @@
   "dependencies": {
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
     "Microsoft.AspNet.StaticFiles": "1.0.0-beta7",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
@@ -17,17 +18,14 @@
 
   "commands": {
     "web": "Microsoft.AspNet.Hosting --config hosting.ini",
+    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --config hosting.ini",
     "ef": "EntityFramework.Commands"
   },
 
   "exclude": [
-    "wwwroot",
-    "node_modules",
-    "bower_components"
+    "wwwroot"
   ],
   "publishExclude": [
-    "node_modules",
-    "bower_components",
     "**.xproj",
     "**.user",
     "**.vspscc"
