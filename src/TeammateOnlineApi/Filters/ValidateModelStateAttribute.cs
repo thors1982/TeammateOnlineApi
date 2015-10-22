@@ -3,7 +3,7 @@ using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.Framework.Internal;
 using TeammateOnlineApi.Controllers;
 
-namespace TeammateOnlineApi.Helpers
+namespace TeammateOnlineApi.Filters
 {
     public class ValidateModelStateAttribute : ActionFilterAttribute
     {

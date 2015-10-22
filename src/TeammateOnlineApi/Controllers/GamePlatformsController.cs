@@ -3,7 +3,7 @@ using Microsoft.Framework.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Database;
-using TeammateOnlineApi.Helpers;
+using TeammateOnlineApi.Filters;
 using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Controllers
