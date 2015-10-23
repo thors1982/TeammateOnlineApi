@@ -4,23 +4,18 @@ using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
 using TeammateOnlineApi.Database;
-using Microsoft.Data.Entity.SqlServer.Metadata;
 
 namespace TeammateOnlineApi.Migrations
 {
     [DbContext(typeof(TeammateOnlineContext))]
+    [Migration("20151023003149_Initial")]
     partial class Initial
     {
-        public override string Id
-        {
-            get { return "20151021003308_Initial"; }
-        }
-
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Annotation("ProductVersion", "7.0.0-beta7-15540")
-                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn);
+                .Annotation("ProductVersion", "7.0.0-beta8-15964")
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("TeammateOnlineApi.Models.GameAccount", b =>
                 {
@@ -34,11 +29,11 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("UserName")
-                        .Required();
+                        .IsRequired();
 
                     b.Property<int>("UserProfileId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
                 });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.GamePlatform", b =>
@@ -51,12 +46,12 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Name")
-                        .Required();
+                        .IsRequired();
 
                     b.Property<string>("Url")
-                        .Required();
+                        .IsRequired();
 
-                    b.Key("Id");
+                    b.HasKey("Id");
                 });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.UserProfile", b =>
@@ -67,17 +62,17 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<DateTime>("CreatedDate");
 
                     b.Property<string>("EmailAddress")
-                        .Required();
+                        .IsRequired();
 
                     b.Property<string>("FirstName")
-                        .Required();
+                        .IsRequired();
 
                     b.Property<string>("LastName")
-                        .Required();
+                        .IsRequired();
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
                 });
         }
     }

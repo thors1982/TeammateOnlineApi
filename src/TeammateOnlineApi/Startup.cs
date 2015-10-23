@@ -1,32 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Routing;
-using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using TeammateOnlineApi.Database;
-using Microsoft.Dnx.Runtime;
-using Microsoft.AspNet.Mvc;
+
 
 namespace TeammateOnlineApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; set; }
-
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env)
         {
-            // Setup configuration sources.
-            var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath)
-                .AddJsonFile("config.json")
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
         }
 
         // This method gets called by a runtime.
@@ -41,16 +29,25 @@ namespace TeammateOnlineApi
             // Configure SQL connection string
             services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetSection("Data:ConnectionString").Value);
+                options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=TeammateOnline;Trusted_Connection=True;MultipleActiveResultSets=true");
             });
 
             // Add swagger as a service
+            /* (Doesn't work in beta8 yet)
             services.AddSwagger();
+            */
         }
 
         // Configure is called after ConfigureServices is called.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.MinimumLevel = LogLevel.Information;
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
+
+            // Add the platform handler to the request pipeline.
+            app.UseIISPlatformHandler();
+
             // Configure the HTTP request pipeline.
             app.UseStaticFiles();
 
@@ -64,8 +61,10 @@ namespace TeammateOnlineApi
             SampleData.Initialize(app.ApplicationServices);
 
             // Setup swagger
+            /*  (Doesn't work in beta8 yet)
             app.UseSwagger();
             app.UseSwaggerUi("docs/");
+            */
         }
     }
 }
