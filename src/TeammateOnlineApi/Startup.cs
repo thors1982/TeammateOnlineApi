@@ -1,20 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using TeammateOnlineApi.Database;
-
+using Microsoft.Framework.Configuration;
+using Microsoft.Dnx.Runtime;
 
 namespace TeammateOnlineApi
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public IConfiguration Configuration { get; set; }
+
+        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(appEnv.ApplicationBasePath)
+                .AddJsonFile("config.json")
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         // This method gets called by a runtime.
@@ -29,7 +35,7 @@ namespace TeammateOnlineApi
             // Configure SQL connection string
             services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
             {
-                options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=TeammateOnline;Trusted_Connection=True;MultipleActiveResultSets=true");
+                options.UseSqlServer(Configuration.GetSection("Data:ConnectionString").Value);
             });
 
             // Add swagger as a service
@@ -49,7 +55,7 @@ namespace TeammateOnlineApi
             app.UseIISPlatformHandler();
 
             // Configure the HTTP request pipeline.
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
 
             // Add MVC to the request pipeline.
             app.UseMvc();

@@ -354,10 +354,10 @@
           "lib/dnx451/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
         }
       },
-      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-beta7": {
+      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-beta7"
+          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-beta8"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -2178,10 +2178,10 @@
           "lib/dnx451/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
         }
       },
-      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-beta7": {
+      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-beta7"
+          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-beta8"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -4005,10 +4005,10 @@
           "lib/dnx451/Microsoft.AspNet.FileProviders.Abstractions.dll": {}
         }
       },
-      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-beta7": {
+      "Microsoft.AspNet.FileProviders.Embedded/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-beta7"
+          "Microsoft.AspNet.FileProviders.Abstractions": "1.0.0-beta8"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -5763,10 +5763,10 @@
         "Microsoft.AspNet.FileProviders.Abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNet.FileProviders.Embedded/1.0.0-beta7": {
+    "Microsoft.AspNet.FileProviders.Embedded/1.0.0-beta8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sT8lEQcUuaUQwzfbQZLRH1ph4X/xg3lbCwXl+6c83FTfBzAQhIsr7TrpaGD7GIOReiSzlUUUiWN06yIWyCeFvQ==",
+      "sha512": "h/zGmO2Gl+PAoriaqLhagEo1Xt7Oa0JpKYmji8LN0Wx2GM8nqb10xUgTcBs3xbcZjEWWumgwTfHxDmLLp5beIg==",
       "files": [
         "lib/dnx451/Microsoft.AspNet.FileProviders.Embedded.dll",
         "lib/dnx451/Microsoft.AspNet.FileProviders.Embedded.xml",
@@ -5774,10 +5774,9 @@
         "lib/dnxcore50/Microsoft.AspNet.FileProviders.Embedded.xml",
         "lib/net45/Microsoft.AspNet.FileProviders.Embedded.dll",
         "lib/net45/Microsoft.AspNet.FileProviders.Embedded.xml",
-        "Microsoft.AspNet.FileProviders.Embedded.1.0.0-beta7.nupkg",
-        "Microsoft.AspNet.FileProviders.Embedded.1.0.0-beta7.nupkg.sha512",
-        "Microsoft.AspNet.FileProviders.Embedded.nuspec",
-        "repo.json"
+        "Microsoft.AspNet.FileProviders.Embedded.1.0.0-beta8.nupkg",
+        "Microsoft.AspNet.FileProviders.Embedded.1.0.0-beta8.nupkg.sha512",
+        "Microsoft.AspNet.FileProviders.Embedded.nuspec"
       ]
     },
     "Microsoft.AspNet.FileProviders.Physical/1.0.0-beta8": {
@@ -7525,20 +7524,20 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "Microsoft.AspNet.FileProviders.Embedded >= 1.0.0-beta8",
       "Microsoft.AspNet.IISPlatformHandler >= 1.0.0-beta8",
       "Microsoft.AspNet.Mvc >= 6.0.0-beta8",
       "Microsoft.AspNet.Server.Kestrel >= 1.0.0-beta8",
       "Microsoft.AspNet.StaticFiles >= 1.0.0-beta8",
-      "Microsoft.Framework.Configuration.Json >= 1.0.0-beta8",
+      "Microsoft.Dnx.Runtime.Abstractions >= 1.0.0-beta8",
+      "Microsoft.Framework.DependencyInjection >= 1.0.0-beta8",
       "Microsoft.Framework.Logging >= 1.0.0-beta8",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta8",
       "Microsoft.Framework.Logging.Debug >= 1.0.0-beta8",
       "EntityFramework.SqlServer >= 7.0.0-beta8",
       "EntityFramework.Commands >= 7.0.0-beta8",
-      "Microsoft.Dnx.Runtime.Abstractions >= 1.0.0-beta8",
-      "Swashbuckle >= 6.0.0-beta7",
       "FluentValidation >= 5.6.2",
-      "Microsoft.Framework.DependencyInjection >= 1.0.0-beta8"
+      "Swashbuckle >= 6.0.0-beta7"
     ],
     "DNX,Version=v4.5.1": []
   }
