@@ -2,6 +2,7 @@
 using Microsoft.Data.Entity;
 using TeammateOnlineApi.Models;
 using System.Linq;
+using Microsoft.Data.Sqlite;
 
 namespace TeammateOnlineApi.Database
 {

@@ -7,7 +7,7 @@ using Microsoft.Data.Entity;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using TeammateOnlineApi.Database;
-
+using Microsoft.Data.Sqlite;
 
 namespace TeammateOnlineApi
 {
@@ -26,10 +26,13 @@ namespace TeammateOnlineApi
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
             // services.AddWebApiConventions();
 
+            var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "Put absolute path here C:\\.." };
+            var connectionString = connectionStringBuilder.ToString();
+            var connection = new SqliteConnection(connectionString);
             // Configure SQL connection string
-            services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
+            services.AddEntityFramework().AddSqlite().AddDbContext<TeammateOnlineContext>(options =>
             {
-                options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=TeammateOnline;Trusted_Connection=True;MultipleActiveResultSets=true");
+                options.UseSqlite(connection);
             });
 
             // Add swagger as a service

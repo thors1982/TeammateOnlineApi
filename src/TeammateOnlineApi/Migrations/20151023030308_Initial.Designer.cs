@@ -8,14 +8,13 @@ using TeammateOnlineApi.Database;
 namespace TeammateOnlineApi.Migrations
 {
     [DbContext(typeof(TeammateOnlineContext))]
-    [Migration("20151023003149_Initial")]
+    [Migration("20151023030308_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Annotation("ProductVersion", "7.0.0-beta8-15964")
-                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .Annotation("ProductVersion", "7.0.0-beta8-15964");
 
             modelBuilder.Entity("TeammateOnlineApi.Models.GameAccount", b =>
                 {
