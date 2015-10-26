@@ -2,6 +2,8 @@
 using Microsoft.Data.Entity;
 using TeammateOnlineApi.Models;
 using System.Linq;
+using Microsoft.Framework.Configuration;
+using TeammateOnlineApi;
 
 namespace TeammateOnlineApi.Database
 {
@@ -13,6 +15,13 @@ namespace TeammateOnlineApi.Database
 
         public DbSet<GameAccount> GameAccounts { get; set; }
 
+        public DbSet<Friend> Friends { get; set; }
+
+        public TeammateOnlineContext()
+        {
+            Database.EnsureCreated();
+        }
+        
         public override int SaveChanges()
         {
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))
