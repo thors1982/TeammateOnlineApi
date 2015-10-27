@@ -2,11 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TeammateOnlineApi.Models
+namespace TeammateOnlineApi.ViewModels
 {
-    public class UserProfile : BaseModel
+    public class UserProfileViewModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]

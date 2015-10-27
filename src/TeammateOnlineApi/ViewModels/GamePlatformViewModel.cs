@@ -2,16 +2,17 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TeammateOnlineApi.Models
+namespace TeammateOnlineApi.ViewModels
 {
-    public class GamePlatform : BaseModel
+    public class GamePlatformViewModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        [Url]
         public string Url { get; set; }
     }
 }

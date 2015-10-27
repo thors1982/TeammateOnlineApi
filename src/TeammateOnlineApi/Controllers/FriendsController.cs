@@ -1,31 +1,33 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Database;
 using TeammateOnlineApi.Filters;
 using TeammateOnlineApi.Models;
+using TeammateOnlineApi.ViewModels;
 
 namespace TeammateOnlineApi.Controllers
 {
     public class FriendsController : BaseController
     {
         [HttpGet]
-        public IEnumerable<Friend> GetCollection()
+        public IEnumerable<FriendViewModel> GetCollection()
         {
-            var friendList = TeammateOnlineContext.Friends;
-
-            return friendList.ToList();
+            return Mapper.Map<IEnumerable<FriendViewModel>>(TeammateOnlineContext.Friends);
         }
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Post([FromBody]Friend newFriend)
+        public IActionResult Post([FromBody]FriendViewModel request)
         {
-            var result = TeammateOnlineContext.Friends.Add(newFriend);
+            var newFriend = Mapper.Map<Friend>(request);
+
+            TeammateOnlineContext.Friends.Add(newFriend);
             TeammateOnlineContext.SaveChanges();
 
-            return CreatedAtRoute("GetDetail", new { controller = "FriendsController", friendId = result.Entity.Id }, result.Entity);
+            return CreatedAtRoute("GetDetail", new { controller = "FriendsController", friendId = newFriend.Id }, Mapper.Map<FriendViewModel>(newFriend));
         }
 
         [HttpGet("{friendId}")]
@@ -38,7 +40,7 @@ namespace TeammateOnlineApi.Controllers
                 return HttpNotFound();
             }
 
-            return new HttpOkObjectResult(friend);
+            return new HttpOkObjectResult(Mapper.Map<FriendViewModel>(friend));
         }
 
         [HttpDelete("{friendId}")]

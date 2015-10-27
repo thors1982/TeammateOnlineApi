@@ -1,34 +1,36 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Database;
 using TeammateOnlineApi.Filters;
 using TeammateOnlineApi.Models;
+using TeammateOnlineApi.ViewModels;
 
 namespace TeammateOnlineApi.Controllers
 {
     public class GamePlatformsController : BaseController
     {
         [HttpGet]
-        public IEnumerable<GamePlatform> GetCollection()
+        public IEnumerable<GamePlatformViewModel> GetCollection()
         {
-            var gamePlatformList = TeammateOnlineContext.GamePlatforms;
-
-            return gamePlatformList.ToList();
+            return Mapper.Map<IEnumerable<GamePlatformViewModel>>(TeammateOnlineContext.GamePlatforms);
         }
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Post([FromBody]GamePlatform newGamePlatform)
+        public IActionResult Post([FromBody]GamePlatformViewModel request)
         {
-            var result = TeammateOnlineContext.GamePlatforms.Add(newGamePlatform);
+            var newGamePlatform = Mapper.Map<GamePlatform>(request);
+
+            TeammateOnlineContext.GamePlatforms.Add(newGamePlatform);
             TeammateOnlineContext.SaveChanges();
 
-            return CreatedAtRoute("GetDetail", new { controller = "GamePlatformsController", gamePlatformId = result.Entity.Id }, result.Entity);
+            return CreatedAtRoute("GetDetail", new { controller = "GamePlatformsController", gamePlatformId = newGamePlatform.Id }, Mapper.Map<GamePlatformViewModel>(newGamePlatform));
         }
 
-        [HttpGet("{gamePlatformId}")]
+        [HttpGet("{gamePlatformId}", Name ="GetDetail")]
         public IActionResult GetDetail(int gamePlatformId)
         {
             var gamePlatform = TeammateOnlineContext.GamePlatforms.FirstOrDefault(x => x.Id == gamePlatformId);
@@ -38,12 +40,12 @@ namespace TeammateOnlineApi.Controllers
                 return HttpNotFound();
             }
 
-            return new HttpOkObjectResult(gamePlatform);
+            return new HttpOkObjectResult(Mapper.Map<GamePlatformViewModel>(gamePlatform));
         }
 
         [HttpPut("{gamePlatformId}")]
         [ValidateModelState]
-        public IActionResult Put(int gamePlatformId, [FromBody]GamePlatform newGamePlatform)
+        public IActionResult Put(int gamePlatformId, [FromBody]GamePlatformViewModel request)
         {
             var gamePlatform = TeammateOnlineContext.GamePlatforms.FirstOrDefault(x => x.Id == gamePlatformId);
 
@@ -52,6 +54,7 @@ namespace TeammateOnlineApi.Controllers
                 return HttpNotFound();
             }
 
+            var newGamePlatform = Mapper.Map<GamePlatform>(request);
             gamePlatform.Name = newGamePlatform.Name;
             gamePlatform.Url = newGamePlatform.Url;
             TeammateOnlineContext.GamePlatforms.Update(gamePlatform);

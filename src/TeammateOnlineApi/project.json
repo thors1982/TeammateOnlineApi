@@ -13,6 +13,7 @@
     "Microsoft.Framework.Logging": "1.0.0-beta8",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta8",
     "Microsoft.Framework.Logging.Debug": "1.0.0-beta8",
+    "AutoMapper": "4.1.1",
     "EntityFramework.SqlServer": "7.0.0-beta8",
     "EntityFramework.Commands": "7.0.0-beta8",
     "FluentValidation": "5.6.2",

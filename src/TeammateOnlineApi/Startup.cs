@@ -7,12 +7,15 @@ using Microsoft.Framework.Logging;
 using TeammateOnlineApi.Database;
 using Microsoft.Framework.Configuration;
 using Microsoft.Dnx.Runtime;
+using AutoMapper;
+using TeammateOnlineApi.Models;
+using TeammateOnlineApi.ViewModels;
 
 namespace TeammateOnlineApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; set; }
+        public Microsoft.Framework.Configuration.IConfiguration Configuration { get; set; }
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
@@ -32,6 +35,8 @@ namespace TeammateOnlineApi
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
             // services.AddWebApiConventions();
 
+            services.AddLogging();
+
             // Configure SQL connection string
             services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
             {
@@ -48,8 +53,13 @@ namespace TeammateOnlineApi
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.MinimumLevel = LogLevel.Warning;
-            loggerFactory.AddConsole();
+            //loggerFactory.AddConsole();
             loggerFactory.AddDebug();
+
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<GamePlatform, GamePlatformViewModel>().ReverseMap();
+            });
 
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
