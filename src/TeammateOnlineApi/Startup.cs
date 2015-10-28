@@ -32,6 +32,11 @@ namespace TeammateOnlineApi
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
             // services.AddWebApiConventions();
 
+            //Add Cors support to the service
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+                                                                        .AllowAnyMethod()
+                                                                         .AllowAnyHeader()));
+
             // Configure SQL connection string
             services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
             {
@@ -53,6 +58,8 @@ namespace TeammateOnlineApi
 
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
+
+            app.UseCors("AllowAll");
 
             // Configure the HTTP request pipeline.
             //app.UseStaticFiles();
