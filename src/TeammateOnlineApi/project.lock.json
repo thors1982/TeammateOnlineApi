@@ -1635,12 +1635,10 @@
           "lib/net45/Remotion.Linq.dll": {}
         }
       },
-      "Swashbuckle/6.0.0-beta7": {
+      "Swashbuckle/6.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-beta7",
-          "Microsoft.AspNet.Mvc": "6.0.0-beta7",
-          "Microsoft.AspNet.StaticFiles": "1.0.0-beta7"
+          "Swashbuckle.Swagger": "6.0.0-beta8"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -1653,6 +1651,26 @@
         },
         "runtime": {
           "lib/dnx451/Swashbuckle.dll": {}
+        }
+      },
+      "Swashbuckle.Swagger/6.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-beta8",
+          "Microsoft.AspNet.Mvc": "6.0.0-beta8",
+          "Microsoft.AspNet.StaticFiles": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.Swagger.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.Swagger.dll": {}
         }
       },
       "System.Collections/4.0.0": {
@@ -3480,12 +3498,10 @@
           "lib/net45/Remotion.Linq.dll": {}
         }
       },
-      "Swashbuckle/6.0.0-beta7": {
+      "Swashbuckle/6.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-beta7",
-          "Microsoft.AspNet.Mvc": "6.0.0-beta7",
-          "Microsoft.AspNet.StaticFiles": "1.0.0-beta7"
+          "Swashbuckle.Swagger": "6.0.0-beta8"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -3498,6 +3514,26 @@
         },
         "runtime": {
           "lib/dnx451/Swashbuckle.dll": {}
+        }
+      },
+      "Swashbuckle.Swagger/6.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-beta8",
+          "Microsoft.AspNet.Mvc": "6.0.0-beta8",
+          "Microsoft.AspNet.StaticFiles": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.Swagger.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.Swagger.dll": {}
         }
       },
       "System.Collections/4.0.0": {
@@ -5325,12 +5361,10 @@
           "lib/net45/Remotion.Linq.dll": {}
         }
       },
-      "Swashbuckle/6.0.0-beta7": {
+      "Swashbuckle/6.0.0-beta8": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-beta7",
-          "Microsoft.AspNet.Mvc": "6.0.0-beta7",
-          "Microsoft.AspNet.StaticFiles": "1.0.0-beta7"
+          "Swashbuckle.Swagger": "6.0.0-beta8"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -5343,6 +5377,26 @@
         },
         "runtime": {
           "lib/dnx451/Swashbuckle.dll": {}
+        }
+      },
+      "Swashbuckle.Swagger/6.0.0-beta8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNet.FileProviders.Embedded": "1.0.0-beta8",
+          "Microsoft.AspNet.Mvc": "6.0.0-beta8",
+          "Microsoft.AspNet.StaticFiles": "1.0.0-beta8"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Swashbuckle.Swagger.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Swashbuckle.Swagger.dll": {}
         }
       },
       "System.Collections/4.0.0": {
@@ -6884,17 +6938,30 @@
         "Remotion.Linq.nuspec"
       ]
     },
-    "Swashbuckle/6.0.0-beta7": {
+    "Swashbuckle/6.0.0-beta8": {
       "type": "package",
-      "sha512": "ouvJhHRDWmvBZ//8buW5cNeSBh9vtM8TRAVaSi7DtNGVR+vYVoLLu/dZRz08+gy8BgMF+apYZ5Q2GYmGovpbjQ==",
+      "sha512": "3rYmREAUE+vLn2WmgzKptBOVWSuO20LSz8EZFQUea4UkR4MPGfBZ3Rzv1+zIP6HEixpn1k3HAr8SsuQWh64MaA==",
       "files": [
         "lib/dnx451/Swashbuckle.dll",
         "lib/dnx451/Swashbuckle.xml",
         "lib/dnxcore50/Swashbuckle.dll",
         "lib/dnxcore50/Swashbuckle.xml",
-        "Swashbuckle.6.0.0-beta7.nupkg",
-        "Swashbuckle.6.0.0-beta7.nupkg.sha512",
+        "Swashbuckle.6.0.0-beta8.nupkg",
+        "Swashbuckle.6.0.0-beta8.nupkg.sha512",
         "Swashbuckle.nuspec"
+      ]
+    },
+    "Swashbuckle.Swagger/6.0.0-beta8": {
+      "type": "package",
+      "sha512": "3l5v19pEikZOFziiE5zARExyWzpVmwc8OE22Mxa8weKw16qvr6kIZAwQko9EgGB6wCK9KddhNkjkVCjau/IZHw==",
+      "files": [
+        "lib/dnx451/Swashbuckle.Swagger.dll",
+        "lib/dnx451/Swashbuckle.Swagger.xml",
+        "lib/dnxcore50/Swashbuckle.Swagger.dll",
+        "lib/dnxcore50/Swashbuckle.Swagger.xml",
+        "Swashbuckle.Swagger.6.0.0-beta8.nupkg",
+        "Swashbuckle.Swagger.6.0.0-beta8.nupkg.sha512",
+        "Swashbuckle.Swagger.nuspec"
       ]
     },
     "System.Collections/4.0.0": {
@@ -7606,7 +7673,7 @@
       "EntityFramework.SqlServer >= 7.0.0-beta8",
       "EntityFramework.Commands >= 7.0.0-beta8",
       "FluentValidation >= 5.6.2",
-      "Swashbuckle >= 6.0.0-beta7"
+      "Swashbuckle >= 6.0.0-beta8"
     ],
     "DNX,Version=v4.5.1": []
   }

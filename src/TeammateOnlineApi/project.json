@@ -1,4 +1,4 @@
-﻿{
+{
   "webroot": "wwwroot",
   "version": "1.0.0-*",
 
@@ -17,7 +17,7 @@
     "EntityFramework.SqlServer": "7.0.0-beta8",
     "EntityFramework.Commands": "7.0.0-beta8",
     "FluentValidation": "5.6.2",
-    "Swashbuckle": "6.0.0-beta7"
+    "Swashbuckle": "6.0.0-beta8"
   },
 
   "commands": {

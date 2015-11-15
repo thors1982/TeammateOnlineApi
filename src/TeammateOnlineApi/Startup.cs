@@ -44,9 +44,7 @@ namespace TeammateOnlineApi
             });
 
             // Add swagger as a service
-            /* (Doesn't work in beta8 yet)
             services.AddSwagger();
-            */
         }
 
         // Configure is called after ConfigureServices is called.
@@ -74,10 +72,8 @@ namespace TeammateOnlineApi
             SampleData.Initialize(app.ApplicationServices);
 
             // Setup swagger
-            /*  (Doesn't work in beta8 yet)
             app.UseSwagger();
             app.UseSwaggerUi("docs/");
-            */
         }
     }
 }
