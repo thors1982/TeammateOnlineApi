@@ -10,6 +10,21 @@ namespace TeammateOnlineApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Friend",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    FriendUserProfileId = table.Column<int>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    UserProfileId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friend", x => x.Id);
+                });
+            migrationBuilder.CreateTable(
                 name: "GameAccount",
                 columns: table => new
                 {
@@ -60,6 +75,7 @@ namespace TeammateOnlineApi.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable("Friend");
             migrationBuilder.DropTable("GameAccount");
             migrationBuilder.DropTable("GamePlatform");
             migrationBuilder.DropTable("UserProfile");

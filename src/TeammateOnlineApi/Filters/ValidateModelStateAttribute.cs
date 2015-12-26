@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Filters;
-using Microsoft.Framework.Internal;
+using Microsoft.Extensions.Internal;
 using TeammateOnlineApi.Controllers;
 
 namespace TeammateOnlineApi.Filters

@@ -13,8 +13,24 @@ namespace TeammateOnlineApi.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Annotation("ProductVersion", "7.0.0-beta8-15964")
-                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("TeammateOnlineApi.Models.Friend", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<int>("FriendUserProfileId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<int>("UserProfileId");
+
+                    b.HasKey("Id");
+                });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.GameAccount", b =>
                 {

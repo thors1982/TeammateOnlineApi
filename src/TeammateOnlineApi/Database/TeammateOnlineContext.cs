@@ -2,7 +2,7 @@
 using Microsoft.Data.Entity;
 using TeammateOnlineApi.Models;
 using System.Linq;
-using Microsoft.Framework.Configuration;
+using Microsoft.Extensions.Configuration;
 using TeammateOnlineApi;
 
 namespace TeammateOnlineApi.Database

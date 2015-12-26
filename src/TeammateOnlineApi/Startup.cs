@@ -2,17 +2,19 @@
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TeammateOnlineApi.Database;
-using Microsoft.Framework.Configuration;
-using Microsoft.Dnx.Runtime;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace TeammateOnlineApi
 {
     public class Startup
     {
         public IConfiguration Configuration { get; set; }
+
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
@@ -44,7 +46,7 @@ namespace TeammateOnlineApi
             });
 
             // Add swagger as a service
-            services.AddSwagger();
+            services.AddSwaggerGen();
         }
 
         // Configure is called after ConfigureServices is called.
@@ -72,8 +74,8 @@ namespace TeammateOnlineApi
             SampleData.Initialize(app.ApplicationServices);
 
             // Setup swagger
-            app.UseSwagger();
-            app.UseSwaggerUi("docs/");
+            app.UseSwaggerGen();
+            app.UseSwaggerUi("docs");
         }
     }
 }
