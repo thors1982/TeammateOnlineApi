@@ -5,6 +5,7 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TeammateOnlineApi.Database;
+using TeammateOnlineApi.Database.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 
@@ -31,7 +32,13 @@ namespace TeammateOnlineApi
         {
             services.AddMvc();
 
-            //Add Cors support to the service
+            // Add repositories
+            services.AddScoped<IGamePlatformRepository, GamePlatformRepository>();
+            services.AddScoped<IGameAccountRepository, GameAccountRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IFriendRepository, FriendRepository>();
+
+            // Add Cors support to the service
             services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
                                                                         .AllowAnyMethod()
                                                                          .AllowAnyHeader()));

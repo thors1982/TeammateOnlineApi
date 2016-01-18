@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using TeammateOnlineApi.Database;
+using TeammateOnlineApi.Database.Repositories;
 using TeammateOnlineApi.Filters;
 using TeammateOnlineApi.Models;
 
@@ -10,28 +10,32 @@ namespace TeammateOnlineApi.Controllers
 {
     public class FriendsController : BaseController
     {
+        public IFriendRepository Repository;
+
+        public FriendsController(IFriendRepository repository)
+        {
+            Repository = repository;
+        }
+
         [HttpGet]
         public IEnumerable<Friend> GetCollection()
         {
-            var friendList = TeammateOnlineContext.Friends;
-
-            return friendList.ToList();
+            return Repository.GetAll();
         }
 
         [HttpPost]
         [ValidateModelState]
         public IActionResult Post([FromBody]Friend newFriend)
         {
-            var result = TeammateOnlineContext.Friends.Add(newFriend);
-            TeammateOnlineContext.SaveChanges();
+            var result = Repository.Add(newFriend);
 
-            return CreatedAtRoute("GetDetail", new { controller = "FriendsController", friendId = result.Entity.Id }, result.Entity);
+            return CreatedAtRoute("GetDetail", new { controller = "FriendsController", friendId = result.Id }, result);
         }
 
         [HttpGet("{friendId}")]
         public IActionResult GetDetail(int friendId)
         {
-            var friend = TeammateOnlineContext.Friends.FirstOrDefault(x => x.Id == friendId);
+            var friend = Repository.FinBdyId(friendId);
 
             if (friend == null)
             {
@@ -44,15 +48,14 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{friendId}")]
         public IActionResult Delete(int friendId)
         {
-            var friend = TeammateOnlineContext.Friends.FirstOrDefault(x => x.Id == friendId);
+            var friend = Repository.FinBdyId(friendId);
 
             if (friend == null)
             {
                 return HttpNotFound();
             }
 
-            var result = TeammateOnlineContext.Friends.Remove(friend);
-            TeammateOnlineContext.SaveChanges();
+            Repository.Remove(friend);
 
             return new NoContentResult();
         }

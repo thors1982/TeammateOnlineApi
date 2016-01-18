@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using TeammateOnlineApi.Database;
+using TeammateOnlineApi.Database.Repositories;
 using TeammateOnlineApi.Filters;
 using TeammateOnlineApi.Models;
 
@@ -11,34 +11,41 @@ namespace TeammateOnlineApi.Controllers
     [Route("api/userprofiles/{userProfileId}/[controller]")]
     public class GameAccountsController : BaseController
     {
+        public IGameAccountRepository Repository;
+
+        public GameAccountsController(IGameAccountRepository repository)
+        {
+            Repository = repository;
+        }
+
         [HttpGet]
         public IEnumerable<GameAccount> GetCollection(int userProfileId, [FromQuery]int? gamePlatformId)
         {
-            var gameAccountList = TeammateOnlineContext.GameAccounts.Where(x => x.UserProfileId == userProfileId);
+            var gameAccountList = Repository.GetAllByUserProfileId(userProfileId);
+
             if(gamePlatformId != null)
             {
                 gameAccountList.Where(x => x.GamePlatformId == gamePlatformId);
             }
 
-            return gameAccountList.ToList();
+            return gameAccountList;
         }
 
         [HttpPost]
         [ValidateModelState]
         public IActionResult Post(int userProfileId, [FromBody]GameAccount newGameAccount)
         {
-            var result = TeammateOnlineContext.GameAccounts.Add(newGameAccount);
-            TeammateOnlineContext.SaveChanges();
+            var result = Repository.Add(newGameAccount);
 
-            return CreatedAtRoute("GetDetail", new { controller = "GameAccountsController", gameAccountId = result.Entity.Id }, result.Entity);
+            return CreatedAtRoute("GetDetail", new { controller = "GameAccountsController", gameAccountId = result.Id }, result);
         }
 
         [HttpGet("{gameAccountId}")]
         public IActionResult GetDetail(int userProfileId, int gameAccountId)
         {
-            var gameAccount = TeammateOnlineContext.GameAccounts.FirstOrDefault(x => x.Id == gameAccountId && x.UserProfileId == userProfileId);
+            var gameAccount = Repository.FinBdyId(gameAccountId);
 
-            if(gameAccount == null)
+            if(gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
                 return HttpNotFound();
             }
@@ -50,9 +57,9 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int userProfileId, int gameAccountId, [FromBody]GameAccount newGameAccount)
         {
-            var gameAccount = TeammateOnlineContext.GameAccounts.FirstOrDefault(x => x.Id == gameAccountId && x.UserProfileId == userProfileId);
+            var gameAccount = Repository.FinBdyId(gameAccountId);
 
-            if (gameAccount == null)
+            if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
                 return HttpNotFound();
             }
@@ -60,8 +67,8 @@ namespace TeammateOnlineApi.Controllers
             gameAccount.UserProfileId = userProfileId;
             gameAccount.GamePlatformId = newGameAccount.GamePlatformId;
             gameAccount.UserName = newGameAccount.UserName;
-            TeammateOnlineContext.GameAccounts.Update(gameAccount);
-            TeammateOnlineContext.SaveChanges();
+
+            Repository.Update(gameAccount);
 
             return new HttpOkResult();
         }
@@ -69,15 +76,14 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{gameAccountId}")]
         public IActionResult Delete(int userProfileId, int gameAccountId)
         {
-            var gameAccount = TeammateOnlineContext.GameAccounts.FirstOrDefault(x => x.Id == gameAccountId && x.UserProfileId == userProfileId);
+            var gameAccount = Repository.FinBdyId(gameAccountId);
 
-            if (gameAccount == null)
+            if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
                 return HttpNotFound();
             }
 
-            var result = TeammateOnlineContext.GameAccounts.Remove(gameAccount);
-            TeammateOnlineContext.SaveChanges();
+            Repository.Remove(gameAccount);
 
             return new NoContentResult();
         }
