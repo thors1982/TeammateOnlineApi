@@ -76,6 +76,40 @@ namespace TeammateOnlineApi
                 policy.AllowAnyMethod();
             });
 
+
+            // Add authentication (must run before MVC)
+            app.UseCookieAuthentication(options =>
+            {
+                options.AuthenticationScheme = "Cookies";
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = false;
+            });
+
+            app.UseCookieAuthentication(options =>
+            {
+                options.AuthenticationScheme = "3rdPartyLogin";
+                options.AutomaticAuthenticate = false;
+                options.AutomaticChallenge = false;
+            });
+
+            // Google Oauth
+            app.UseGoogleAuthentication(options => {
+                options.AuthenticationScheme = "Google";
+                options.SignInScheme = "3rdPartyLogin";
+                options.ClientId = Configuration.GetSection("Oauth:Google:ClientId").Value;
+                options.ClientSecret = Configuration.GetSection("Oauth:Google:ClientSecret").Value;
+            });
+            
+            // Facebook Oauth
+            app.UseFacebookAuthentication(options => {
+                options.AuthenticationScheme = "Facebook";
+                options.SignInScheme = "3rdPartyLogin";
+                options.AppId = Configuration.GetSection("Oauth:Facebook:AppId").Value;
+                options.AppSecret = Configuration.GetSection("Oauth:Facebook:AppSecret").Value;
+                options.Scope.Add("email");
+                options.Scope.Add("user_friends");
+            });
+            
             // Add MVC to the request pipeline.
             app.UseMvc();
 

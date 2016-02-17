@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Controllers
 {
+    [Authorize]
     [Route("api/userprofiles/{userProfileId}/[controller]")]
     public class GameAccountsController : BaseController
     {
