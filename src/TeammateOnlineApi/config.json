@@ -4,5 +4,9 @@
   },
   "Database": {
     "ConnectionString": "Database Connection String"
+  },
+  "Urls": {
+    "API": "API url",
+    "UI": "UI url"
   }
 }

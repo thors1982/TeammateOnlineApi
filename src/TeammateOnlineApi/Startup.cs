@@ -40,9 +40,7 @@ namespace TeammateOnlineApi
             services.AddScoped<IFriendRepository, FriendRepository>();
 
             // Add Cors support to the service
-            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
-                                                                        .AllowAnyMethod()
-                                                                         .AllowAnyHeader()));
+            services.AddCors();
 
             // Configure SQL connection string
             services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
@@ -64,10 +62,19 @@ namespace TeammateOnlineApi
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
 
-            app.UseCors("AllowAll");
-
             // Configure the HTTP request pipeline.
             //app.UseStaticFiles();
+
+            // Add Cors
+            app.UseCors(policy =>
+            {
+                policy.WithOrigins(
+                    Configuration.GetSection("Urls:API").Value,
+                    Configuration.GetSection("Urls:UI").Value
+                    );
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+            });
 
             // Add MVC to the request pipeline.
             app.UseMvc();
