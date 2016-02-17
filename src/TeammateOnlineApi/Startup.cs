@@ -113,9 +113,13 @@ namespace TeammateOnlineApi
             // Add MVC to the request pipeline.
             app.UseMvc();
 
-            // Seed data and add sample data for testing
+            // Seed data for application
             SeedData.Initialize(app.ApplicationServices);
-            SampleData.Initialize(app.ApplicationServices);
+            // Add sample data for testing
+            if (env.EnvironmentName == "Development")
+            {
+                SampleData.Initialize(app.ApplicationServices);
+            }
 
             // Setup swagger
             app.UseSwaggerGen();
