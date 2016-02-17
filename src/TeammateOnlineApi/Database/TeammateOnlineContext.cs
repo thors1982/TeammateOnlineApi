@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.Data.Entity;
-using TeammateOnlineApi.Models;
+﻿using Microsoft.Data.Entity;
+using System;
 using System.Linq;
+using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Database
 {
