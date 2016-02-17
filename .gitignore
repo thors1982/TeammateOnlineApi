@@ -74,3 +74,8 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+
+###########
+# Configs #
+###########
+src/TeammateOnlineApi/config.Development.json

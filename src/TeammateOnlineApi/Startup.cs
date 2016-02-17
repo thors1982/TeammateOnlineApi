@@ -22,6 +22,7 @@ namespace TeammateOnlineApi
             var builder = new ConfigurationBuilder()
                 .SetBasePath(appEnv.ApplicationBasePath)
                 .AddJsonFile("config.json")
+                .AddJsonFile($"config.{env.EnvironmentName}.json",optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -46,7 +47,7 @@ namespace TeammateOnlineApi
             // Configure SQL connection string
             services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetSection("Data:ConnectionString").Value);
+                options.UseSqlServer(Configuration.GetSection("Database:ConnectionString").Value);
             });
 
             // Add swagger as a service

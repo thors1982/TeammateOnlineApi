@@ -1,8 +1,8 @@
 ﻿{
   "AppSettings": {
-    "SiteTitle": "Teammate Online"
+    "SiteTitle": "Site name"
   },
-  "Data": {
-    "ConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=TeammateOnline;Trusted_Connection=True;MultipleActiveResultSets=true"
+  "Database": {
+    "ConnectionString": "Database Connection String"
   }
 }
