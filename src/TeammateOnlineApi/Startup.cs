@@ -60,6 +60,7 @@ namespace TeammateOnlineApi
 
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
+            app.UseDeveloperExceptionPage();
 
             // Configure the HTTP request pipeline.
             //app.UseStaticFiles();
