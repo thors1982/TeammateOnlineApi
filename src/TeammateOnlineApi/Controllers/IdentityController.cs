@@ -20,8 +20,8 @@ namespace TeammateOnlineApi.Controllers
             var claims = new List<Claim>
             {
                 new Claim("sub", "12345"),
-                new Claim("name", "Nick Stark"),
-                new Claim("email", "thors1982@gmail.com")
+                new Claim("name", "Tony Stark"),
+                new Claim("email", "tony.stark@ironman.com")
             };
 
             var id = new ClaimsIdentity(claims, "test");
