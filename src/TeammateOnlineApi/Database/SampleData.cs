@@ -16,6 +16,7 @@ namespace TeammateOnlineApi.Database
                 var ironman = context.UserProfiles.Add(new UserProfile { FirstName = "Tony", LastName = "Stark", EmailAddress = "tony.stark@ironman.com" });
                 var captainamerica = context.UserProfiles.Add(new UserProfile { FirstName = "Steve", LastName = "Rogers", EmailAddress = "steve.rogers@captainamerica.com" });
                 var hulk = context.UserProfiles.Add(new UserProfile { FirstName = "Bruce", LastName = "Banner", EmailAddress = "bruce.banner@hulk.com" });
+                var batman = context.UserProfiles.Add(new UserProfile { FirstName = "Bruce", LastName = "Wayne", EmailAddress = "brace.wayne@batman.com" });
 
                 context.SaveChanges();
             }
