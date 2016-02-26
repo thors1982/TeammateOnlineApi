@@ -10,6 +10,7 @@ using TeammateOnlineApi.Models;
 namespace TeammateOnlineApi.Controllers
 {
     [Authorize]
+    [Route("api/userprofiles/{userProfileId}/[controller]")]
     public class FriendsController : BaseController
     {
         public IFriendRepository Repository;
@@ -20,14 +21,14 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Friend> GetCollection()
+        public IEnumerable<Friend> GetCollection(int userProfileId)
         {
-            return Repository.GetAll();
+            return Repository.GetAllByUserProfileId(userProfileId);
         }
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Post([FromBody]Friend newFriend)
+        public IActionResult Post(int userProfileId, [FromBody]Friend newFriend)
         {
             var result = Repository.Add(newFriend);
 
@@ -35,11 +36,11 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{friendId}")]
-        public IActionResult GetDetail(int friendId)
+        public IActionResult GetDetail(int userProfileId, int friendId)
         {
             var friend = Repository.FinBdyId(friendId);
 
-            if (friend == null)
+            if (friend == null || friend.UserProfileId != userProfileId)
             {
                 return HttpNotFound();
             }
@@ -48,11 +49,11 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpDelete("{friendId}")]
-        public IActionResult Delete(int friendId)
+        public IActionResult Delete(int userProfileId, int friendId)
         {
             var friend = Repository.FinBdyId(friendId);
 
-            if (friend == null)
+            if (friend == null || friend.UserProfileId != userProfileId)
             {
                 return HttpNotFound();
             }

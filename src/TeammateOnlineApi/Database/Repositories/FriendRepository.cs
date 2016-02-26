@@ -26,9 +26,9 @@ namespace TeammateOnlineApi.Database.Repositories
             return context.Friends.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Friend> GetAll()
+        public IEnumerable<Friend> GetAllByUserProfileId(int userProfileId)
         {
-            return context.Friends.ToList();
+            return context.Friends.Where(x => x.UserProfileId == userProfileId);
         }
 
         public void Remove(Friend friend)
