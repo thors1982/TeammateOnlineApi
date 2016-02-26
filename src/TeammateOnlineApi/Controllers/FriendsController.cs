@@ -35,7 +35,7 @@ namespace TeammateOnlineApi.Controllers
             return CreatedAtRoute("GetDetail", new { controller = "FriendsController", friendId = result.Id }, result);
         }
 
-        [HttpGet("{friendId}")]
+        [HttpGet("{friendId}", Name = "GetDetail")]
         public IActionResult GetDetail(int userProfileId, int friendId)
         {
             var friend = Repository.FinBdyId(friendId);
