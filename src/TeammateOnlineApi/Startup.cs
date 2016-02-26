@@ -60,7 +60,11 @@ namespace TeammateOnlineApi
 
             // Add the platform handler to the request pipeline.
             app.UseIISPlatformHandler();
-            app.UseDeveloperExceptionPage();
+            if (env.EnvironmentName == "Development")
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseRuntimeInfoPage("/runtimeinfo");
+            }
 
             // Configure the HTTP request pipeline.
             //app.UseStaticFiles();
@@ -75,7 +79,6 @@ namespace TeammateOnlineApi
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
             });
-
 
             // Add authentication (must run before MVC)
             app.UseCookieAuthentication(options =>
@@ -109,7 +112,7 @@ namespace TeammateOnlineApi
                 options.Scope.Add("email");
                 options.Scope.Add("user_friends");
             });
-            
+
             // Add MVC to the request pipeline.
             app.UseMvc();
 
