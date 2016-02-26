@@ -37,7 +37,7 @@ namespace TeammateOnlineApi.Controllers
             return LocalRedirect("/");
         }*/
 
-        [HttpGet("identity/logout")]
+        [HttpGet("Identity/Logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.Authentication.SignOutAsync("Cookies");
@@ -46,7 +46,7 @@ namespace TeammateOnlineApi.Controllers
             return LocalRedirect("/");
         }
 
-        [HttpGet("identity/google")]
+        [HttpGet("Identity/Google")]
         public IActionResult Google()
         {
             var properties = new AuthenticationProperties
@@ -57,7 +57,7 @@ namespace TeammateOnlineApi.Controllers
             return new ChallengeResult("Google", properties);
         }
 
-        [HttpGet("identity/google/callback")]
+        [HttpGet("Identity/Google/Callback")]
         public async Task<IActionResult> GoogleCallback()
         {
             var exteranlIdentity = await HttpContext.Authentication.AuthenticateAsync("3rdPartyLogin");
@@ -87,7 +87,7 @@ namespace TeammateOnlineApi.Controllers
             return LocalRedirect("/");
         }
 
-        [HttpGet("identity/facebook")]
+        [HttpGet("Identity/Facebook")]
         public IActionResult Facebook()
         {
             var properties = new AuthenticationProperties
@@ -98,7 +98,7 @@ namespace TeammateOnlineApi.Controllers
             return new ChallengeResult("Facebook", properties);
         }
 
-        [HttpGet("identity/facebook/callback")]
+        [HttpGet("Identity/Facebook/Callback")]
         public async Task<IActionResult> FacebookCallback()
         {
             var exteranlIdentity = await HttpContext.Authentication.AuthenticateAsync("3rdPartyLogin");

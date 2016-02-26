@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.SwaggerGen;
 using TeammateOnlineApi.Database;
 using TeammateOnlineApi.Database.Repositories;
 
@@ -49,6 +50,16 @@ namespace TeammateOnlineApi
 
             // Add swagger as a service
             services.AddSwaggerGen();
+            services.ConfigureSwaggerDocument(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "TeammateOnline API",
+                    Description = "",
+                    TermsOfService = "None"
+                });
+            });
         }
 
         // Configure is called after ConfigureServices is called.

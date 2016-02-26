@@ -10,7 +10,7 @@ using TeammateOnlineApi.Models;
 namespace TeammateOnlineApi.Controllers
 {
     [Authorize]
-    [Route("api/userprofiles/{userProfileId}/[controller]")]
+    [Route("api/UserProfiles/{userProfileId}/[controller]")]
     public class FriendsController : BaseController
     {
         public IFriendRepository Repository;
@@ -32,10 +32,10 @@ namespace TeammateOnlineApi.Controllers
         {
             var result = Repository.Add(newFriend);
 
-            return CreatedAtRoute("GetDetail", new { controller = "FriendsController", friendId = result.Id }, result);
+            return CreatedAtRoute("FriendDetail", new { controller = "FriendsController", friendId = result.Id }, result);
         }
 
-        [HttpGet("{friendId}", Name = "GetDetail")]
+        [HttpGet("{friendId}", Name = "FriendDetail")]
         public IActionResult GetDetail(int userProfileId, int friendId)
         {
             var friend = Repository.FinBdyId(friendId);
