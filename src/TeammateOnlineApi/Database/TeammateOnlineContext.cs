@@ -19,7 +19,7 @@ namespace TeammateOnlineApi.Database
         {
             Database.EnsureCreated();
         }
-        
+
         public override int SaveChanges()
         {
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))

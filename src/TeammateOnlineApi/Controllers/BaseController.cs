@@ -11,9 +11,6 @@ namespace TeammateOnlineApi.Controllers
     public abstract class BaseController : Controller
     {
         [FromServices]
-        public TeammateOnlineContext TeammateOnlineContext { get; set; }
-
-        [FromServices]
         public ILogger<GamePlatformsController> Logger { get; set; }
     }
 }

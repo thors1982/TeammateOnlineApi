@@ -32,7 +32,7 @@ namespace TeammateOnlineApi.Controllers
             return CreatedAtRoute("GetDetail", new { controller = "GamePlatformsController", gamePlatformId = result.Id }, result);
         }
 
-        [HttpGet("{gamePlatformId}")]
+        [HttpGet("{gamePlatformId}", Name = "GetDetail")]
         public IActionResult GetDetail(int gamePlatformId)
         {
             var gamePlatform = Repository.FinBdyId(gamePlatformId);

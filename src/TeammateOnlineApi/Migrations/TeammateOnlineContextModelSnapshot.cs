@@ -79,8 +79,12 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<string>("EmailAddress")
                         .IsRequired();
 
+                    b.Property<string>("FacebookId");
+
                     b.Property<string>("FirstName")
                         .IsRequired();
+
+                    b.Property<string>("GoogleId");
 
                     b.Property<string>("LastName")
                         .IsRequired();

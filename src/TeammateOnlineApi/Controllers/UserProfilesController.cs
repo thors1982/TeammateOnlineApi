@@ -20,9 +20,24 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserProfile> GetCollection()
+        public IEnumerable<UserProfile> GetCollection([FromQuery]string googleId = null, [FromQuery]string facebookId = null)
         {
-            return Repository.GetAll();
+            var userProfileList = new List<UserProfile>();
+
+            if (!string.IsNullOrEmpty(googleId))
+            {
+                userProfileList.Add(Repository.FindByGoogleId(googleId));
+            }
+            else if(!string.IsNullOrEmpty(facebookId))
+            {
+                userProfileList.Add(Repository.FindByFacebookId(facebookId));
+            }
+            else
+            {
+                userProfileList = Repository.GetAll().ToList();
+            }
+
+            return userProfileList;
         }
 
         [HttpPost]

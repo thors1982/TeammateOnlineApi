@@ -7,14 +7,20 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TeammateOnlineApi.Database.Repositories;
-using TeammateOnlineApi.Filters;
 using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Controllers
 {
     public class IdentityController : Controller
     {
-        [HttpGet("identity/login")]
+        public IUserProfileRepository Repository;
+
+        public IdentityController(IUserProfileRepository repository)
+        {
+            Repository = repository;
+        }
+
+        /*[HttpGet("identity/login")]
         public async Task<IActionResult> Login()
         {
             var claims = new List<Claim>
@@ -29,7 +35,7 @@ namespace TeammateOnlineApi.Controllers
             await HttpContext.Authentication.SignInAsync("Cookies", new ClaimsPrincipal(id));
 
             return LocalRedirect("/");
-        }
+        }*/
 
         [HttpGet("identity/logout")]
         public async Task<IActionResult> Logout()
@@ -54,7 +60,31 @@ namespace TeammateOnlineApi.Controllers
         [HttpGet("identity/google/callback")]
         public async Task<IActionResult> GoogleCallback()
         {
-            return await ThirdPartyLogin("google");
+            var exteranlIdentity = await HttpContext.Authentication.AuthenticateAsync("3rdPartyLogin");
+           
+            var googleId = exteranlIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var userProfileContoller = new UserProfilesController(Repository);
+            var userProfileList = userProfileContoller.GetCollection(googleId) as List<UserProfile>;
+            
+            if(userProfileList.Any())
+            {
+                var createUser = new UserProfile
+                {
+                    GoogleId = googleId,
+                    FirstName = exteranlIdentity.FindFirst(ClaimTypes.GivenName).Value,
+                    LastName = exteranlIdentity.FindFirst(ClaimTypes.Surname).Value,
+                    EmailAddress = exteranlIdentity.FindFirst(ClaimTypes.Email).Value,
+                };
+
+                var response = userProfileContoller.Post(createUser);
+
+                userProfileList = userProfileContoller.GetCollection(googleId) as List<UserProfile>;
+            }
+
+            signInUser(userProfileList.First());
+
+            return LocalRedirect("/");
         }
 
         [HttpGet("identity/facebook")]
@@ -71,33 +101,48 @@ namespace TeammateOnlineApi.Controllers
         [HttpGet("identity/facebook/callback")]
         public async Task<IActionResult> FacebookCallback()
         {
-            return await ThirdPartyLogin("facebook");
-        }
-
-        private async Task<IActionResult> ThirdPartyLogin(string type)
-        {
             var exteranlIdentity = await HttpContext.Authentication.AuthenticateAsync("3rdPartyLogin");
 
-            //TODO: Lookup in database for this user id
+            var facebookId = exteranlIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var claims = new List<Claim>
-            {
-                new Claim("sub", "12345"),
-                new Claim("name", exteranlIdentity.FindFirst(ClaimTypes.Name).Value),
-            };
+            var userProfileContoller = new UserProfilesController(Repository);
+            var userProfileList = userProfileContoller.GetCollection(facebookId) as List<UserProfile>;
 
-            // This logic incase facebook doesn't return email address
-            if(exteranlIdentity.FindFirst(ClaimTypes.Email) != null)
+            if (userProfileList.Any())
             {
-                claims.Add(new Claim("email", exteranlIdentity.FindFirst(ClaimTypes.Email).Value));
+                var createUser = new UserProfile
+                {
+                    FacebookId = facebookId,
+                    FirstName = exteranlIdentity.FindFirst(ClaimTypes.GivenName).Value,
+                    LastName = exteranlIdentity.FindFirst(ClaimTypes.Surname).Value,
+                    //Email
+                };
+
+                var response = userProfileContoller.Post(createUser);
+
+                userProfileList = userProfileContoller.GetCollection(facebookId) as List<UserProfile>;
             }
 
-            var id = new ClaimsIdentity(claims, type);
+            signInUser(userProfileList.First());
+
+            return LocalRedirect("/");
+        }
+
+        private async void signInUser(UserProfile userProfile)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim("sub", userProfile.Id.ToString()),
+                new Claim("firstname", userProfile.FirstName),
+                new Claim("lastname", userProfile.LastName),
+                new Claim("email", userProfile.EmailAddress),
+                new Claim("role", "default")
+            };
+
+            var id = new ClaimsIdentity(claims, "google");
 
             await HttpContext.Authentication.SignInAsync("Cookies", new ClaimsPrincipal(id));
             await HttpContext.Authentication.SignOutAsync("3rdPartyLogin");
-
-            return LocalRedirect("/");
         }
     }
 }

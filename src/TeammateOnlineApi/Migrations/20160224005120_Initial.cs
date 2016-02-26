@@ -63,7 +63,9 @@ namespace TeammateOnlineApi.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     EmailAddress = table.Column<string>(nullable: false),
+                    FacebookId = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: false),
+                    GoogleId = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false)
                 },

@@ -32,6 +32,16 @@ namespace TeammateOnlineApi.Database.Repositories
             return context.UserProfiles.FirstOrDefault(x => x.EmailAddress == emailAddress);
         }
 
+        public UserProfile FindByGoogleId(string googleId)
+        {
+            return context.UserProfiles.FirstOrDefault(x => x.GoogleId == googleId);
+        }
+
+        public UserProfile FindByFacebookId(string facebookId)
+        {
+            return context.UserProfiles.FirstOrDefault(x => x.FacebookId == facebookId);
+        }
+
         public IEnumerable<UserProfile> GetAll()
         {
             return context.UserProfiles.ToList();

@@ -21,5 +21,11 @@ namespace TeammateOnlineApi.Models
         [EmailAddress]
         [Display(Name = "Email address")]
         public string EmailAddress { get; set; }
+        
+        [Display(Name = "Google Id")]
+        public string GoogleId { get; set; }
+
+        [Display(Name = "Facebook Id")]
+        public string FacebookId { get; set; }
     }
 }
