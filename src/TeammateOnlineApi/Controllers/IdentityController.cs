@@ -8,6 +8,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using TeammateOnlineApi.Database.Repositories;
 using TeammateOnlineApi.Models;
+using TeammateOnlineApi.Configs;
+using Microsoft.Extensions.OptionsModel;
 
 namespace TeammateOnlineApi.Controllers
 {
@@ -15,9 +17,12 @@ namespace TeammateOnlineApi.Controllers
     {
         public IUserProfileRepository Repository;
 
-        public IdentityController(IUserProfileRepository repository)
+        public IOptions<UrlConfig> UrlConfig;
+
+        public IdentityController(IUserProfileRepository repository, IOptions<UrlConfig> urlConfig)
         {
             Repository = repository;
+            UrlConfig = urlConfig;
         }
 
         /*[HttpGet("identity/login")]
@@ -43,7 +48,7 @@ namespace TeammateOnlineApi.Controllers
             await HttpContext.Authentication.SignOutAsync("Cookies");
             await HttpContext.Authentication.SignOutAsync("3rdPartyLogin");
 
-            return LocalRedirect("/");
+            return Redirect(UrlConfig.Value.UI);
         }
 
         [HttpGet("Identity/Google")]
@@ -84,7 +89,7 @@ namespace TeammateOnlineApi.Controllers
 
             signInUser(userProfileList.First());
 
-            return LocalRedirect("/");
+            return Redirect(UrlConfig.Value.UI);
         }
 
         [HttpGet("Identity/Facebook")]
@@ -125,7 +130,7 @@ namespace TeammateOnlineApi.Controllers
 
             signInUser(userProfileList.First());
 
-            return LocalRedirect("/");
+            return Redirect(UrlConfig.Value.UI);
         }
 
         private async void signInUser(UserProfile userProfile)

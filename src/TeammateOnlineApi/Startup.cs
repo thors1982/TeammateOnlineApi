@@ -8,6 +8,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.SwaggerGen;
 using TeammateOnlineApi.Database;
 using TeammateOnlineApi.Database.Repositories;
+using TeammateOnlineApi.Configs;
 
 namespace TeammateOnlineApi
 {
@@ -32,6 +33,8 @@ namespace TeammateOnlineApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.Configure<UrlConfig>(Configuration.GetSection("Urls"));
 
             // Add repositories
             services.AddScoped<IGamePlatformRepository, GamePlatformRepository>();
