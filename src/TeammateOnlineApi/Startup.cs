@@ -16,8 +16,6 @@ namespace TeammateOnlineApi
     {
         public IConfiguration Configuration { get; set; }
 
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
-
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             var builder = new ConfigurationBuilder()
@@ -28,8 +26,8 @@ namespace TeammateOnlineApi
             Configuration = builder.Build();
         }
 
-        // This method gets called by a runtime.
-        // Use this method to add services to the container
+        // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -65,7 +63,7 @@ namespace TeammateOnlineApi
             });
         }
 
-        // Configure is called after ConfigureServices is called.
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.MinimumLevel = LogLevel.Warning;
@@ -79,9 +77,6 @@ namespace TeammateOnlineApi
                 app.UseDeveloperExceptionPage();
                 app.UseRuntimeInfoPage("/runtimeinfo");
             }
-
-            // Configure the HTTP request pipeline.
-            //app.UseStaticFiles();
 
             // Add Cors
             app.UseCors(policy =>
@@ -142,5 +137,8 @@ namespace TeammateOnlineApi
             app.UseSwaggerGen();
             app.UseSwaggerUi("docs");
         }
+
+        // Entry point for the application.
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
