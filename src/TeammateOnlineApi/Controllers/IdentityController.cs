@@ -10,6 +10,7 @@ using TeammateOnlineApi.Database.Repositories;
 using TeammateOnlineApi.Models;
 using TeammateOnlineApi.Configs;
 using Microsoft.Extensions.OptionsModel;
+using System;
 
 namespace TeammateOnlineApi.Controllers
 {
@@ -23,6 +24,22 @@ namespace TeammateOnlineApi.Controllers
         {
             Repository = repository;
             UrlConfig = urlConfig;
+        }
+
+        [HttpGet("identity")]
+        public IActionResult Get()
+        {
+            var identity = new Identity();
+
+            if (HttpContext.User.Claims.Any())
+            {
+                identity.UserProfileId = Int32.Parse(HttpContext.User.Claims.First(x => x.Type == "sub").Value);
+                identity.FirstName = HttpContext.User.Claims.First(x => x.Type == "firstname").Value;
+                identity.LastName = HttpContext.User.Claims.First(x => x.Type == "lastname").Value;
+                identity.IsLoggedIn = true;
+            }
+            
+            return new HttpOkObjectResult(identity);
         }
 
         /*[HttpGet("identity/login")]
