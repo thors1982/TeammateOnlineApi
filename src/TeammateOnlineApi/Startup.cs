@@ -9,6 +9,8 @@ using Swashbuckle.SwaggerGen;
 using TeammateOnlineApi.Database;
 using TeammateOnlineApi.Database.Repositories;
 using TeammateOnlineApi.Configs;
+using System.IdentityModel.Tokens.Jwt;
+using System.Collections.Generic;
 
 namespace TeammateOnlineApi
 {
@@ -30,8 +32,13 @@ namespace TeammateOnlineApi
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add Cors support to the service
+            services.AddCors();
+            
+            // Add MVC
             services.AddMvc();
 
+            // Setup config values
             services.Configure<UrlConfig>(Configuration.GetSection("Urls"));
 
             // Add repositories
@@ -39,9 +46,6 @@ namespace TeammateOnlineApi
             services.AddScoped<IGameAccountRepository, GameAccountRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IFriendRepository, FriendRepository>();
-
-            // Add Cors support to the service
-            services.AddCors();
 
             // Configure SQL connection string
             services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
@@ -56,7 +60,7 @@ namespace TeammateOnlineApi
                 options.SingleApiVersion(new Info
                 {
                     Version = "v1",
-                    Title = "TeammateOnline API",
+                    Title = Configuration.GetSection("AppSettings:SiteTitle").Value,
                     Description = "",
                     TermsOfService = "None"
                 });
@@ -79,47 +83,23 @@ namespace TeammateOnlineApi
             }
 
             // Add Cors
-            app.UseCors(policy =>
+            app.UseCors(builder =>
             {
-                policy.WithOrigins(
-                    Configuration.GetSection("Urls:API").Value,
-                    Configuration.GetSection("Urls:UI").Value
-                    );
-                policy.AllowAnyHeader();
-                policy.AllowAnyMethod();
+                builder.WithOrigins(Configuration.GetSection("Urls:UI").Value)
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+                //.AllowCredentials();
             });
 
-            // Add authentication (must run before MVC)
-            app.UseCookieAuthentication(options =>
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
+
+            app.UseJwtBearerAuthentication(options =>
             {
-                options.AuthenticationScheme = "Cookies";
+                options.Authority = Configuration.GetSection("Urls:Identity").Value;
+                options.RequireHttpsMetadata = false;
+
+                options.Audience = Configuration.GetSection("Urls:Identity").Value + "/resources";
                 options.AutomaticAuthenticate = true;
-                options.AutomaticChallenge = false;
-            });
-
-            app.UseCookieAuthentication(options =>
-            {
-                options.AuthenticationScheme = "3rdPartyLogin";
-                options.AutomaticAuthenticate = false;
-                options.AutomaticChallenge = false;
-            });
-
-            // Google Oauth
-            app.UseGoogleAuthentication(options => {
-                options.AuthenticationScheme = "Google";
-                options.SignInScheme = "3rdPartyLogin";
-                options.ClientId = Configuration.GetSection("Oauth:Google:ClientId").Value;
-                options.ClientSecret = Configuration.GetSection("Oauth:Google:ClientSecret").Value;
-            });
-            
-            // Facebook Oauth
-            app.UseFacebookAuthentication(options => {
-                options.AuthenticationScheme = "Facebook";
-                options.SignInScheme = "3rdPartyLogin";
-                options.AppId = Configuration.GetSection("Oauth:Facebook:AppId").Value;
-                options.AppSecret = Configuration.GetSection("Oauth:Facebook:AppSecret").Value;
-                options.Scope.Add("email");
-                options.Scope.Add("user_friends");
             });
 
             // Add MVC to the request pipeline.
