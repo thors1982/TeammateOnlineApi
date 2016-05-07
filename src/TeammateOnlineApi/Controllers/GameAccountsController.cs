@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Controllers
 {
-    [Route("api/userprofiles/{userProfileId}/[controller]")]
+    [Authorize]
+    [Route("api/UserProfiles/{userProfileId}/[controller]")]
     public class GameAccountsController : BaseController
     {
         public IGameAccountRepository Repository;
@@ -37,10 +39,10 @@ namespace TeammateOnlineApi.Controllers
         {
             var result = Repository.Add(newGameAccount);
 
-            return CreatedAtRoute("GetDetail", new { controller = "GameAccountsController", gameAccountId = result.Id }, result);
+            return CreatedAtRoute("GameAccountDetail", new { controller = "GameAccountsController", gameAccountId = result.Id }, result);
         }
 
-        [HttpGet("{gameAccountId}")]
+        [HttpGet("{gameAccountId}", Name = "GameAccountDetail")]
         public IActionResult GetDetail(int userProfileId, int gameAccountId)
         {
             var gameAccount = Repository.FinBdyId(gameAccountId);

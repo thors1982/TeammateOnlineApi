@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Controllers
 {
+    [Authorize]
     public class UserProfilesController : BaseController
     {
         public IUserProfileRepository Repository;
@@ -18,9 +20,24 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserProfile> GetCollection()
+        public IEnumerable<UserProfile> GetCollection([FromQuery]string googleId = null, [FromQuery]string facebookId = null)
         {
-            return Repository.GetAll();
+            var userProfileList = new List<UserProfile>();
+
+            if (!string.IsNullOrEmpty(googleId))
+            {
+                userProfileList.Add(Repository.FindByGoogleId(googleId));
+            }
+            else if(!string.IsNullOrEmpty(facebookId))
+            {
+                userProfileList.Add(Repository.FindByFacebookId(facebookId));
+            }
+            else
+            {
+                userProfileList = Repository.GetAll().ToList();
+            }
+
+            return userProfileList;
         }
 
         [HttpPost]
@@ -35,10 +52,10 @@ namespace TeammateOnlineApi.Controllers
 
             var result = Repository.Add(newUserProfile);
 
-            return CreatedAtRoute("GetDetail", new { controller = "UserProfilesController", userProfileId = result.Id }, result);
+            return CreatedAtRoute("UserProfileDetail", new { controller = "UserProfilesController", userProfileId = result.Id }, result);
         }
 
-        [HttpGet("{userProfileId}")]
+        [HttpGet("{userProfileId}", Name = "UserProfileDetail")]
         public IActionResult GetDetail(int userProfileId)
         {
             var userProfile = Repository.FinBdyId(userProfileId);

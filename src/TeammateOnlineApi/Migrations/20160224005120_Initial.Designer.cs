@@ -8,7 +8,7 @@ using TeammateOnlineApi.Database;
 namespace TeammateOnlineApi.Migrations
 {
     [DbContext(typeof(TeammateOnlineContext))]
-    [Migration("20151226031432_Initial")]
+    [Migration("20160224005120_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,8 +80,12 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<string>("EmailAddress")
                         .IsRequired();
 
+                    b.Property<string>("FacebookId");
+
                     b.Property<string>("FirstName")
                         .IsRequired();
+
+                    b.Property<string>("GoogleId");
 
                     b.Property<string>("LastName")
                         .IsRequired();

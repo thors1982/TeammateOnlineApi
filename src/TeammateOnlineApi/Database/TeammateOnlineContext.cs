@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.Data.Entity;
-using TeammateOnlineApi.Models;
+﻿using Microsoft.Data.Entity;
+using System;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
-using TeammateOnlineApi;
+using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Database
 {
@@ -21,7 +19,7 @@ namespace TeammateOnlineApi.Database
         {
             Database.EnsureCreated();
         }
-        
+
         public override int SaveChanges()
         {
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))

@@ -29,10 +29,10 @@ namespace TeammateOnlineApi.Controllers
         {
             var result = Repository.Add(newGamePlatform);
 
-            return CreatedAtRoute("GetDetail", new { controller = "GamePlatformsController", gamePlatformId = result.Id }, result);
+            return CreatedAtRoute("GamePlatformDetail", new { controller = "GamePlatformsController", gamePlatformId = result.Id }, result);
         }
 
-        [HttpGet("{gamePlatformId}")]
+        [HttpGet("{gamePlatformId}", Name = "GamePlatformDetail")]
         public IActionResult GetDetail(int gamePlatformId)
         {
             var gamePlatform = Repository.FinBdyId(gamePlatformId);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Controllers
 {
+    [Authorize]
+    [Route("api/UserProfiles/{userProfileId}/[controller]")]
     public class FriendsController : BaseController
     {
         public IFriendRepository Repository;
@@ -18,26 +21,26 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Friend> GetCollection()
+        public IEnumerable<Friend> GetCollection(int userProfileId)
         {
-            return Repository.GetAll();
+            return Repository.GetAllByUserProfileId(userProfileId);
         }
 
         [HttpPost]
         [ValidateModelState]
-        public IActionResult Post([FromBody]Friend newFriend)
+        public IActionResult Post(int userProfileId, [FromBody]Friend newFriend)
         {
             var result = Repository.Add(newFriend);
 
-            return CreatedAtRoute("GetDetail", new { controller = "FriendsController", friendId = result.Id }, result);
+            return CreatedAtRoute("FriendDetail", new { controller = "FriendsController", friendId = result.Id }, result);
         }
 
-        [HttpGet("{friendId}")]
-        public IActionResult GetDetail(int friendId)
+        [HttpGet("{friendId}", Name = "FriendDetail")]
+        public IActionResult GetDetail(int userProfileId, int friendId)
         {
             var friend = Repository.FinBdyId(friendId);
 
-            if (friend == null)
+            if (friend == null || friend.UserProfileId != userProfileId)
             {
                 return HttpNotFound();
             }
@@ -46,11 +49,11 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpDelete("{friendId}")]
-        public IActionResult Delete(int friendId)
+        public IActionResult Delete(int userProfileId, int friendId)
         {
             var friend = Repository.FinBdyId(friendId);
 
-            if (friend == null)
+            if (friend == null || friend.UserProfileId != userProfileId)
             {
                 return HttpNotFound();
             }

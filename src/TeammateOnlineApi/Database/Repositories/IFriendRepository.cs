@@ -7,7 +7,7 @@ namespace TeammateOnlineApi.Database.Repositories
     {
         Friend Add(Friend friend);
         Friend FinBdyId(int id);
-        IEnumerable<Friend> GetAll();
+        IEnumerable<Friend> GetAllByUserProfileId(int userProfileId);
         void Remove(Friend friend);
     }
 }
