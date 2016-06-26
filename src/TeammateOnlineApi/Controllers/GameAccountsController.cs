@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,10 +49,10 @@ namespace TeammateOnlineApi.Controllers
 
             if(gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
-            return new HttpOkObjectResult(gameAccount);
+            return new OkObjectResult(gameAccount);
         }
 
         [HttpPut("{gameAccountId}")]
@@ -63,7 +63,7 @@ namespace TeammateOnlineApi.Controllers
 
             if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             gameAccount.UserProfileId = userProfileId;
@@ -72,7 +72,7 @@ namespace TeammateOnlineApi.Controllers
 
             Repository.Update(gameAccount);
 
-            return new HttpOkResult();
+            return new OkResult();
         }
 
         [HttpDelete("{gameAccountId}")]
@@ -82,7 +82,7 @@ namespace TeammateOnlineApi.Controllers
 
             if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             Repository.Remove(gameAccount);

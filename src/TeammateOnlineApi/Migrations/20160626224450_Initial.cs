@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Microsoft.Data.Entity.Migrations;
-using Microsoft.Data.Entity.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TeammateOnlineApi.Migrations
 {
@@ -10,7 +10,7 @@ namespace TeammateOnlineApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Friend",
+                name: "Friends",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -22,10 +22,11 @@ namespace TeammateOnlineApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Friend", x => x.Id);
+                    table.PrimaryKey("PK_Friends", x => x.Id);
                 });
+
             migrationBuilder.CreateTable(
-                name: "GameAccount",
+                name: "GameAccounts",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -38,10 +39,11 @@ namespace TeammateOnlineApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameAccount", x => x.Id);
+                    table.PrimaryKey("PK_GameAccounts", x => x.Id);
                 });
+
             migrationBuilder.CreateTable(
-                name: "GamePlatform",
+                name: "GamePlatforms",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -53,10 +55,11 @@ namespace TeammateOnlineApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GamePlatform", x => x.Id);
+                    table.PrimaryKey("PK_GamePlatforms", x => x.Id);
                 });
+
             migrationBuilder.CreateTable(
-                name: "UserProfile",
+                name: "UserProfiles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -71,16 +74,23 @@ namespace TeammateOnlineApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserProfile", x => x.Id);
+                    table.PrimaryKey("PK_UserProfiles", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable("Friend");
-            migrationBuilder.DropTable("GameAccount");
-            migrationBuilder.DropTable("GamePlatform");
-            migrationBuilder.DropTable("UserProfile");
+            migrationBuilder.DropTable(
+                name: "Friends");
+
+            migrationBuilder.DropTable(
+                name: "GameAccounts");
+
+            migrationBuilder.DropTable(
+                name: "GamePlatforms");
+
+            migrationBuilder.DropTable(
+                name: "UserProfiles");
         }
     }
 }

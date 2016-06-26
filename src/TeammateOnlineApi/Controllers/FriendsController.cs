@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,10 +42,10 @@ namespace TeammateOnlineApi.Controllers
 
             if (friend == null || friend.UserProfileId != userProfileId)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
-            return new HttpOkObjectResult(friend);
+            return new OkObjectResult(friend);
         }
 
         [HttpDelete("{friendId}")]
@@ -55,7 +55,7 @@ namespace TeammateOnlineApi.Controllers
 
             if (friend == null || friend.UserProfileId != userProfileId)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             Repository.Remove(friend);

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,10 +39,10 @@ namespace TeammateOnlineApi.Controllers
 
             if(gamePlatform == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
-            return new HttpOkObjectResult(gamePlatform);
+            return new OkObjectResult(gamePlatform);
         }
 
         [HttpPut("{gamePlatformId}")]
@@ -53,7 +53,7 @@ namespace TeammateOnlineApi.Controllers
 
             if (gamePlatform == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             gamePlatform.Name = newGamePlatform.Name;
@@ -61,7 +61,7 @@ namespace TeammateOnlineApi.Controllers
 
             Repository.Update(gamePlatform);
 
-            return new HttpOkResult();
+            return new OkResult();
         }
 
         [HttpDelete("{gamePlatformId}")]
@@ -71,7 +71,7 @@ namespace TeammateOnlineApi.Controllers
 
             if(gamePlatform == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             Repository.Remove(gamePlatform);

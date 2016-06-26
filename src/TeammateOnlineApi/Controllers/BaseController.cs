@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,6 @@ namespace TeammateOnlineApi.Controllers
     [Route("api/[controller]")]
     public abstract class BaseController : Controller
     {
-        [FromServices]
         public ILogger<GamePlatformsController> Logger { get; set; }
     }
 }

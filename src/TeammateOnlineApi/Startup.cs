@@ -1,45 +1,40 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.Data.Entity;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
-using Swashbuckle.SwaggerGen;
+using Swashbuckle.SwaggerGen.Generator;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using TeammateOnlineApi.Database;
 using TeammateOnlineApi.Database.Repositories;
-using TeammateOnlineApi.Configs;
-using System.IdentityModel.Tokens.Jwt;
-using System.Collections.Generic;
 
 namespace TeammateOnlineApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; }
 
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
-                .AddJsonFile("config.json")
-                .AddJsonFile($"config.{env.EnvironmentName}.json",optional: true)
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Cors support to the service
             services.AddCors();
-            
-            // Add MVC
-            services.AddMvc();
 
-            // Setup config values
-            services.Configure<UrlConfig>(Configuration.GetSection("Urls"));
+            // Add framework services.
+            services.AddMvc();
 
             // Add repositories
             services.AddScoped<IGamePlatformRepository, GamePlatformRepository>();
@@ -48,21 +43,18 @@ namespace TeammateOnlineApi
             services.AddScoped<IFriendRepository, FriendRepository>();
 
             // Configure SQL connection string
-            services.AddEntityFramework().AddSqlServer().AddDbContext<TeammateOnlineContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetSection("Database:ConnectionString").Value);
-            });
+            services.AddDbContext<TeammateOnlineContext>(
+                options => options.UseSqlServer(Configuration.GetSection("Database:ConnectionString").Value)
+                );
 
             // Add swagger as a service
-            services.AddSwaggerGen();
-            services.ConfigureSwaggerDocument(options =>
+            services.AddSwaggerGen(options =>
             {
                 options.SingleApiVersion(new Info
                 {
                     Version = "v1",
                     Title = Configuration.GetSection("AppSettings:SiteTitle").Value,
                     Description = "",
-                    TermsOfService = "None"
                 });
             });
         }
@@ -70,12 +62,9 @@ namespace TeammateOnlineApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.MinimumLevel = LogLevel.Warning;
-            loggerFactory.AddConsole();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // Add the platform handler to the request pipeline.
-            app.UseIISPlatformHandler();
             if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
@@ -93,13 +82,13 @@ namespace TeammateOnlineApi
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
 
-            app.UseJwtBearerAuthentication(options =>
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
-                options.Authority = Configuration.GetSection("Urls:Identity").Value;
-                options.RequireHttpsMetadata = false;
+                Authority = Configuration.GetSection("Urls:Identity").Value,
+                RequireHttpsMetadata = false,
 
-                options.Audience = Configuration.GetSection("Urls:Identity").Value + "/resources";
-                options.AutomaticAuthenticate = true;
+                Audience = Configuration.GetSection("Urls:Identity").Value + "/resources",
+                AutomaticAuthenticate = true
             });
 
             // Add MVC to the request pipeline.
@@ -117,8 +106,5 @@ namespace TeammateOnlineApi
             app.UseSwaggerGen();
             app.UseSwaggerUi("docs");
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

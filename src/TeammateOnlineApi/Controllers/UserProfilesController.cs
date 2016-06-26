@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,10 +62,10 @@ namespace TeammateOnlineApi.Controllers
 
             if (userProfile == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
-            return new HttpOkObjectResult(userProfile);
+            return new OkObjectResult(userProfile);
         }
 
         [HttpPut("{userProfileId}")]
@@ -76,7 +76,7 @@ namespace TeammateOnlineApi.Controllers
 
             if (userProfile == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             if (userProfile.EmailAddress != newUserProfile.EmailAddress && Repository.FindByEmailAddress(newUserProfile.EmailAddress) != null)
@@ -91,7 +91,7 @@ namespace TeammateOnlineApi.Controllers
 
             Repository.Update(userProfile);
 
-            return new HttpOkResult();
+            return new OkResult();
         }
     }
 }

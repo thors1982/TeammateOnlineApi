@@ -1,20 +1,20 @@
-using System;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
-using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using TeammateOnlineApi.Database;
 
 namespace TeammateOnlineApi.Migrations
 {
     [DbContext(typeof(TeammateOnlineContext))]
-    [Migration("20160224005120_Initial")]
+    [Migration("20160626224450_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
+                .HasAnnotation("ProductVersion", "1.0.0-rc2-20896")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("TeammateOnlineApi.Models.Friend", b =>
@@ -31,6 +31,8 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<int>("UserProfileId");
 
                     b.HasKey("Id");
+
+                    b.ToTable("Friends");
                 });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.GameAccount", b =>
@@ -50,6 +52,8 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<int>("UserProfileId");
 
                     b.HasKey("Id");
+
+                    b.ToTable("GameAccounts");
                 });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.GamePlatform", b =>
@@ -68,6 +72,8 @@ namespace TeammateOnlineApi.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.ToTable("GamePlatforms");
                 });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.UserProfile", b =>
@@ -93,6 +99,8 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<DateTime>("ModifiedDate");
 
                     b.HasKey("Id");
+
+                    b.ToTable("UserProfiles");
                 });
         }
     }
