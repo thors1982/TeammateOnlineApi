@@ -64,7 +64,7 @@ namespace TeammateOnlineApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            if (env.EnvironmentName == "Development")
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
@@ -96,7 +96,7 @@ namespace TeammateOnlineApi
             // Seed data for application
             SeedData.Initialize(app.ApplicationServices);
             // Add sample data for testing
-            if (env.EnvironmentName == "Development")
+            if (env.IsDevelopment())
             {
                 SampleData.Initialize(app.ApplicationServices);
             }
