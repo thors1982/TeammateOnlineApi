@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using TeammateOnlineApi.Database;
 using TeammateOnlineApi.Database.Repositories;
+using TeammateOnlineApi.Middleware;
 
 namespace TeammateOnlineApi
 {
@@ -61,6 +62,8 @@ namespace TeammateOnlineApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseMiddleware<ProcessingTimeMiddleware>();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
