@@ -20,7 +20,7 @@ namespace TeammateOnlineApi.Database
                 var minecraft = context.GamePlatforms.Add(new GamePlatform { Name = "Minecraft", Url = "https://minecraft.net" });
                 var origin = context.GamePlatforms.Add(new GamePlatform { Name = "Origin", Url = "https://www.origin.com/en-us/store" });
                 var nintendo = context.GamePlatforms.Add(new GamePlatform { Name = "Nintendo Network", Url = "https://miiverse.nintendo.net" });
-                var battlenet = context.GamePlatforms.Add(new GamePlatform { Name = "Battl.net", Url = "http://battle.net/en/" });
+                var battlenet = context.GamePlatforms.Add(new GamePlatform { Name = "Battle.net", Url = "http://battle.net/en/" });
 
                 context.SaveChanges();
             }
