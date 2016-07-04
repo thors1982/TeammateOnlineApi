@@ -21,7 +21,7 @@ namespace TeammateOnlineApi.Middleware
             context.Response.OnStarting(state =>
             {
                 var httpContext = (HttpContext)state;
-                httpContext.Response.Headers.Add("X-ProcessingTime", new[] { timer.ElapsedMilliseconds.ToString() });
+                httpContext.Response.Headers.Add("X-ProcessingTime", new[] { timer.ElapsedMilliseconds.ToString() + " ms" });
 
                 return Task.FromResult(0);
             }, context);
