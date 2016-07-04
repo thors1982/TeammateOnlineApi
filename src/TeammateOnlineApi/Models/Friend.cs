@@ -14,5 +14,7 @@ namespace TeammateOnlineApi.Models
 
         [Required]
         public int FriendUserProfileId { get; set; }
+
+        public virtual UserProfile FriendUserProfile { get; set; }
     }
 }

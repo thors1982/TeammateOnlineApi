@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TeammateOnlineApi.Database.Repositories
 {
@@ -23,12 +24,12 @@ namespace TeammateOnlineApi.Database.Repositories
 
         public Friend FinBdyId(int id)
         {
-            return context.Friends.FirstOrDefault(x => x.Id == id);
+            return context.Friends.Include(u => u.FriendUserProfile).FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<Friend> GetAllByUserProfileId(int userProfileId)
         {
-            return context.Friends.Where(x => x.UserProfileId == userProfileId);
+            return  context.Friends.Include(u => u.FriendUserProfile).Where(x => x.UserProfileId == userProfileId);
         }
 
         public void Remove(Friend friend)

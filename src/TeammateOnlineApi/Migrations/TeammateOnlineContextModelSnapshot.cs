@@ -13,7 +13,7 @@ namespace TeammateOnlineApi.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rc2-20896")
+                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("TeammateOnlineApi.Models.Friend", b =>
@@ -30,6 +30,8 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<int>("UserProfileId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("Friends");
                 });
@@ -100,6 +102,14 @@ namespace TeammateOnlineApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserProfiles");
+                });
+
+            modelBuilder.Entity("TeammateOnlineApi.Models.Friend", b =>
+                {
+                    b.HasOne("TeammateOnlineApi.Models.UserProfile", "UserProfile")
+                        .WithMany()
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }
