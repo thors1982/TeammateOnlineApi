@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.SwaggerGen.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Database.Repositories;
@@ -28,6 +29,7 @@ namespace TeammateOnlineApi.Controllers
 
         [HttpPost]
         [ValidateModelState]
+        [Produces(typeof(Friend))]
         public IActionResult Post(int userProfileId, [FromBody]Friend newFriend)
         {
             var result = Repository.Add(newFriend);
@@ -36,6 +38,8 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{friendId}", Name = "FriendDetail")]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "User profile", typeof(Friend))]
+
         public IActionResult GetDetail(int userProfileId, int friendId)
         {
             var friend = Repository.FinBdyId(friendId);

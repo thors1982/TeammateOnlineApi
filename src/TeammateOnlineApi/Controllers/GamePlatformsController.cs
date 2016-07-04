@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.SwaggerGen.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Database.Repositories;
@@ -25,6 +26,7 @@ namespace TeammateOnlineApi.Controllers
 
         [HttpPost]
         [ValidateModelState]
+        [Produces(typeof(GamePlatform))]
         public IActionResult Post([FromBody]GamePlatform newGamePlatform)
         {
             var result = Repository.Add(newGamePlatform);
@@ -33,6 +35,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{gamePlatformId}", Name = "GamePlatformDetail")]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "Game platform", typeof(GamePlatform))]
         public IActionResult GetDetail(int gamePlatformId)
         {
             var gamePlatform = Repository.FinBdyId(gamePlatformId);

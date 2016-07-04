@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.SwaggerGen.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Database.Repositories;
@@ -46,6 +47,7 @@ namespace TeammateOnlineApi.Controllers
 
         [HttpPost]
         [ValidateModelState]
+        [Produces(typeof(UserProfile))]
         public IActionResult Post([FromBody]UserProfile newUserProfile)
         {
             if (Repository.FindByEmailAddress(newUserProfile.EmailAddress) != null)
@@ -60,6 +62,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{userProfileId}", Name = "UserProfileDetail")]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "User profile", typeof(UserProfile))]
         public IActionResult GetDetail(int userProfileId)
         {
             var userProfile = Repository.FinBdyId(userProfileId);

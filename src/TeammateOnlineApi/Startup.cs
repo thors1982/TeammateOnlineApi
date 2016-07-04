@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-//using Swashbuckle.SwaggerGen.Generator;
+using Swashbuckle.Swagger.Model;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using TeammateOnlineApi.Database;
@@ -48,7 +48,7 @@ namespace TeammateOnlineApi
                 );
 
             // Add swagger as a service
-            /*services.AddSwaggerGen(options =>
+            services.AddSwaggerGen(options =>
             {
                 options.SingleApiVersion(new Info
                 {
@@ -56,7 +56,7 @@ namespace TeammateOnlineApi
                     Title = Configuration.GetSection("AppSettings:SiteTitle").Value,
                     Description = "",
                 });
-            });*/
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,8 +105,8 @@ namespace TeammateOnlineApi
             }
 
             // Setup swagger
-            //app.UseSwaggerGen();
-            //app.UseSwaggerUi("docs");
+            app.UseSwagger();
+            app.UseSwaggerUi("docs");
         }
     }
 }

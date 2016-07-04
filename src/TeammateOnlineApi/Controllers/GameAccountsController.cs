@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.SwaggerGen.Annotations;
 using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Database.Repositories;
@@ -35,6 +36,7 @@ namespace TeammateOnlineApi.Controllers
 
         [HttpPost]
         [ValidateModelState]
+        [Produces(typeof(GameAccount))]
         public IActionResult Post(int userProfileId, [FromBody]GameAccount newGameAccount)
         {
             var result = Repository.Add(newGameAccount);
@@ -43,6 +45,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{gameAccountId}", Name = "GameAccountDetail")]
+        [SwaggerResponse(System.Net.HttpStatusCode.OK, "Game account", typeof(GameAccount))]
         public IActionResult GetDetail(int userProfileId, int gameAccountId)
         {
             var gameAccount = Repository.FinBdyId(gameAccountId);
