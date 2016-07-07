@@ -24,12 +24,22 @@ namespace TeammateOnlineApi
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsEnvironment("Development"))
+            {
+                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
+                builder.AddApplicationInsightsSettings(developerMode: true);
+            }
+
             Configuration = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add framework services.
+            services.AddApplicationInsightsTelemetry(Configuration);
+
             // Add Cors support to the service
             services.AddCors();
 
@@ -69,6 +79,10 @@ namespace TeammateOnlineApi
 
             if (env.IsDevelopment())
             {
+                app.UseApplicationInsightsRequestTelemetry();
+
+                app.UseApplicationInsightsExceptionTelemetry();
+
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
