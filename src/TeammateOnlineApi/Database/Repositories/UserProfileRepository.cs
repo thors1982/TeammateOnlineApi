@@ -52,5 +52,10 @@ namespace TeammateOnlineApi.Database.Repositories
             context.UserProfiles.Update(userProfile);
             context.SaveChanges();
         }
+
+        public IEnumerable<UserProfile> Query(string query, int count = 10)
+        {
+            return context.UserProfiles.Where(x => x.EmailAddress.Contains(query)).Take(count);
+        }
     }
 }

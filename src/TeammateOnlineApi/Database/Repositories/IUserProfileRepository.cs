@@ -12,5 +12,6 @@ namespace TeammateOnlineApi.Database.Repositories
         UserProfile FindByFacebookId(string facebookId);
         IEnumerable<UserProfile> GetAll();
         void Update(UserProfile userProfile);
+        IEnumerable<UserProfile> Query(string query, int count = 10);
     }
 }

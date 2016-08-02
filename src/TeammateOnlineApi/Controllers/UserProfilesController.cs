@@ -21,7 +21,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserProfile> GetCollection([FromQuery]string emailAddress = null, [FromQuery]string googleId = null, [FromQuery]string facebookId = null)
+        public IEnumerable<UserProfile> GetCollection([FromQuery]string emailAddress = null, [FromQuery]string googleId = null, [FromQuery]string facebookId = null, [FromQuery]string query = null)
         {
             var userProfileList = new List<UserProfile>();
 
@@ -36,6 +36,10 @@ namespace TeammateOnlineApi.Controllers
             else if(!string.IsNullOrEmpty(emailAddress))
             {
                 userProfileList.Add(Repository.FindByEmailAddress(emailAddress));
+            }
+            else if(!string.IsNullOrEmpty(query))
+            {
+                userProfileList.AddRange(Repository.Query(query));
             }
             else
             {

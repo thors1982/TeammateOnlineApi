@@ -42,5 +42,10 @@ namespace TeammateOnlineApi.Database.Repositories
             context.GameAccounts.Update(gameAccount);
             context.SaveChanges();
         }
+
+        public IEnumerable<GameAccount> Query(string query, int count = 10)
+        {
+            return context.GameAccounts.Where(x => x.UserName.Contains(query)).Take(count);
+        }
     }
 }
