@@ -8,7 +8,7 @@ using TeammateOnlineApi.Database;
 namespace TeammateOnlineApi.Migrations
 {
     [DbContext(typeof(TeammateOnlineContext))]
-    [Migration("20160704194907_Initial")]
+    [Migration("20160806190409_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,9 +32,39 @@ namespace TeammateOnlineApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FriendUserProfileId");
+
                     b.HasIndex("UserProfileId");
 
                     b.ToTable("Friends");
+                });
+
+            modelBuilder.Entity("TeammateOnlineApi.Models.FriendRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<int>("FriendUserProfileId");
+
+                    b.Property<bool>("IsAccepted");
+
+                    b.Property<bool>("IsPending");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Note");
+
+                    b.Property<int>("UserProfileId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FriendUserProfileId");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("FriendRequests");
                 });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.GameAccount", b =>
@@ -54,6 +84,10 @@ namespace TeammateOnlineApi.Migrations
                     b.Property<int>("UserProfileId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserName");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("GameAccounts");
                 });
@@ -102,14 +136,28 @@ namespace TeammateOnlineApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmailAddress");
+
+                    b.HasIndex("FacebookId");
+
+                    b.HasIndex("GoogleId");
+
                     b.ToTable("UserProfiles");
                 });
 
             modelBuilder.Entity("TeammateOnlineApi.Models.Friend", b =>
                 {
-                    b.HasOne("TeammateOnlineApi.Models.UserProfile", "UserProfile")
+                    b.HasOne("TeammateOnlineApi.Models.UserProfile", "FriendUserProfile")
                         .WithMany()
-                        .HasForeignKey("UserProfileId")
+                        .HasForeignKey("FriendUserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TeammateOnlineApi.Models.FriendRequest", b =>
+                {
+                    b.HasOne("TeammateOnlineApi.Models.UserProfile", "FriendUserProfile")
+                        .WithMany()
+                        .HasForeignKey("FriendUserProfileId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

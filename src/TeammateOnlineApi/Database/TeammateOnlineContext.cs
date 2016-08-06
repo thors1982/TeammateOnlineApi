@@ -15,9 +15,27 @@ namespace TeammateOnlineApi.Database
 
         public DbSet<Friend> Friends { get; set; }
 
+        public DbSet<FriendRequest> FriendRequests { get; set; }
+
         public TeammateOnlineContext(DbContextOptions<TeammateOnlineContext> options): base(options)
         {
             Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Creating indexes
+            modelBuilder.Entity<UserProfile>().HasIndex(u => u.EmailAddress);
+            modelBuilder.Entity<UserProfile>().HasIndex(u => u.FacebookId);
+            modelBuilder.Entity<UserProfile>().HasIndex(u => u.GoogleId);
+
+            modelBuilder.Entity<GameAccount>().HasIndex(g => g.UserProfileId);
+            modelBuilder.Entity<GameAccount>().HasIndex(g => g.UserName);
+
+            modelBuilder.Entity<Friend>().HasIndex(f => f.UserProfileId);
+
+            modelBuilder.Entity<FriendRequest>().HasIndex(fr => fr.UserProfileId);
+            modelBuilder.Entity<FriendRequest>().HasIndex(fr => fr.FriendUserProfileId);
         }
 
         public override int SaveChanges()
