@@ -21,7 +21,7 @@ namespace TeammateOnlineApi.Database.Repositories
             return gamePlatform;
         }
 
-        public GamePlatform FinBdyId(int id)
+        public GamePlatform FindById(int id)
         {
             return context.GamePlatforms.FirstOrDefault(x => x.Id == id);
         }

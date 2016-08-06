@@ -69,7 +69,7 @@ namespace TeammateOnlineApi.Controllers
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "User profile", typeof(UserProfile))]
         public IActionResult GetDetail(int userProfileId)
         {
-            var userProfile = Repository.FinBdyId(userProfileId);
+            var userProfile = Repository.FindById(userProfileId);
 
             if (userProfile == null)
             {
@@ -83,7 +83,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int userProfileId, [FromBody]UserProfile newUserProfile)
         {
-            var userProfile = Repository.FinBdyId(userProfileId);
+            var userProfile = Repository.FindById(userProfileId);
 
             if (userProfile == null)
             {

@@ -38,7 +38,7 @@ namespace TeammateOnlineApi.Controllers
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "Game platform", typeof(GamePlatform))]
         public IActionResult GetDetail(int gamePlatformId)
         {
-            var gamePlatform = Repository.FinBdyId(gamePlatformId);
+            var gamePlatform = Repository.FindById(gamePlatformId);
 
             if(gamePlatform == null)
             {
@@ -52,7 +52,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int gamePlatformId, [FromBody]GamePlatform newGamePlatform)
         {
-            var gamePlatform = Repository.FinBdyId(gamePlatformId);
+            var gamePlatform = Repository.FindById(gamePlatformId);
 
             if (gamePlatform == null)
             {
@@ -70,7 +70,7 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{gamePlatformId}")]
         public IActionResult Delete(int gamePlatformId)
         {
-            var gamePlatform = Repository.FinBdyId(gamePlatformId);
+            var gamePlatform = Repository.FindById(gamePlatformId);
 
             if(gamePlatform == null)
             {

@@ -21,7 +21,7 @@ namespace TeammateOnlineApi.Database.Repositories
             return gameAccount;
         }
 
-        public GameAccount FinBdyId(int id)
+        public GameAccount FindById(int id)
         {
             return context.GameAccounts.FirstOrDefault(x => x.Id == id);
         }

@@ -48,7 +48,7 @@ namespace TeammateOnlineApi.Controllers
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "Game account", typeof(GameAccount))]
         public IActionResult GetDetail(int userProfileId, int gameAccountId)
         {
-            var gameAccount = Repository.FinBdyId(gameAccountId);
+            var gameAccount = Repository.FindById(gameAccountId);
 
             if(gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
@@ -62,7 +62,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int userProfileId, int gameAccountId, [FromBody]GameAccount newGameAccount)
         {
-            var gameAccount = Repository.FinBdyId(gameAccountId);
+            var gameAccount = Repository.FindById(gameAccountId);
 
             if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
@@ -81,7 +81,7 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{gameAccountId}")]
         public IActionResult Delete(int userProfileId, int gameAccountId)
         {
-            var gameAccount = Repository.FinBdyId(gameAccountId);
+            var gameAccount = Repository.FindById(gameAccountId);
 
             if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {

@@ -6,7 +6,7 @@ namespace TeammateOnlineApi.Database.Repositories
     public interface IUserProfileRepository
     {
         UserProfile Add(UserProfile userProfile);
-        UserProfile FinBdyId(int id);
+        UserProfile FindById(int id);
         UserProfile FindByEmailAddress(string emailAddress);
         UserProfile FindByGoogleId(string googleId);
         UserProfile FindByFacebookId(string facebookId);

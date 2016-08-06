@@ -22,7 +22,7 @@ namespace TeammateOnlineApi.Database.Repositories
             return userProfile;
         }
 
-        public UserProfile FinBdyId(int id)
+        public UserProfile FindById(int id)
         {
             return context.UserProfiles.FirstOrDefault(x => x.Id == id);
         }

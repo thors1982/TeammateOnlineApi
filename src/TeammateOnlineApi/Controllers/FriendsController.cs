@@ -32,6 +32,8 @@ namespace TeammateOnlineApi.Controllers
         [Produces(typeof(Friend))]
         public IActionResult Post(int userProfileId, [FromBody]Friend newFriend)
         {
+            // Todo: Make sure friend doesn't already exist
+
             var result = Repository.Add(newFriend);
 
             return CreatedAtRoute("FriendDetail", new { controller = "FriendsController", friendId = result.Id }, result);
@@ -42,7 +44,7 @@ namespace TeammateOnlineApi.Controllers
 
         public IActionResult GetDetail(int userProfileId, int friendId)
         {
-            var friend = Repository.FinBdyId(friendId);
+            var friend = Repository.FindById(friendId);
 
             if (friend == null || friend.UserProfileId != userProfileId)
             {
@@ -55,7 +57,7 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{friendId}")]
         public IActionResult Delete(int userProfileId, int friendId)
         {
-            var friend = Repository.FinBdyId(friendId);
+            var friend = Repository.FindById(friendId);
 
             if (friend == null || friend.UserProfileId != userProfileId)
             {

@@ -22,7 +22,7 @@ namespace TeammateOnlineApi.Database.Repositories
             return friend;
         }
 
-        public Friend FinBdyId(int id)
+        public Friend FindById(int id)
         {
             return context.Friends.Include(u => u.FriendUserProfile).FirstOrDefault(x => x.Id == id);
         }
