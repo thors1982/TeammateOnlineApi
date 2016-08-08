@@ -8,7 +8,7 @@ using TeammateOnlineApi.Database;
 namespace TeammateOnlineApi.Migrations
 {
     [DbContext(typeof(TeammateOnlineContext))]
-    [Migration("20160806190409_Initial")]
+    [Migration("20160808013505_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

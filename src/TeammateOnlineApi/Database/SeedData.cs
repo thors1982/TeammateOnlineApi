@@ -21,6 +21,9 @@ namespace TeammateOnlineApi.Database
                 var origin = context.GamePlatforms.Add(new GamePlatform { Name = "Origin", Url = "https://www.origin.com/en-us/store" });
                 var nintendo = context.GamePlatforms.Add(new GamePlatform { Name = "Nintendo Network", Url = "https://miiverse.nintendo.net" });
                 var battlenet = context.GamePlatforms.Add(new GamePlatform { Name = "Battle.net", Url = "http://battle.net/en/" });
+                var uplay = context.GamePlatforms.Add(new GamePlatform { Name = "Uplay", Url = "https://uplay.ubi.com" });
+                var hirez = context.GamePlatforms.Add(new GamePlatform { Name = "Hi-Rez", Url = "https://www.hirezstudios.com/" });
+                var mojang = context.GamePlatforms.Add(new GamePlatform { Name = "Mojang", Url = "https://mojang.com/" });
 
                 context.SaveChanges();
             }
