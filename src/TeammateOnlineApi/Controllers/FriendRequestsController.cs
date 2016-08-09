@@ -91,6 +91,7 @@ namespace TeammateOnlineApi.Controllers
                 return NotFound();
             }
 
+            friendRequest.Note = newFriendRequest.Note;
             friendRequest.IsPending = newFriendRequest.IsPending;
             friendRequest.IsAccepted = newFriendRequest.IsAccepted;
 
