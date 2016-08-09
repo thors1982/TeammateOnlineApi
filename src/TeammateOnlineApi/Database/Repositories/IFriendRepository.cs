@@ -8,6 +8,7 @@ namespace TeammateOnlineApi.Database.Repositories
         Friend Add(Friend friend);
         Friend FindById(int id);
         IEnumerable<Friend> GetAllByUserProfileId(int userProfileId);
+        Friend FindFriendOfAUser(int userProfileId, int friendUserProfileId);
         void Remove(Friend friend);
     }
 }

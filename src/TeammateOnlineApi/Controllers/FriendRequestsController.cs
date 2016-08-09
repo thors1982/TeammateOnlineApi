@@ -42,7 +42,18 @@ namespace TeammateOnlineApi.Controllers
         [Produces(typeof(FriendRequest))]
         public IActionResult Post(int userProfileId, [FromBody]FriendRequest newFriendRequest)
         {
-            // Todo: Make sure friend isn't already added and make sure friend request doesn't already exist
+            // Make sure user's are not already friends
+            if(FriendRepository.FindFriendOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
+            {
+                ModelState.AddModelError("FriendUserProfileId", "Friend already exists.");
+                return new BadRequestObjectResult(ModelState);
+            }
+            // Make sure friend request does not already exist
+            if(Repository.FindFriendRequestOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
+            {
+                ModelState.AddModelError("FriendUserProfileId", "Friend request already exists.");
+                return new BadRequestObjectResult(ModelState);
+            }
 
             newFriendRequest.IsPending = true;
             newFriendRequest.IsAccepted = false;

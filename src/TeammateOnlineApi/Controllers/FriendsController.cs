@@ -32,7 +32,12 @@ namespace TeammateOnlineApi.Controllers
         [Produces(typeof(Friend))]
         public IActionResult Post(int userProfileId, [FromBody]Friend newFriend)
         {
-            // Todo: Make sure friend doesn't already exist
+            // Make sure friend doesn't already exist
+            if (Repository.FindFriendOfAUser(userProfileId, newFriend.FriendUserProfileId) != null)
+            {
+                ModelState.AddModelError("FriendUserProfileId", "Friend already exists.");
+                return new BadRequestObjectResult(ModelState);
+            }
 
             var result = Repository.Add(newFriend);
 

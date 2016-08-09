@@ -9,6 +9,7 @@ namespace TeammateOnlineApi.Database.Repositories
         FriendRequest FindById(int id);
         IEnumerable<FriendRequest> GetAllByUserProfileId(int userProfileId);
         IEnumerable<FriendRequest> GetAllIncomingAndOutgoingRequests(int userProfileId);
+        FriendRequest FindFriendRequestOfAUser(int userProfileId, int friendUserProfileId);
         void Remove(FriendRequest friendRequest);
         void Update(FriendRequest friendRequest);
     }
