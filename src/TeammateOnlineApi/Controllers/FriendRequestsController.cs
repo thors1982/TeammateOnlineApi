@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.SwaggerGen.Annotations;
-using System.Collections.Generic;
-using System.Linq;
 using TeammateOnlineApi.Database.Repositories;
 using TeammateOnlineApi.Filters;
 using TeammateOnlineApi.Models;
