@@ -16,7 +16,7 @@ namespace MyFirstDotNetCoreTests
             Assert.Equal(5, Add(2, 2));
         }
 
-        int Add(int x, int y)
+        public int Add(int x, int y)
         {
             return x + y;
         }
@@ -30,7 +30,7 @@ namespace MyFirstDotNetCoreTests
             Assert.True(IsOdd(value));
         }
 
-        bool IsOdd(int value)
+        public bool IsOdd(int value)
         {
             return value % 2 == 1;
         }

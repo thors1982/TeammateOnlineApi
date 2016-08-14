@@ -22,22 +22,6 @@ namespace TeammateOnlineApi.Database
             Database.EnsureCreated();
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Creating indexes
-            modelBuilder.Entity<UserProfile>().HasIndex(u => u.EmailAddress);
-            modelBuilder.Entity<UserProfile>().HasIndex(u => u.FacebookId);
-            modelBuilder.Entity<UserProfile>().HasIndex(u => u.GoogleId);
-
-            modelBuilder.Entity<GameAccount>().HasIndex(g => g.UserProfileId);
-            modelBuilder.Entity<GameAccount>().HasIndex(g => g.UserName);
-
-            modelBuilder.Entity<Friend>().HasIndex(f => f.UserProfileId);
-
-            modelBuilder.Entity<FriendRequest>().HasIndex(fr => fr.UserProfileId);
-            modelBuilder.Entity<FriendRequest>().HasIndex(fr => fr.FriendUserProfileId);
-        }
-
         public override int SaveChanges()
         {
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))
@@ -54,6 +38,22 @@ namespace TeammateOnlineApi.Database
             }
 
             return base.SaveChanges();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Creating indexes
+            modelBuilder.Entity<UserProfile>().HasIndex(u => u.EmailAddress);
+            modelBuilder.Entity<UserProfile>().HasIndex(u => u.FacebookId);
+            modelBuilder.Entity<UserProfile>().HasIndex(u => u.GoogleId);
+
+            modelBuilder.Entity<GameAccount>().HasIndex(g => g.UserProfileId);
+            modelBuilder.Entity<GameAccount>().HasIndex(g => g.UserName);
+
+            modelBuilder.Entity<Friend>().HasIndex(f => f.UserProfileId);
+
+            modelBuilder.Entity<FriendRequest>().HasIndex(fr => fr.UserProfileId);
+            modelBuilder.Entity<FriendRequest>().HasIndex(fr => fr.FriendUserProfileId);
         }
     }
 }

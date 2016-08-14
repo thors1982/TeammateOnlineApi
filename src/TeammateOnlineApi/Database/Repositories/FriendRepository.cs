@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using TeammateOnlineApi.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace TeammateOnlineApi.Database.Repositories
 {
@@ -29,7 +29,7 @@ namespace TeammateOnlineApi.Database.Repositories
 
         public IEnumerable<Friend> GetAllByUserProfileId(int userProfileId)
         {
-            return  context.Friends.Include(u => u.FriendUserProfile).Where(x => x.UserProfileId == userProfileId);
+            return context.Friends.Include(u => u.FriendUserProfile).Where(x => x.UserProfileId == userProfileId);
         }
 
         public Friend FindFriendOfAUser(int userProfileId, int friendUserProfileId)

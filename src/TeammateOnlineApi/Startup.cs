@@ -65,7 +65,7 @@ namespace TeammateOnlineApi
                 {
                     Version = "v1",
                     Title = Configuration.GetSection("AppSettings:SiteTitle").Value,
-                    Description = "",
+                    Description = string.Empty,
                 });
             });
         }
@@ -113,6 +113,7 @@ namespace TeammateOnlineApi
 
             // Seed data for application
             SeedData.Initialize(app.ApplicationServices);
+
             // Add sample data for testing
             if (env.IsDevelopment())
             {

@@ -34,6 +34,7 @@ namespace TeammateOnlineApi.Controllers
                     r.IsIncomingRequest = true;
                 }
             }
+
             return requests;
         }
 
@@ -48,6 +49,7 @@ namespace TeammateOnlineApi.Controllers
                 ModelState.AddModelError("FriendUserProfileId", "Friend already exists.");
                 return new BadRequestObjectResult(ModelState);
             }
+
             // Make sure friend request does not already exist
             if(RequestRepository.FindFriendRequestOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
             {
@@ -130,6 +132,7 @@ namespace TeammateOnlineApi.Controllers
 
             // Create friend for first user
             friendController.Post(userId1, new Friend { UserProfileId = userId1, FriendUserProfileId = userId2 });
+
             // Create friend for second user
             friendController.Post(userId2, new Friend { UserProfileId = userId2, FriendUserProfileId = userId1 });
 

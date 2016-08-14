@@ -6,11 +6,11 @@ namespace TeammateOnlineApi.Middleware
 {
     public class ProcessingTimeMiddleware
     {
-        private readonly RequestDelegate _next;
+        private readonly RequestDelegate next;
 
         public ProcessingTimeMiddleware(RequestDelegate next)
         {
-            _next = next;
+            this.next = next;
         }
 
         public async Task Invoke(HttpContext context)
@@ -27,7 +27,7 @@ namespace TeammateOnlineApi.Middleware
             }, context);
 
             // Before the headers are sent back tot he client the OnStarting method gets called
-            await _next(context);
+            await next(context);
         }
     }
 }
