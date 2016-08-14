@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Database
@@ -17,7 +17,7 @@ namespace TeammateOnlineApi.Database
 
         public DbSet<FriendRequest> FriendRequests { get; set; }
 
-        public TeammateOnlineContext(DbContextOptions<TeammateOnlineContext> options): base(options)
+        public TeammateOnlineContext(DbContextOptions<TeammateOnlineContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

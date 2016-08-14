@@ -27,9 +27,9 @@ namespace TeammateOnlineApi.Controllers
         public IEnumerable<FriendRequest> GetCollection(int userProfileId)
         {
             var requests = RequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
-            foreach(var r in requests)
+            foreach (var r in requests)
             {
-                if(r.FriendUserProfileId == userProfileId)
+                if (r.FriendUserProfileId == userProfileId)
                 {
                     r.IsIncomingRequest = true;
                 }
@@ -44,14 +44,14 @@ namespace TeammateOnlineApi.Controllers
         public IActionResult Post(int userProfileId, [FromBody]FriendRequest newFriendRequest)
         {
             // Make sure user's are not already friends
-            if(FriendRepository.FindFriendOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
+            if (FriendRepository.FindFriendOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
             {
                 ModelState.AddModelError("FriendUserProfileId", "Friend already exists.");
                 return new BadRequestObjectResult(ModelState);
             }
 
             // Make sure friend request does not already exist
-            if(RequestRepository.FindFriendRequestOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
+            if (RequestRepository.FindFriendRequestOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
             {
                 ModelState.AddModelError("FriendUserProfileId", "Friend request already exists.");
                 return new BadRequestObjectResult(ModelState);
@@ -97,10 +97,10 @@ namespace TeammateOnlineApi.Controllers
             friendRequest.IsPending = newFriendRequest.IsPending;
             friendRequest.IsAccepted = newFriendRequest.IsAccepted;
 
-            if(friendRequest.IsAccepted == true)
+            if (friendRequest.IsAccepted == true)
             {
                 var result = CreateFriends(userProfileId, newFriendRequest.FriendUserProfileId);
-                if(result == false)
+                if (result == false)
                 {
                     friendRequest.IsAccepted = false;
                 }

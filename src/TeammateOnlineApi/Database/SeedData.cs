@@ -11,7 +11,7 @@ namespace TeammateOnlineApi.Database
         {
             var context = serviceProvider.GetService<TeammateOnlineContext>();
             
-            if(!context.GamePlatforms.Any())
+            if (!context.GamePlatforms.Any())
             {
                 var xbox = context.GamePlatforms.Add(new GamePlatform { Name = "Xbox Live", Url = "http://www.xbox.com/en-US/live" });
                 var playstation = context.GamePlatforms.Add(new GamePlatform { Name = "PlatStation Network", Url = "https://www.playstationnetwork.com/home" });

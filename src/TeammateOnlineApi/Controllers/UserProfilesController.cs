@@ -29,15 +29,15 @@ namespace TeammateOnlineApi.Controllers
             {
                 userProfileList.Add(UserProfileRepository.FindByGoogleId(googleId));
             }
-            else if(!string.IsNullOrEmpty(facebookId))
+            else if (!string.IsNullOrEmpty(facebookId))
             {
                 userProfileList.Add(UserProfileRepository.FindByFacebookId(facebookId));
             }
-            else if(!string.IsNullOrEmpty(emailAddress))
+            else if (!string.IsNullOrEmpty(emailAddress))
             {
                 userProfileList.Add(UserProfileRepository.FindByEmailAddress(emailAddress));
             }
-            else if(!string.IsNullOrEmpty(query))
+            else if (!string.IsNullOrEmpty(query))
             {
                 userProfileList.AddRange(UserProfileRepository.Query(query));
             }

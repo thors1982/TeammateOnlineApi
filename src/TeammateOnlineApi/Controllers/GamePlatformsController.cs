@@ -40,7 +40,7 @@ namespace TeammateOnlineApi.Controllers
         {
             var gamePlatform = GamePlatformRepository.FindById(gamePlatformId);
 
-            if(gamePlatform == null)
+            if (gamePlatform == null)
             {
                 return NotFound();
             }
@@ -72,7 +72,7 @@ namespace TeammateOnlineApi.Controllers
         {
             var gamePlatform = GamePlatformRepository.FindById(gamePlatformId);
 
-            if(gamePlatform == null)
+            if (gamePlatform == null)
             {
                 return NotFound();
             }

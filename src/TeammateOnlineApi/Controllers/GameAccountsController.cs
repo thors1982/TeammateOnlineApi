@@ -26,7 +26,7 @@ namespace TeammateOnlineApi.Controllers
         {
             var gameAccountList = GameAccountRepository.GetAllByUserProfileId(userProfileId);
 
-            if(gamePlatformId != null)
+            if (gamePlatformId != null)
             {
                 gameAccountList.Where(x => x.GamePlatformId == gamePlatformId);
             }
@@ -50,7 +50,7 @@ namespace TeammateOnlineApi.Controllers
         {
             var gameAccount = GameAccountRepository.FindById(gameAccountId);
 
-            if(gameAccount == null || gameAccount.UserProfileId != userProfileId)
+            if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
                 return NotFound();
             }
