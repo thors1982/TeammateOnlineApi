@@ -3,9 +3,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TeammateOnlineApi.Database.Repositories;
 using TeammateOnlineApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TeammateOnlineApi.Controllers
 {
+    [Authorize]
     public class SearchController : BaseController
     {
         public IUserProfileRepository UseProfileRepository;
