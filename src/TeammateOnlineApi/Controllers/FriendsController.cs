@@ -14,17 +14,17 @@ namespace TeammateOnlineApi.Controllers
     [Route("api/UserProfiles/{userProfileId}/[controller]")]
     public class FriendsController : BaseController
     {
-        public IFriendRepository Repository;
+        public IFriendRepository FriendRepository;
 
-        public FriendsController(IFriendRepository repository)
+        public FriendsController(IFriendRepository friendRepository)
         {
-            Repository = repository;
+            FriendRepository = friendRepository;
         }
 
         [HttpGet]
         public IEnumerable<Friend> GetCollection(int userProfileId)
         {
-            return Repository.GetAllByUserProfileId(userProfileId);
+            return FriendRepository.GetAllByUserProfileId(userProfileId);
         }
 
         [HttpPost]
@@ -33,13 +33,13 @@ namespace TeammateOnlineApi.Controllers
         public IActionResult Post(int userProfileId, [FromBody]Friend newFriend)
         {
             // Make sure friend doesn't already exist
-            if (Repository.FindFriendOfAUser(userProfileId, newFriend.FriendUserProfileId) != null)
+            if (FriendRepository.FindFriendOfAUser(userProfileId, newFriend.FriendUserProfileId) != null)
             {
                 ModelState.AddModelError("FriendUserProfileId", "Friend already exists.");
                 return new BadRequestObjectResult(ModelState);
             }
 
-            var result = Repository.Add(newFriend);
+            var result = FriendRepository.Add(newFriend);
 
             return CreatedAtRoute("FriendDetail", new { controller = "FriendsController", friendId = result.Id }, result);
         }
@@ -49,7 +49,7 @@ namespace TeammateOnlineApi.Controllers
 
         public IActionResult GetDetail(int userProfileId, int friendId)
         {
-            var friend = Repository.FindById(friendId);
+            var friend = FriendRepository.FindById(friendId);
 
             if (friend == null || friend.UserProfileId != userProfileId)
             {
@@ -62,14 +62,14 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{friendId}")]
         public IActionResult Delete(int userProfileId, int friendId)
         {
-            var friend = Repository.FindById(friendId);
+            var friend = FriendRepository.FindById(friendId);
 
             if (friend == null || friend.UserProfileId != userProfileId)
             {
                 return NotFound();
             }
 
-            Repository.Remove(friend);
+            FriendRepository.Remove(friend);
 
             return new NoContentResult();
         }
