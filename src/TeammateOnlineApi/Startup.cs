@@ -94,7 +94,7 @@ namespace TeammateOnlineApi
                 builder.WithOrigins(Configuration.GetSection("Urls:UI").Value)
                 .AllowAnyHeader()
                 .AllowAnyMethod();
-                //.AllowCredentials();
+                ////.AllowCredentials();
             });
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
