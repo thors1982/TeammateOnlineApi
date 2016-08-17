@@ -13,11 +13,11 @@ namespace TeammateOnlineApi.Controllers
     [Authorize]
     public class UserProfilesController : BaseController
     {
-        public IUserProfileRepository UserProfileRepository;
+        private IUserProfileRepository userProfileRepository;
 
         public UserProfilesController(IUserProfileRepository userProfileRepository)
         {
-            UserProfileRepository = userProfileRepository;
+            this.userProfileRepository = userProfileRepository;
         }
 
         [HttpGet]
@@ -27,23 +27,23 @@ namespace TeammateOnlineApi.Controllers
 
             if (!string.IsNullOrEmpty(googleId))
             {
-                userProfileList.Add(UserProfileRepository.FindByGoogleId(googleId));
+                userProfileList.Add(userProfileRepository.FindByGoogleId(googleId));
             }
             else if (!string.IsNullOrEmpty(facebookId))
             {
-                userProfileList.Add(UserProfileRepository.FindByFacebookId(facebookId));
+                userProfileList.Add(userProfileRepository.FindByFacebookId(facebookId));
             }
             else if (!string.IsNullOrEmpty(emailAddress))
             {
-                userProfileList.Add(UserProfileRepository.FindByEmailAddress(emailAddress));
+                userProfileList.Add(userProfileRepository.FindByEmailAddress(emailAddress));
             }
             else if (!string.IsNullOrEmpty(query))
             {
-                userProfileList.AddRange(UserProfileRepository.Query(query));
+                userProfileList.AddRange(userProfileRepository.Query(query));
             }
             else
             {
-                userProfileList = UserProfileRepository.GetAll().ToList();
+                userProfileList = userProfileRepository.GetAll().ToList();
             }
 
             return userProfileList;
@@ -54,13 +54,13 @@ namespace TeammateOnlineApi.Controllers
         [Produces(typeof(UserProfile))]
         public IActionResult Post([FromBody]UserProfile newUserProfile)
         {
-            if (UserProfileRepository.FindByEmailAddress(newUserProfile.EmailAddress) != null)
+            if (userProfileRepository.FindByEmailAddress(newUserProfile.EmailAddress) != null)
             {
                 ModelState.AddModelError("EmailAddress", "Email address already taken.");
                 return new BadRequestObjectResult(ModelState);
             }
 
-            var result = UserProfileRepository.Add(newUserProfile);
+            var result = userProfileRepository.Add(newUserProfile);
 
             return CreatedAtRoute("UserProfileDetail", new { controller = "UserProfilesController", userProfileId = result.Id }, result);
         }
@@ -69,7 +69,7 @@ namespace TeammateOnlineApi.Controllers
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "User profile", typeof(UserProfile))]
         public IActionResult GetDetail(int userProfileId)
         {
-            var userProfile = UserProfileRepository.FindById(userProfileId);
+            var userProfile = userProfileRepository.FindById(userProfileId);
 
             if (userProfile == null)
             {
@@ -83,14 +83,14 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int userProfileId, [FromBody]UserProfile newUserProfile)
         {
-            var userProfile = UserProfileRepository.FindById(userProfileId);
+            var userProfile = userProfileRepository.FindById(userProfileId);
 
             if (userProfile == null)
             {
                 return NotFound();
             }
 
-            if (userProfile.EmailAddress != newUserProfile.EmailAddress && UserProfileRepository.FindByEmailAddress(newUserProfile.EmailAddress) != null)
+            if (userProfile.EmailAddress != newUserProfile.EmailAddress && userProfileRepository.FindByEmailAddress(newUserProfile.EmailAddress) != null)
             {
                 ModelState.AddModelError("EmailAddress", "Email address already taken.");
                 return new BadRequestObjectResult(ModelState);
@@ -100,7 +100,7 @@ namespace TeammateOnlineApi.Controllers
             userProfile.LastName = newUserProfile.LastName;
             userProfile.EmailAddress = newUserProfile.EmailAddress;
 
-            UserProfileRepository.Update(userProfile);
+            userProfileRepository.Update(userProfile);
 
             return new OkResult();
         }

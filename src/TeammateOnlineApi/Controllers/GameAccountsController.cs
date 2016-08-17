@@ -14,17 +14,17 @@ namespace TeammateOnlineApi.Controllers
     [Route("api/UserProfiles/{userProfileId}/[controller]")]
     public class GameAccountsController : BaseController
     {
-        public IGameAccountRepository GameAccountRepository;
+        private IGameAccountRepository gameAccountRepository;
 
         public GameAccountsController(IGameAccountRepository gameAccountRepository)
         {
-            GameAccountRepository = gameAccountRepository;
+            this.gameAccountRepository = gameAccountRepository;
         }
 
         [HttpGet]
         public IEnumerable<GameAccount> GetCollection(int userProfileId, [FromQuery]int? gamePlatformId)
         {
-            var gameAccountList = GameAccountRepository.GetAllByUserProfileId(userProfileId);
+            var gameAccountList = gameAccountRepository.GetAllByUserProfileId(userProfileId);
 
             if (gamePlatformId != null)
             {
@@ -39,7 +39,7 @@ namespace TeammateOnlineApi.Controllers
         [Produces(typeof(GameAccount))]
         public IActionResult Post(int userProfileId, [FromBody]GameAccount newGameAccount)
         {
-            var result = GameAccountRepository.Add(newGameAccount);
+            var result = gameAccountRepository.Add(newGameAccount);
 
             return CreatedAtRoute("GameAccountDetail", new { controller = "GameAccountsController", gameAccountId = result.Id }, result);
         }
@@ -48,7 +48,7 @@ namespace TeammateOnlineApi.Controllers
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "Game account", typeof(GameAccount))]
         public IActionResult GetDetail(int userProfileId, int gameAccountId)
         {
-            var gameAccount = GameAccountRepository.FindById(gameAccountId);
+            var gameAccount = gameAccountRepository.FindById(gameAccountId);
 
             if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
@@ -62,7 +62,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int userProfileId, int gameAccountId, [FromBody]GameAccount newGameAccount)
         {
-            var gameAccount = GameAccountRepository.FindById(gameAccountId);
+            var gameAccount = gameAccountRepository.FindById(gameAccountId);
 
             if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
@@ -73,7 +73,7 @@ namespace TeammateOnlineApi.Controllers
             gameAccount.GamePlatformId = newGameAccount.GamePlatformId;
             gameAccount.UserName = newGameAccount.UserName;
 
-            GameAccountRepository.Update(gameAccount);
+            gameAccountRepository.Update(gameAccount);
 
             return new OkResult();
         }
@@ -81,14 +81,14 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{gameAccountId}")]
         public IActionResult Delete(int userProfileId, int gameAccountId)
         {
-            var gameAccount = GameAccountRepository.FindById(gameAccountId);
+            var gameAccount = gameAccountRepository.FindById(gameAccountId);
 
             if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
                 return NotFound();
             }
 
-            GameAccountRepository.Remove(gameAccount);
+            gameAccountRepository.Remove(gameAccount);
 
             return new NoContentResult();
         }

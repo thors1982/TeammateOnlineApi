@@ -14,19 +14,19 @@ namespace TeammateOnlineApi.Controllers
     [Route("api/UserProfiles/{userProfileId}/[controller]")]
     public class FriendRequestsController : BaseController
     {
-        public IFriendRequestRepository RequestRepository;
-        public IFriendRepository FriendRepository;
+        private IFriendRequestRepository friendRequestRepository;
+        private IFriendRepository friendRepository;
 
         public FriendRequestsController(IFriendRequestRepository friendRequestRepository, IFriendRepository friendRepository)
         {
-            RequestRepository = friendRequestRepository;
-            FriendRepository = friendRepository;
+            this.friendRequestRepository = friendRequestRepository;
+            this.friendRepository = friendRepository;
         }
 
         [HttpGet]
         public IEnumerable<FriendRequest> GetCollection(int userProfileId)
         {
-            var requests = RequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
+            var requests = friendRequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
             foreach (var r in requests)
             {
                 if (r.FriendUserProfileId == userProfileId)
@@ -44,14 +44,14 @@ namespace TeammateOnlineApi.Controllers
         public IActionResult Post(int userProfileId, [FromBody]FriendRequest newFriendRequest)
         {
             // Make sure user's are not already friends
-            if (FriendRepository.FindFriendOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
+            if (friendRepository.FindFriendOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
             {
                 ModelState.AddModelError("FriendUserProfileId", "Friend already exists.");
                 return new BadRequestObjectResult(ModelState);
             }
 
             // Make sure friend request does not already exist
-            if (RequestRepository.FindFriendRequestOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
+            if (friendRequestRepository.FindFriendRequestOfAUser(userProfileId, newFriendRequest.FriendUserProfileId) != null)
             {
                 ModelState.AddModelError("FriendUserProfileId", "Friend request already exists.");
                 return new BadRequestObjectResult(ModelState);
@@ -60,7 +60,7 @@ namespace TeammateOnlineApi.Controllers
             newFriendRequest.IsPending = true;
             newFriendRequest.IsAccepted = false;
 
-            var result = RequestRepository.Add(newFriendRequest);
+            var result = friendRequestRepository.Add(newFriendRequest);
 
             return CreatedAtRoute("FriendRequestDetail", new { controller = "FriendRequestsController", friendRequestId = result.Id }, result);
         }
@@ -70,7 +70,7 @@ namespace TeammateOnlineApi.Controllers
 
         public IActionResult GetDetail(int userProfileId, int friendRequestId)
         {
-            var friendRequest = RequestRepository.FindById(friendRequestId);
+            var friendRequest = friendRequestRepository.FindById(friendRequestId);
 
             if (friendRequest == null || friendRequest.UserProfileId != userProfileId)
             {
@@ -86,7 +86,7 @@ namespace TeammateOnlineApi.Controllers
         {
             // Todo make sure someone is not accepting someone elses request
 
-            var friendRequest = RequestRepository.FindById(friendRequestId);
+            var friendRequest = friendRequestRepository.FindById(friendRequestId);
 
             if (friendRequest == null || friendRequest.UserProfileId != userProfileId)
             {
@@ -106,7 +106,7 @@ namespace TeammateOnlineApi.Controllers
                 }
             }
 
-            RequestRepository.Update(friendRequest);
+            friendRequestRepository.Update(friendRequest);
 
             return new OkResult();
         }
@@ -114,21 +114,21 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{friendRequestId}")]
         public IActionResult Delete(int userProfileId, int friendRequestId)
         {
-            var friendRequest = RequestRepository.FindById(friendRequestId);
+            var friendRequest = friendRequestRepository.FindById(friendRequestId);
 
             if (friendRequest == null || friendRequest.UserProfileId != userProfileId)
             {
                 return NotFound();
             }
 
-            RequestRepository.Remove(friendRequest);
+            friendRequestRepository.Remove(friendRequest);
 
             return new NoContentResult();
         }
 
         private bool CreateFriends(int userId1, int userId2)
         {
-            var friendController = new FriendsController(FriendRepository);
+            var friendController = new FriendsController(friendRepository);
 
             // Create friend for first user
             friendController.Post(userId1, new Friend { UserProfileId = userId1, FriendUserProfileId = userId2 });

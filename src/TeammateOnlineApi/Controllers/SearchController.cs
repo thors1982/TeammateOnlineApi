@@ -10,13 +10,13 @@ namespace TeammateOnlineApi.Controllers
     [Authorize]
     public class SearchController : BaseController
     {
-        public IUserProfileRepository UserProfileRepository;
-        public IGameAccountRepository GameAccountRepository;
+        private IUserProfileRepository userProfileRepository;
+        private IGameAccountRepository gameAccountRepository;
 
         public SearchController(IUserProfileRepository userProfileRepository, IGameAccountRepository gameAccountRepository)
         {
-            UserProfileRepository = userProfileRepository;
-            GameAccountRepository = gameAccountRepository;
+            this.userProfileRepository = userProfileRepository;
+            this.gameAccountRepository = gameAccountRepository;
         }
 
         [HttpGet]
@@ -29,11 +29,11 @@ namespace TeammateOnlineApi.Controllers
             if (!string.IsNullOrEmpty(query))
             {
                 // Find user profiles
-                var userProfileController = new UserProfilesController(UserProfileRepository);
+                var userProfileController = new UserProfilesController(userProfileRepository);
                 searchResponse.UserProfiles.AddRange(userProfileController.GetCollection(query: query));
 
                 // Find gameaccounts
-                searchResponse.GameAccounts.AddRange(GameAccountRepository.Query(query));
+                searchResponse.GameAccounts.AddRange(gameAccountRepository.Query(query));
             }
 
             return searchResponse;

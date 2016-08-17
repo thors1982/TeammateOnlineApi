@@ -11,17 +11,17 @@ namespace TeammateOnlineApi.Controllers
 {
     public class GamePlatformsController : BaseController
     {
-        public IGamePlatformRepository GamePlatformRepository;
+        private IGamePlatformRepository gamePlatformRepository;
 
         public GamePlatformsController(IGamePlatformRepository gamePlatformRepository)
         {
-            GamePlatformRepository = gamePlatformRepository;
+            this.gamePlatformRepository = gamePlatformRepository;
         }
 
         [HttpGet]
         public IEnumerable<GamePlatform> GetCollection()
         {
-            return GamePlatformRepository.GetAll();
+            return gamePlatformRepository.GetAll();
         }
 
         [HttpPost]
@@ -29,7 +29,7 @@ namespace TeammateOnlineApi.Controllers
         [Produces(typeof(GamePlatform))]
         public IActionResult Post([FromBody]GamePlatform newGamePlatform)
         {
-            var result = GamePlatformRepository.Add(newGamePlatform);
+            var result = gamePlatformRepository.Add(newGamePlatform);
 
             return CreatedAtRoute("GamePlatformDetail", new { controller = "GamePlatformsController", gamePlatformId = result.Id }, result);
         }
@@ -38,7 +38,7 @@ namespace TeammateOnlineApi.Controllers
         [SwaggerResponse(System.Net.HttpStatusCode.OK, "Game platform", typeof(GamePlatform))]
         public IActionResult GetDetail(int gamePlatformId)
         {
-            var gamePlatform = GamePlatformRepository.FindById(gamePlatformId);
+            var gamePlatform = gamePlatformRepository.FindById(gamePlatformId);
 
             if (gamePlatform == null)
             {
@@ -52,7 +52,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int gamePlatformId, [FromBody]GamePlatform newGamePlatform)
         {
-            var gamePlatform = GamePlatformRepository.FindById(gamePlatformId);
+            var gamePlatform = gamePlatformRepository.FindById(gamePlatformId);
 
             if (gamePlatform == null)
             {
@@ -62,7 +62,7 @@ namespace TeammateOnlineApi.Controllers
             gamePlatform.Name = newGamePlatform.Name;
             gamePlatform.Url = newGamePlatform.Url;
 
-            GamePlatformRepository.Update(gamePlatform);
+            gamePlatformRepository.Update(gamePlatform);
 
             return new OkResult();
         }
@@ -70,14 +70,14 @@ namespace TeammateOnlineApi.Controllers
         [HttpDelete("{gamePlatformId}")]
         public IActionResult Delete(int gamePlatformId)
         {
-            var gamePlatform = GamePlatformRepository.FindById(gamePlatformId);
+            var gamePlatform = gamePlatformRepository.FindById(gamePlatformId);
 
             if (gamePlatform == null)
             {
                 return NotFound();
             }
 
-            GamePlatformRepository.Remove(gamePlatform);
+            gamePlatformRepository.Remove(gamePlatform);
 
             return new NoContentResult();
         }
