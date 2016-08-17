@@ -24,6 +24,8 @@ namespace TeammateOnlineApi.Models
         [NotMapped]
         public bool IsIncomingRequest { get; set; } 
 
+        public virtual UserProfile UserProfile { get; set; }
+
         public virtual UserProfile FriendUserProfile { get; set; }
     }
 }

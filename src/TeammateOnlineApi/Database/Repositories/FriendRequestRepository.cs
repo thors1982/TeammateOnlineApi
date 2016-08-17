@@ -24,22 +24,22 @@ namespace TeammateOnlineApi.Database.Repositories
 
         public FriendRequest FindById(int id)
         {
-            return context.FriendRequests.Include(u => u.FriendUserProfile).FirstOrDefault(x => x.Id == id);
+            return context.FriendRequests.Include(u => u.FriendUserProfile).Include(u => u.UserProfile).FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<FriendRequest> GetAllByUserProfileId(int userProfileId)
         {
-            return context.FriendRequests.Include(u => u.FriendUserProfile).Where(x => x.UserProfileId == userProfileId);
+            return context.FriendRequests.Include(u => u.FriendUserProfile).Include(u => u.UserProfile).Where(x => x.UserProfileId == userProfileId);
         }
 
         public IEnumerable<FriendRequest> GetAllIncomingAndOutgoingRequests(int userProfileId)
         {
-            return context.FriendRequests.Include(u => u.FriendUserProfile).Where(x => x.UserProfileId == userProfileId || x.FriendUserProfileId == userProfileId);
+            return context.FriendRequests.Include(u => u.FriendUserProfile).Include(u => u.UserProfile).Where(x => x.UserProfileId == userProfileId || x.FriendUserProfileId == userProfileId);
         }
 
         public FriendRequest FindFriendRequestOfAUser(int userProfileId, int friendUserProfileId)
         {
-            return context.FriendRequests.Include(u => u.FriendUserProfile).FirstOrDefault(x => (x.UserProfileId == userProfileId && x.FriendUserProfileId == friendUserProfileId) || (x.UserProfileId == friendUserProfileId && x.FriendUserProfileId == userProfileId));
+            return context.FriendRequests.Include(u => u.FriendUserProfile).Include(u => u.UserProfile).FirstOrDefault(x => (x.UserProfileId == userProfileId && x.FriendUserProfileId == friendUserProfileId) || (x.UserProfileId == friendUserProfileId && x.FriendUserProfileId == userProfileId));
         }
 
         public void Remove(FriendRequest friendRequest)
