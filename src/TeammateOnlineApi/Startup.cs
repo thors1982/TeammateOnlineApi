@@ -54,20 +54,21 @@ namespace TeammateOnlineApi
             services.AddScoped<IFriendRequestRepository, FriendRequestRepository>();
 
             // Configure SQL connection string
-            services.AddDbContext<TeammateOnlineContext>(
-                options => options.UseSqlServer(Configuration.GetSection("Database:ConnectionString").Value)
-                );
+            services.AddDbContext<TeammateOnlineContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetSection("Database:ConnectionString").Value);
+                });
 
             // Add swagger as a service
             services.AddSwaggerGen(options =>
-            {
-                options.SingleApiVersion(new Info
                 {
-                    Version = "v1",
-                    Title = Configuration.GetSection("AppSettings:SiteTitle").Value,
-                    Description = string.Empty,
+                    options.SingleApiVersion(new Info
+                        {
+                            Version = "v1",
+                            Title = Configuration.GetSection("AppSettings:SiteTitle").Value,
+                            Description = string.Empty,
+                        });
                 });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,23 +91,23 @@ namespace TeammateOnlineApi
 
             // Add Cors
             app.UseCors(builder =>
-            {
-                builder.WithOrigins(Configuration.GetSection("Urls:UI").Value)
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-                ////.AllowCredentials();
-            });
+                {
+                    builder.WithOrigins(Configuration.GetSection("Urls:UI").Value)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                    ////.AllowCredentials();
+                });
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap = new Dictionary<string, string>();
 
             app.UseJwtBearerAuthentication(new JwtBearerOptions
-            {
-                Authority = Configuration.GetSection("Urls:Identity").Value,
-                RequireHttpsMetadata = false,
+                {
+                    Authority = Configuration.GetSection("Urls:Identity").Value,
+                    RequireHttpsMetadata = false,
 
-                Audience = Configuration.GetSection("Urls:Identity").Value + "/resources",
-                AutomaticAuthenticate = true
-            });
+                    Audience = Configuration.GetSection("Urls:Identity").Value + "/resources",
+                    AutomaticAuthenticate = true
+                });
 
             // Add MVC to the request pipeline.
             app.UseMvc();

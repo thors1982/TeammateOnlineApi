@@ -84,7 +84,7 @@ namespace TeammateOnlineApi.Controllers
         [ValidateModelState]
         public IActionResult Put(int userProfileId, int friendRequestId, [FromBody]FriendRequest newFriendRequest)
         {
-            // Todo make sure someone is not accepting someone elses request
+            // Todo: make sure someone is not accepting someone elses request
 
             var friendRequest = friendRequestRepository.FindById(friendRequestId);
 
