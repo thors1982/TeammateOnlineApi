@@ -66,7 +66,6 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{userProfileId}", Name = "UserProfileDetail")]
-        [SwaggerResponse(System.Net.HttpStatusCode.OK, "User profile", typeof(UserProfile))]
         public IActionResult GetDetail(int userProfileId)
         {
             var userProfile = userProfileRepository.FindById(userProfileId);

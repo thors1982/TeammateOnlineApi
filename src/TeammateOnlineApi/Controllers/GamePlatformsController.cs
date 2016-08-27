@@ -35,7 +35,6 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{gamePlatformId}", Name = "GamePlatformDetail")]
-        [SwaggerResponse(System.Net.HttpStatusCode.OK, "Game platform", typeof(GamePlatform))]
         public IActionResult GetDetail(int gamePlatformId)
         {
             var gamePlatform = gamePlatformRepository.FindById(gamePlatformId);

@@ -66,7 +66,6 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{friendRequestId}", Name = "FriendRequestDetail")]
-        [SwaggerResponse(System.Net.HttpStatusCode.OK, "User profile", typeof(FriendRequest))]
 
         public IActionResult GetDetail(int userProfileId, int friendRequestId)
         {

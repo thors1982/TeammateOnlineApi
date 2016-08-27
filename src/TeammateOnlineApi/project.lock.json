@@ -2202,14 +2202,15 @@
           }
         }
       },
-      "Swashbuckle/6.0.0-beta901": {
+      "Swashbuckle/6.0.0-beta902": {
         "type": "package",
         "dependencies": {
-          "Swashbuckle.SwaggerGen": "6.0.0-beta901",
-          "Swashbuckle.SwaggerUi": "6.0.0-beta901"
+          "Swashbuckle.Swagger": "6.0.0-beta902",
+          "Swashbuckle.SwaggerGen": "6.0.0-beta902",
+          "Swashbuckle.SwaggerUi": "6.0.0-beta902"
         }
       },
-      "Swashbuckle.Swagger/6.0.0-beta901": {
+      "Swashbuckle.Swagger/6.0.0-beta902": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
@@ -2222,13 +2223,13 @@
           "lib/netstandard1.6/Swashbuckle.Swagger.dll": {}
         }
       },
-      "Swashbuckle.SwaggerGen/6.0.0-beta901": {
+      "Swashbuckle.SwaggerGen/6.0.0-beta902": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.ApiExplorer": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
           "Microsoft.AspNetCore.Mvc.DataAnnotations": "1.0.0",
-          "Swashbuckle.Swagger": "6.0.0-beta901",
+          "Swashbuckle.Swagger": "6.0.0-beta902",
           "System.Xml.XPath": "4.0.1"
         },
         "compile": {
@@ -2238,7 +2239,7 @@
           "lib/netstandard1.6/Swashbuckle.SwaggerGen.dll": {}
         }
       },
-      "Swashbuckle.SwaggerUi/6.0.0-beta901": {
+      "Swashbuckle.SwaggerUi/6.0.0-beta902": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
@@ -5997,43 +5998,43 @@
         "runtimes/win7-x86/native/sni.dll"
       ]
     },
-    "Swashbuckle/6.0.0-beta901": {
-      "sha512": "7QlFBzUxOwDrUOo2ZMLzF1ekhelozTUCzNifnz2rND+HqR0lJ6Bpl5QfIDVRnjMAge9LLTsc+TQLynkLVliKWw==",
+    "Swashbuckle/6.0.0-beta902": {
+      "sha512": "jEGtMQ6pl/q6ZGB6fVkp6F830qDDNOa6QekFjanI7brmftDTv7TAFNoAjosKGH11SFO3D1g+A2UY45bskseqFQ==",
       "type": "package",
-      "path": "Swashbuckle/6.0.0-beta901",
+      "path": "Swashbuckle/6.0.0-beta902",
       "files": [
-        "Swashbuckle.6.0.0-beta901.nupkg.sha512",
+        "Swashbuckle.6.0.0-beta902.nupkg.sha512",
         "Swashbuckle.nuspec"
       ]
     },
-    "Swashbuckle.Swagger/6.0.0-beta901": {
-      "sha512": "Aa9fzgCfJ6STF9EJyvpHz0J2BUKMYOV/ASZVvEN/Z8Tad4Ovn2KiKr6yN5rrXvtVqWjYlOiFPd01TM/DCtmKYA==",
+    "Swashbuckle.Swagger/6.0.0-beta902": {
+      "sha512": "DAA0nU/XCLXjir9EPScRWjUBhTT88iS+2f9wQz5av524FhMAJOVG/N/vNvXj8QPObQdnK3ttW7k/wyota73yOQ==",
       "type": "package",
-      "path": "Swashbuckle.Swagger/6.0.0-beta901",
+      "path": "Swashbuckle.Swagger/6.0.0-beta902",
       "files": [
-        "Swashbuckle.Swagger.6.0.0-beta901.nupkg.sha512",
+        "Swashbuckle.Swagger.6.0.0-beta902.nupkg.sha512",
         "Swashbuckle.Swagger.nuspec",
         "lib/net451/Swashbuckle.Swagger.dll",
         "lib/netstandard1.6/Swashbuckle.Swagger.dll"
       ]
     },
-    "Swashbuckle.SwaggerGen/6.0.0-beta901": {
-      "sha512": "lLznzenpFMkSyIygf7PZr9f48PRT51kSrrfsvufgciUxnKOBsGJMAFhBWQFccYSxDjFYdP0EOfPU6yZrGwZ+nQ==",
+    "Swashbuckle.SwaggerGen/6.0.0-beta902": {
+      "sha512": "zSHFHSf6KJ7yNwsYAibd1z0fqLVpueeax8wVwyLSZvMiUkfrNGnX/NhXKSzVltuGm3b52k7sG05mL9nwY3YvIA==",
       "type": "package",
-      "path": "Swashbuckle.SwaggerGen/6.0.0-beta901",
+      "path": "Swashbuckle.SwaggerGen/6.0.0-beta902",
       "files": [
-        "Swashbuckle.SwaggerGen.6.0.0-beta901.nupkg.sha512",
+        "Swashbuckle.SwaggerGen.6.0.0-beta902.nupkg.sha512",
         "Swashbuckle.SwaggerGen.nuspec",
         "lib/net451/Swashbuckle.SwaggerGen.dll",
         "lib/netstandard1.6/Swashbuckle.SwaggerGen.dll"
       ]
     },
-    "Swashbuckle.SwaggerUi/6.0.0-beta901": {
-      "sha512": "qqYh14nwLQI4NCTYQXjtoXoAjv1Fonio5LFRLlbQ8vfDUMOjEzBw94oLUF7uRBivrY6NEEqTmBasSdujveCCeA==",
+    "Swashbuckle.SwaggerUi/6.0.0-beta902": {
+      "sha512": "qdxsxIw55cFGbng2F10soyS/eJK4MZW/M7jjoQIxUxOdpe+hG2EmNwWXijEPMwJJ5qcpB/QOc766LHtFPx9Ucg==",
       "type": "package",
-      "path": "Swashbuckle.SwaggerUi/6.0.0-beta901",
+      "path": "Swashbuckle.SwaggerUi/6.0.0-beta902",
       "files": [
-        "Swashbuckle.SwaggerUi.6.0.0-beta901.nupkg.sha512",
+        "Swashbuckle.SwaggerUi.6.0.0-beta902.nupkg.sha512",
         "Swashbuckle.SwaggerUi.nuspec",
         "lib/net451/Swashbuckle.SwaggerUi.dll",
         "lib/netstandard1.6/Swashbuckle.SwaggerUi.dll"
@@ -10624,7 +10625,7 @@
       "Microsoft.Extensions.Logging.Console >= 1.0.0",
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",
       "Microsoft.NETCore.App >= 1.0.0",
-      "Swashbuckle >= 6.0.0-beta901"
+      "Swashbuckle >= 6.0.0-beta902"
     ],
     ".NETCoreApp,Version=v1.0": []
   },

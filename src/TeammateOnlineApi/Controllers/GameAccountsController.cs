@@ -45,7 +45,6 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{gameAccountId}", Name = "GameAccountDetail")]
-        [SwaggerResponse(System.Net.HttpStatusCode.OK, "Game account", typeof(GameAccount))]
         public IActionResult GetDetail(int userProfileId, int gameAccountId)
         {
             var gameAccount = gameAccountRepository.FindById(gameAccountId);
