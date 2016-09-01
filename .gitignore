@@ -306,4 +306,4 @@ $RECYCLE.BIN/
 
 # Configs
 # =========================
-src/TeammateOnlineApi/config.Development.json
+src/TeammateOnlineApi/appsettings.Development.json
