@@ -77,7 +77,6 @@ namespace TeammateOnlineApi
             app.UseMiddleware<ProcessingTimeMiddleware>();
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
@@ -87,6 +86,12 @@ namespace TeammateOnlineApi
 
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+
+                loggerFactory.AddDebug(LogLevel.Information);
+            }
+            else
+            {
+                loggerFactory.AddDebug(LogLevel.Warning);
             }
 
             // Add Cors
