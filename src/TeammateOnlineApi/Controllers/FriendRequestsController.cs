@@ -27,11 +27,11 @@ namespace TeammateOnlineApi.Controllers
         public IEnumerable<FriendRequest> GetCollection(int userProfileId)
         {
             var requests = friendRequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
-            foreach (var r in requests)
+            foreach (var request in requests)
             {
-                if (r.FriendUserProfileId == userProfileId)
+                if (request.FriendUserProfileId == userProfileId)
                 {
-                    r.IsIncomingRequest = true;
+                    request.IsIncomingRequest = true;
                 }
             }
 
