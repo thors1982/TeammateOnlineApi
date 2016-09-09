@@ -74,9 +74,18 @@ namespace TeammateOnlineApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseMiddleware<ProcessingTimeMiddleware>();
+            app.UseProcessingTimeMiddleware();
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+
+            if (env.IsDevelopment())
+            {
+                loggerFactory.AddDebug(LogLevel.Information);
+            }
+            else
+            {
+                loggerFactory.AddDebug(LogLevel.Warning);
+            }
 
             if (env.IsDevelopment())
             {
@@ -86,12 +95,6 @@ namespace TeammateOnlineApi
 
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-
-                loggerFactory.AddDebug(LogLevel.Information);
-            }
-            else
-            {
-                loggerFactory.AddDebug(LogLevel.Warning);
             }
 
             // Add Cors
@@ -113,6 +116,11 @@ namespace TeammateOnlineApi
                     Audience = Configuration.GetSection("Urls:Identity").Value + "/resources",
                     AutomaticAuthenticate = true
                 });
+
+            if (env.IsDevelopment())
+            {
+                app.UseThrowExceptionMiddleware();
+            }
 
             // Add MVC to the request pipeline.
             app.UseMvc();

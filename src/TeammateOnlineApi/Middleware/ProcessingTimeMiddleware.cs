@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace TeammateOnlineApi.Middleware
 {
@@ -30,6 +31,15 @@ namespace TeammateOnlineApi.Middleware
             httpContext.Response.Headers.Add("X-ProcessingTime", new[] { timer.ElapsedMilliseconds.ToString() + " ms" });
 
             return Task.FromResult(0);
+        }
+    }
+
+    // Extension method used to add the middleware to the HTTP request pipeline.
+    public static class ProcessingTimeMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseProcessingTimeMiddleware(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<ProcessingTimeMiddleware>();
         }
     }
 }
