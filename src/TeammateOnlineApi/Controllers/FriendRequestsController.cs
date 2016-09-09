@@ -26,8 +26,8 @@ namespace TeammateOnlineApi.Controllers
         [HttpGet]
         public IEnumerable<FriendRequest> GetCollection(int userProfileId)
         {
-            var requests = friendRequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
-            foreach (var request in requests)
+            var friendRequests = friendRequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
+            foreach (var request in friendRequests)
             {
                 if (request.FriendUserProfileId == userProfileId)
                 {
@@ -35,7 +35,7 @@ namespace TeammateOnlineApi.Controllers
                 }
             }
 
-            return requests;
+            return friendRequests;
         }
 
         [HttpPost]
