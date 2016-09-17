@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Threading.Tasks;
 
 namespace TeammateOnlineApi.Middleware
 {
@@ -16,13 +16,13 @@ namespace TeammateOnlineApi.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            if(context.Request.Query.ContainsKey("throw"))
+            if (context.Request.Query.ContainsKey("throw"))
             {
-                switch(context.Request.Query["throw"].ToString().ToLower())
+                switch (context.Request.Query["throw"].ToString().ToLower())
                 {
                     case "unauthorized":
                     case "401":
-                        context.Response.StatusCode = 401; //Unauthorized
+                        context.Response.StatusCode = 401; // Unauthorized
                         return;
                     case "500":
                         context.Response.StatusCode = 500;
