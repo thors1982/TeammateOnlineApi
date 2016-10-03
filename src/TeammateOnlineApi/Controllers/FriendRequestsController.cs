@@ -3,7 +3,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.SwaggerGen.Annotations;
 using TeammateOnlineApi.Database.Repositories;
 using TeammateOnlineApi.Filters;
 using TeammateOnlineApi.Models;
@@ -26,16 +25,14 @@ namespace TeammateOnlineApi.Controllers
         [HttpGet]
         public IEnumerable<FriendRequest> GetCollection(int userProfileId)
         {
-            var friendRequests = friendRequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
-            foreach (var request in friendRequests)
+            var friendRequestsFromDatabase = friendRequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
+            var responseFriendRequests = new List<FriendRequest>();
+            foreach (var request in friendRequestsFromDatabase)
             {
-                if (request.FriendUserProfileId == userProfileId)
-                {
-                    request.IsIncomingRequest = true;
-                }
+                responseFriendRequests.Add(TranslateFriendRequestForResponse(userProfileId, request));
             }
 
-            return friendRequests;
+            return responseFriendRequests;
         }
 
         [HttpPost]
@@ -71,12 +68,12 @@ namespace TeammateOnlineApi.Controllers
         {
             var friendRequest = friendRequestRepository.FindById(friendRequestId);
 
-            if (friendRequest == null || friendRequest.UserProfileId != userProfileId)
+            if (friendRequest == null || (friendRequest.UserProfileId != userProfileId && friendRequest.FriendUserProfileId != userProfileId))
             {
                 return NotFound();
             }
 
-            return new OkObjectResult(friendRequest);
+            return new OkObjectResult(TranslateFriendRequestForResponse(userProfileId, friendRequest));
         }
 
         [HttpPut("{friendRequestId}")]
@@ -87,7 +84,7 @@ namespace TeammateOnlineApi.Controllers
 
             var friendRequest = friendRequestRepository.FindById(friendRequestId);
 
-            if (friendRequest == null || friendRequest.UserProfileId != userProfileId)
+            if (friendRequest == null || (friendRequest.UserProfileId != userProfileId && friendRequest.FriendUserProfileId != userProfileId))
             {
                 return NotFound();
             }
@@ -136,6 +133,30 @@ namespace TeammateOnlineApi.Controllers
             friendController.Post(userId2, new Friend { UserProfileId = userId2, FriendUserProfileId = userId1 });
 
             return true;
+        }
+
+        private FriendRequest TranslateFriendRequestForResponse(int userProfileId, FriendRequest friendRequest)
+        {
+            if (friendRequest.UserProfileId == userProfileId)
+            {
+                friendRequest.IsIncomingRequest = false;
+                return friendRequest;
+            }
+
+            return new FriendRequest
+            {
+                Id = friendRequest.Id,
+                UserProfileId = friendRequest.FriendUserProfileId,
+                UserProfile = friendRequest.FriendUserProfile,
+                FriendUserProfileId = friendRequest.UserProfileId,
+                FriendUserProfile = friendRequest.UserProfile,
+                Note = friendRequest.Note,
+                IsAccepted = friendRequest.IsAccepted,
+                IsPending = friendRequest.IsPending,
+                IsIncomingRequest = true,
+                CreatedDate = friendRequest.CreatedDate,
+                ModifiedDate = friendRequest.ModifiedDate
+            };
         }
     }
 }
