@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace TeammateOnlineApi.Controllers
 {
+    [Authorize]
     [Route("api/UserProfiles/{userProfileId}/GameAccounts/{gameAccountId}/[controller]")]
     public class FriendsAccountsController : BaseController
     {
