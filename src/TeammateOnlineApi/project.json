@@ -19,7 +19,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
     "Swashbuckle": "6.0.0-beta902",
-    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0"
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.2"
   },
 
   "tools": {

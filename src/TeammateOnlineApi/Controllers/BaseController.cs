@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
-using TeammateOnlineApi.Database;
-using TeammateOnlineApi.Models;
 
 namespace TeammateOnlineApi.Controllers
 {

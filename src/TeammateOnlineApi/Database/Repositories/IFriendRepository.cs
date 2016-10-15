@@ -13,6 +13,8 @@ namespace TeammateOnlineApi.Database.Repositories
 
         Friend FindFriendOfAUser(int userProfileId, int friendUserProfileId);
 
+        bool IsUserAFriend(int userProfileId, int friendUserProfileId);
+
         void Remove(Friend friend);
     }
 }

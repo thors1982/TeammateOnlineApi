@@ -37,6 +37,11 @@ namespace TeammateOnlineApi.Database.Repositories
             return context.Friends.Include(u => u.FriendUserProfile).FirstOrDefault(x => x.UserProfileId == userProfileId && x.FriendUserProfileId == friendUserProfileId);
         }
 
+        public bool IsUserAFriend(int userProfileId, int friendUserProfileId)
+        {
+            return context.Friends.Any(x => x.UserProfileId == userProfileId && x.FriendUserProfileId == friendUserProfileId);
+        }
+
         public void Remove(Friend friend)
         {
             context.Remove(friend);
