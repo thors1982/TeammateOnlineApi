@@ -14,7 +14,7 @@ namespace TeammateOnlineApi.Database
             if (!context.GamePlatforms.Any())
             {
                 var xbox = context.GamePlatforms.Add(new GamePlatform { Name = "Xbox Live", Url = "http://www.xbox.com/en-US/live" });
-                var playstation = context.GamePlatforms.Add(new GamePlatform { Name = "PlatStation Network", Url = "https://www.playstationnetwork.com/home" });
+                var playstation = context.GamePlatforms.Add(new GamePlatform { Name = "PlayStation Network", Url = "https://www.playstationnetwork.com/home" });
                 var steam = context.GamePlatforms.Add(new GamePlatform { Name = "Steam", Url = "http://store.steampowered.com" });
                 var lol = context.GamePlatforms.Add(new GamePlatform { Name = "League of Legends", Url = "http://leagueoflegends.com" });
                 var minecraft = context.GamePlatforms.Add(new GamePlatform { Name = "Minecraft", Url = "https://minecraft.net" });
