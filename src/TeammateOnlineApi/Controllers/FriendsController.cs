@@ -45,7 +45,6 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet("{friendId}", Name = "FriendDetail")]
-
         public IActionResult GetDetail(int userProfileId, int friendId)
         {
             var friend = friendRepository.FindById(friendId);

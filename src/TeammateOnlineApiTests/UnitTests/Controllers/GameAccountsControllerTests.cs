@@ -108,7 +108,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
 
-            mockGameAccountRepository.Setup(repo => repo.FindById(testGameAccount.Id)).Returns((GameAccount)null);
+            mockGameAccountRepository.Setup(repo => repo.FindById(testGameAccount.Id)).Returns(testGameAccount);
 
             var result = controller.GetDetail(idDoesNotExist, testGameAccount.Id);
 
