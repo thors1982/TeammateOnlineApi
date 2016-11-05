@@ -28,7 +28,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
 
             userProfiles = new List<UserProfile>
             {
-                new UserProfile { Id = 1, FirstName = "Tony", LastName = "Stark", EmailAddress = "tony.stark@ironman.com", FacebookId = "tony.stark.ironman.facebookid", GoogleId = "tony.stark.ironman.googleid" , CreatedDate = new DateTime(2015, 12, 1), ModifiedDate = new DateTime(2016, 1, 1)}
+                new UserProfile { Id = 1, FirstName = "Tony", LastName = "Stark", EmailAddress = "tony.stark@ironman.com", FacebookId = "tony.stark.ironman.facebookid", GoogleId = "tony.stark.ironman.googleid", CreatedDate = new DateTime(2015, 12, 1), ModifiedDate = new DateTime(2016, 1, 1)}
             };
         }
 

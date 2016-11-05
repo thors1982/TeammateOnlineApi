@@ -28,7 +28,7 @@ namespace TeammateOnlineApi.Controllers
 
             if (gamePlatformId != null)
             {
-                gameAccountList.Where(x => x.GamePlatformId == gamePlatformId);
+                gameAccountList = gameAccountList.Where(x => x.GamePlatformId == gamePlatformId);
             }
 
             return gameAccountList;

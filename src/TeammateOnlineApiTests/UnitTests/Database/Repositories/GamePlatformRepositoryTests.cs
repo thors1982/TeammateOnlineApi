@@ -27,8 +27,8 @@ namespace TeammateOnlineApiTests.UnitTests.Database.Repositories
             SeedData();
         }
 
-        [Fact]
-        public void Add_Test()
+        [Fact(DisplayName = "GamePlatformRepository - Adding Game Platform")]
+        public void Add()
         {
             var steam = new GamePlatform { Name = "Steam", Url = "http://store.steampowered.com" };
 
@@ -42,10 +42,10 @@ namespace TeammateOnlineApiTests.UnitTests.Database.Repositories
             Assert.Equal(steam.Url, foundGamePlatform.Url);
         }
 
-        [Theory]
+        [Theory(DisplayName = "GamePlatformRepository - Find Game Platform by Id")]
         [InlineData(0)]
         [InlineData(1)]
-        public void FindById_Test(int position)
+        public void FindById(int position)
         {
             var testGamePlatform = GetAGamePlatform(position);
 
@@ -54,16 +54,16 @@ namespace TeammateOnlineApiTests.UnitTests.Database.Repositories
             Assert.Equal(testGamePlatform, foundGamePlatform);
         }
 
-        [Fact]
-        public void GetAll_Test()
+        [Fact(DisplayName = "GamePlatformRepository - Get all Game Platforms")]
+        public void GetAll()
         {
             var allGamePlatforms = gamePlatformRepository.GetAll();
 
             Assert.Equal(context.GamePlatforms, allGamePlatforms);
         }
 
-        [Fact]
-        public void Remove_Test()
+        [Fact(DisplayName = "GamePlatformRepository - Removing a Game Platform")]
+        public void Remove()
         {
             var testGamePlatform = GetAGamePlatform();
 
@@ -75,8 +75,8 @@ namespace TeammateOnlineApiTests.UnitTests.Database.Repositories
             Assert.Equal(null, context.GamePlatforms.FirstOrDefault(x => x.Id == testGamePlatform.Id));
         }
 
-        [Fact]
-        public void Update_Test()
+        [Fact(DisplayName = "GamePlatformRepository - Update a Game Platform")]
+        public void Update()
         {
             var testGamePlatform = GetAGamePlatform();
 
