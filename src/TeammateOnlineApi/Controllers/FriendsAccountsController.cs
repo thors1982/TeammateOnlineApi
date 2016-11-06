@@ -19,7 +19,7 @@ namespace TeammateOnlineApi.Controllers
 
         private IFriendRepository friendRepository;
 
-        public FriendsAccountsController(IGameAccountRepository gameAccountRepository, IFriendRepository friendRepository)
+        public FriendsAccountsController(IFriendRepository friendRepository, IGameAccountRepository gameAccountRepository)
         {
             this.gameAccountRepository = gameAccountRepository;
             this.friendRepository = friendRepository;

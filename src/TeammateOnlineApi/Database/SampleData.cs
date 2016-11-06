@@ -14,10 +14,10 @@ namespace TeammateOnlineApi.Database
             if (!context.UserProfiles.Any())
             {
                 // Some default user profiles
-                var ironman = context.UserProfiles.Add(new UserProfile { FirstName = "Tony", LastName = "Stark", EmailAddress = "tony.stark@ironman.com" });
-                var captainAmerica = context.UserProfiles.Add(new UserProfile { FirstName = "Steve", LastName = "Rogers", EmailAddress = "steve.rogers@captainamerica.com" });
-                var hulk = context.UserProfiles.Add(new UserProfile { FirstName = "Bruce", LastName = "Banner", EmailAddress = "bruce.banner@hulk.com" });
-                var batman = context.UserProfiles.Add(new UserProfile { FirstName = "Bruce", LastName = "Wayne", EmailAddress = "brace.wayne@batman.com" });
+                var ironman = context.UserProfiles.Add(new UserProfile { FirstName = "Tony", LastName = "Stark", EmailAddress = "tony.stark@ironman.com", FacebookId = "tony.stark.ironman.facebookid", GoogleId = "tony.stark.ironman.googleid" });
+                var captainAmerica = context.UserProfiles.Add(new UserProfile { FirstName = "Steve", LastName = "Rogers", EmailAddress = "steve.rogers@captainamerica.com", FacebookId = "steve.rogers.captainamerica.facebookid", GoogleId = "steve.rogers.captainamerica.googleid" });
+                var hulk = context.UserProfiles.Add(new UserProfile { FirstName = "Bruce", LastName = "Banner", EmailAddress = "bruce.banner@hulk.com", FacebookId = "bruce.banner.hulk.facebookid", GoogleId = "bruce.banner.hulk.googleid" });
+                var batman = context.UserProfiles.Add(new UserProfile { FirstName = "Bruce", LastName = "Wayne", EmailAddress = "brace.wayne@batman.com", FacebookId = "brace.wayne.batman.facbeookid", GoogleId = "brace.wayne.batman.googleid" });
 
                 context.SaveChanges();
 

@@ -45,9 +45,9 @@ namespace TeammateOnlineApiTests.UnitTests.Database.Repositories
         [Theory(DisplayName = "GamePlatformRepository - Find Game Platform by Id")]
         [InlineData(0)]
         [InlineData(1)]
-        public void FindById(int position)
+        public void FindById(int numberToSkip)
         {
-            var testGamePlatform = GetAGamePlatform(position);
+            var testGamePlatform = GetGamePlatform(numberToSkip);
 
             var foundGamePlatform = gamePlatformRepository.FindById(testGamePlatform.Id);
 
@@ -65,7 +65,7 @@ namespace TeammateOnlineApiTests.UnitTests.Database.Repositories
         [Fact(DisplayName = "GamePlatformRepository - Removing a Game Platform")]
         public void Remove()
         {
-            var testGamePlatform = GetAGamePlatform();
+            var testGamePlatform = GetGamePlatform();
 
             var currentCount = context.GamePlatforms.Count();
 
@@ -78,7 +78,7 @@ namespace TeammateOnlineApiTests.UnitTests.Database.Repositories
         [Fact(DisplayName = "GamePlatformRepository - Update a Game Platform")]
         public void Update()
         {
-            var testGamePlatform = GetAGamePlatform();
+            var testGamePlatform = GetGamePlatform();
 
             testGamePlatform.Name = "UpdatedName";
             testGamePlatform.Url = "http://updated.url";
@@ -99,7 +99,7 @@ namespace TeammateOnlineApiTests.UnitTests.Database.Repositories
             }
         }
 
-        private GamePlatform GetAGamePlatform(int numberToSkip = 0)
+        private GamePlatform GetGamePlatform(int numberToSkip = 0)
         {
             return context.GamePlatforms.Skip(numberToSkip).First();
         }
