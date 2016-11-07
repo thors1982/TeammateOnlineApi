@@ -34,30 +34,24 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetCollection_ReturnsAll()
+        public void GetCollectionReturnsAll()
         {
-            // Arrange
             mockGamePlatformRepository.Setup(repo => repo.GetAll()).Returns(gamePlatforms);
 
-            // Act
             var result = controller.GetCollection();
 
-            // Assert
             Assert.Equal(gamePlatforms, result);
         }
 
         [Fact]
-        public void Post_ReturnsCreateAtResult()
+        public void PostReturnsCreateAtResult()
         {
-            // Arrange
             var testGamePlatform = gamePlatforms.First();
 
             mockGamePlatformRepository.Setup(repo => repo.Add(It.IsAny<GamePlatform>())).Returns(testGamePlatform);
 
-            // Act
             var result = controller.Post(testGamePlatform);
 
-            // Assert
             var createdResult = Assert.IsType<CreatedAtRouteResult>(result);
             Assert.Equal(testGamePlatform, createdResult.Value);
 
@@ -65,38 +59,31 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDteail_ReturnsOkObjectResult()
+        public void GetDteailReturnsOkObjectResult()
         {
-            // Arrange
             var testGamePlatform = gamePlatforms.First();
 
             mockGamePlatformRepository.Setup(repo => repo.FindById(testGamePlatform.Id)).Returns(testGamePlatform);
 
-            // Act
             var result = controller.GetDetail(testGamePlatform.Id);
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(testGamePlatform, okResult.Value);
         }
 
         [Fact]
-        public void GetDetail_ReturnsNotFound()
+        public void GetDetailReturnsNotFound()
         {
-            // Arrange
             mockGamePlatformRepository.Setup(repo => repo.FindById(idDoesNotExist)).Returns((GamePlatform)null);
 
-            // Act
             var result = controller.GetDetail(idDoesNotExist);
 
-            // Assert
             var notFound = Assert.IsType<NotFoundResult>(result);
         }
 
         [Fact]
-        public void Put_ReturnsOkResult()
+        public void PutReturnsOkResult()
         {
-            // Arrange
             var testGamePlatform = gamePlatforms.First();
 
             mockGamePlatformRepository.Setup(repo => repo.FindById(testGamePlatform.Id)).Returns(testGamePlatform);
@@ -109,17 +96,14 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
                 Url = "http://test.url/"
             };
             
-            // Act
             var result = controller.Put(testGamePlatform.Id, updatedGamePlatform);
 
-            // Assert
             var okResult = Assert.IsType<OkResult>(result);
         }
 
         [Fact]
-        public void Put_ReturnsNotFound()
+        public void PutReturnsNotFound()
         {
-            // Arrange
             var testGamePlatform = gamePlatforms.First();
             
             mockGamePlatformRepository.Setup(repo => repo.FindById(idDoesNotExist)).Returns((GamePlatform)null);
@@ -131,41 +115,33 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
                 Url = "http://test.url/"
             };
             
-            // Act
             var result = controller.Put(idDoesNotExist, updatedGamePlatform);
 
-            // Assert
             var notFound = Assert.IsType<NotFoundResult>(result);
         }
 
         [Fact]
-        public void Delete_ReturnsNoContentResult()
+        public void DeleteReturnsNoContentResult()
         {
-            // Arrange
             var testGamePlatform = gamePlatforms.First();
 
             mockGamePlatformRepository.Setup(repo => repo.FindById(testGamePlatform.Id)).Returns(testGamePlatform);
             mockGamePlatformRepository.Setup(repo => repo.Remove(testGamePlatform));
 
-            // Act
             var result = controller.Delete(testGamePlatform.Id);
 
-            // Assert
             var noContentResult = Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
-        public void Delete_ReturnsNotFound()
+        public void DeleteReturnsNotFound()
         {
-            // Arrange
             var testGamePlatform = gamePlatforms.First();
 
             mockGamePlatformRepository.Setup(repo => repo.FindById(idDoesNotExist)).Returns((GamePlatform)null);
             
-            // Act
             var result = controller.Delete(idDoesNotExist);
 
-            // Assert
             var notFound = Assert.IsType<NotFoundResult>(result);
         }
 

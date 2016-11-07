@@ -33,7 +33,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetCollection_ReturnsAll()
+        public void GetCollectionReturnsAll()
         {
             mockUserProfileRepository.Setup(repo => repo.GetAll()).Returns(userProfiles);
 
@@ -43,7 +43,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Post_ReturnsCreateAtResult()
+        public void PostReturnsCreateAtResult()
         {
             var testUserProfile = userProfiles.First();
 
@@ -58,7 +58,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Post_ReturnsEmailAddressAlreadyTaken()
+        public void PostReturnsEmailAddressAlreadyTaken()
         {
             var testUserProfile = userProfiles.First();
 
@@ -71,7 +71,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDteail_ReturnsOkObjectResult()
+        public void GetDteailReturnsOkObjectResult()
         {
             var testUserProfile = userProfiles.First();
             mockUserProfileRepository.Setup(repo => repo.FindById(testUserProfile.Id)).Returns(testUserProfile);
@@ -83,7 +83,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDetail_ReturnsNotFound()
+        public void GetDetailReturnsNotFound()
         {
             mockUserProfileRepository.Setup(repo => repo.FindById(idDoesNotExist)).Returns((UserProfile)null);
 
@@ -93,7 +93,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Put_ReturnsOkResult()
+        public void PutReturnsOkResult()
         {
             var testUserProfile = userProfiles.First();
 
@@ -116,7 +116,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Put_ReturnsNotFound()
+        public void PutReturnsNotFound()
         {
             var testUserProfile = userProfiles.First();
 
@@ -138,7 +138,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Put_ReturnsEmailAddressAlreadyTaken()
+        public void PutReturnsEmailAddressAlreadyTaken()
         {
             var testUserProfile = userProfiles.First();
 

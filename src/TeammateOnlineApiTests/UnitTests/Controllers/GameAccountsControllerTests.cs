@@ -34,7 +34,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetCollection_ReturnsAll()
+        public void GetCollectionReturnsAll()
         {
             var userProfileId = gameAccounts.First().UserProfileId;
 
@@ -48,7 +48,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
-        public void GetCollection_ByGamePlatformId(int gamePlatformId)
+        public void GetCollectionByGamePlatformId(int gamePlatformId)
         {
             var userProfileId = gameAccounts.First().UserProfileId;
 
@@ -60,7 +60,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Post_ReturnsCreateAtResult()
+        public void PostReturnsCreateAtResult()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -76,7 +76,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDteail_ReturnsOkObjectResult()
+        public void GetDteailReturnsOkObjectResult()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -90,7 +90,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDetail_GameAccountsIdDoesNotExist_ReturnsNotFound()
+        public void GetDetailGameAccountsIdDoesNotExistReturnsNotFound()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -103,7 +103,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDetail_UserIdDoesNotExist_ReturnsNotFound()
+        public void GetDetailUserIdDoesNotExistReturnsNotFound()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -116,7 +116,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Put_ReturnsOkResult()
+        public void PutReturnsOkResult()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -138,7 +138,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Put_GameAccountsIdDoesNotExist_ReturnsNotFound()
+        public void PutGameAccountsIdDoesNotExistReturnsNotFound()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -159,7 +159,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Put_UserIdDoesNotExist_ReturnsNotFound()
+        public void PutUserIdDoesNotExistReturnsNotFound()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -188,7 +188,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Delete_ReturnsNoContentResult()
+        public void DeleteReturnsNoContentResult()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -202,7 +202,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Delete_GameAccountsIdDoesNotExist_ReturnsNotFound()
+        public void DeleteGameAccountsIdDoesNotExistReturnsNotFound()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;
@@ -215,7 +215,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Delete_UserIdDoesNotExist_ReturnsNotFound()
+        public void DeleteUserIdDoesNotExistReturnsNotFound()
         {
             var testGameAccount = gameAccounts.First();
             var userProfileId = testGameAccount.UserProfileId;

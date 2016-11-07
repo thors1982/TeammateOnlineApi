@@ -34,7 +34,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetCollection_ReturnsAll()
+        public void GetCollectionReturnsAll()
         {
             var userProfileId = friends.First().UserProfileId;
 
@@ -46,7 +46,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Post_ReturnsCreateAtResult()
+        public void PostReturnsCreateAtResult()
         {
             var testFriend = friends.First();
             var userProfileId = testFriend.UserProfileId;
@@ -63,7 +63,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Post_ReturnsAlreadyExists()
+        public void PostReturnsAlreadyExists()
         {
             var testFriend = friends.First();
             var userProfileId = testFriend.UserProfileId;
@@ -76,7 +76,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDteail_ReturnsOkObjectResult()
+        public void GetDteailReturnsOkObjectResult()
         {
             var testFriend = friends.First();
             var userProfileId = testFriend.UserProfileId;
@@ -90,7 +90,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDetail_FriendIdDoesNotExist_ReturnsNotFound()
+        public void GetDetailFriendIdDoesNotExist_ReturnsNotFound()
         {
             var testFriend = friends.First();
             var userProfileId = testFriend.UserProfileId;
@@ -103,7 +103,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void GetDetail_UserIdDoesNotExist_ReturnsNotFound()
+        public void GetDetailUserIdDoesNotExistReturnsNotFound()
         {
             var testFriend = friends.First();
             var userProfileId = testFriend.UserProfileId;
@@ -116,7 +116,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Delete_ReturnsNoContentResult()
+        public void DeleteReturnsNoContentResult()
         {
             var testFriend = friends.First();
             var userProfileId = testFriend.UserProfileId;
@@ -130,7 +130,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Delete_FriendIdDoesNotExist_ReturnsNotFound()
+        public void DeleteFriendIdDoesNotExistReturnsNotFound()
         {
             var testFriend = friends.First();
             var userProfileId = testFriend.UserProfileId;
@@ -143,7 +143,7 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
         }
 
         [Fact]
-        public void Delete_UserIdDoesNotExist_ReturnsNotFound()
+        public void DeleteUserIdDoesNotExistReturnsNotFound()
         {
             var testFriend = friends.First();
             var userProfileId = testFriend.UserProfileId;

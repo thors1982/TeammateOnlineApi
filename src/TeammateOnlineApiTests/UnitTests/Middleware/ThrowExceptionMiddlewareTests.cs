@@ -8,7 +8,6 @@ using System.Net.Http;
 using TeammateOnlineApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using System.Threading;
 using System.Net;
 
 namespace TeammateOnlineApiTests.UnitTests.Middleware

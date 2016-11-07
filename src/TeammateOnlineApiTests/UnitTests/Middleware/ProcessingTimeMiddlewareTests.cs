@@ -37,7 +37,7 @@ namespace TeammateOnlineApiTests.UnitTests.Middleware
         }
 
         [Fact(DisplayName = "ProcessingTimeMiddleware - Check header greater than sleep")]
-        public async void AddProcessingTimeHeader_Returns200()
+        public async void AddProcessingTimeHeaderReturns200()
         {
             var requestMessage = new HttpRequestMessage(new HttpMethod("GET"), "/test-processing-time/");
             var responseMessage = await client.SendAsync(requestMessage);
