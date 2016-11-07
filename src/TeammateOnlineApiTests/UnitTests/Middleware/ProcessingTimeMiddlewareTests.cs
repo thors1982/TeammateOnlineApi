@@ -1,15 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using TeammateOnlineApi.Database;
-using TeammateOnlineApi.Database.Repositories;
 using Xunit;
-using TeammateOnlineApi.Models;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.Hosting;
-using TeammateOnlineApi;
 using System.Net.Http;
 using TeammateOnlineApi.Middleware;
 using Microsoft.AspNetCore.Builder;
@@ -51,7 +45,7 @@ namespace TeammateOnlineApiTests.UnitTests.Middleware
 
             Assert.Equal("X-ProcessingTime", processingTimeHeader.Key);
 
-            var processingTimeValue = Int32.Parse(processingTimeHeader.Value.FirstOrDefault().Replace(" ms", ""));
+            var processingTimeValue = int.Parse(processingTimeHeader.Value.FirstOrDefault().Replace(" ms", ""));
 
             Assert.True(processingTimeValue > sleepTimer);
         }
