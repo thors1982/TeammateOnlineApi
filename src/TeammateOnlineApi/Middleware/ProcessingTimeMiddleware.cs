@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TeammateOnlineApi.Middleware
@@ -28,7 +29,17 @@ namespace TeammateOnlineApi.Middleware
         private Task AddProcessingTimeHeader(object state, Stopwatch timer)
         {
             var httpContext = (HttpContext)state;
-            httpContext.Response.Headers.Add("X-ProcessingTime", new[] { timer.ElapsedMilliseconds.ToString() + " ms" });
+
+            var currentHeader = httpContext.Response.Headers.FirstOrDefault(h => h.Key == "X-ProcessingTime");
+            if (currentHeader.Key == null)
+            {
+                httpContext.Response.Headers["X-ProcessingTime"] = timer.ElapsedMilliseconds.ToString() + " ms";
+            }
+            else
+            {
+                httpContext.Response.Headers.Add("X-ProcessingTime", new[] { timer.ElapsedMilliseconds.ToString() + " ms" });
+            }
+            
 
             return Task.FromResult(0);
         }

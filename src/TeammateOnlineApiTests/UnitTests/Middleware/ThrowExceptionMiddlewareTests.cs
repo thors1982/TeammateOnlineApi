@@ -17,9 +17,7 @@ namespace TeammateOnlineApiTests.UnitTests.Middleware
         private TestServer server;
 
         private HttpClient client;
-
-        private int sleepTimer = 1000;
-
+        
         public ThrowExceptionMiddlewareTests()
         {
             var builder = new WebHostBuilder().Configure(
