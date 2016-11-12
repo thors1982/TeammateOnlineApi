@@ -35,7 +35,9 @@
             </ModulePaths>
             <Functions>
               <Exclude>
+                <!-- Auto generated code from Database Migrations -->
                 <Function>.*\TeammateOnlineApi.Migrations\..*</Function>
+                <!-- Code I don't really need to test -->
                 <Function>.*\TeammateOnlineApi.Database.SeedData\..*</Function>
                 <Function>.*\TeammateOnlineApi.Database.SampleData\..*</Function>
                 <Function>.*\TeammateOnlineApi.Startup\..*</Function>
