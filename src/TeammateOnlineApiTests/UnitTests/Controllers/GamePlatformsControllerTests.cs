@@ -39,8 +39,9 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
             mockGamePlatformRepository.Setup(repo => repo.GetAll()).Returns(gamePlatforms);
 
             var result = controller.GetCollection();
+            var okResult = Assert.IsType<OkObjectResult>(result);
 
-            Assert.Equal(gamePlatforms, result);
+            Assert.Equal(gamePlatforms, okResult.Value);
         }
 
         [Fact]

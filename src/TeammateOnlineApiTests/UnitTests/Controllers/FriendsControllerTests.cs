@@ -41,8 +41,9 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
             mockFriendRepository.Setup(repo => repo.GetAllByUserProfileId(userProfileId)).Returns(friends);
 
             var result = controller.GetCollection(userProfileId);
+            var okResult = Assert.IsType<OkObjectResult>(result);
 
-            Assert.Equal(friends, result);
+            Assert.Equal(friends, okResult.Value);
         }
 
         [Fact]

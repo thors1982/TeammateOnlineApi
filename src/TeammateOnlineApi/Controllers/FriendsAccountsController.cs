@@ -26,7 +26,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<GameAccount> GetCollection(int userProfileId, int gameAccountId)
+        public IActionResult GetCollection(int userProfileId, int gameAccountId)
         {
             var gameAccountList = new List<GameAccount>();
 
@@ -34,8 +34,7 @@ namespace TeammateOnlineApi.Controllers
 
             if (gameAccount == null || gameAccount.UserProfileId != userProfileId)
             {
-                HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-                return null;
+                return NotFound();
             }
 
             var friends = friendRepository.GetAllByUserProfileId(userProfileId);
@@ -45,7 +44,7 @@ namespace TeammateOnlineApi.Controllers
                 gameAccountList.AddRange(friendsGameAccounts);
             }
 
-            return gameAccountList;
+            return new OkObjectResult(gameAccountList);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public Search GetCollection([FromQuery]string query = null)
+        public IActionResult GetCollection([FromQuery]string query = null)
         {
             var searchResponse = new Search();
             searchResponse.UserProfiles = new List<UserProfile>();
@@ -30,13 +30,14 @@ namespace TeammateOnlineApi.Controllers
             {
                 // Find user profiles
                 var userProfileController = new UserProfilesController(userProfileRepository);
-                searchResponse.UserProfiles.AddRange(userProfileController.GetCollection(query: query));
+                var foundUserProfiles = (List<UserProfile>)userProfileController.GetCollection(query: query);
+                searchResponse.UserProfiles.AddRange(foundUserProfiles);
 
                 // Find gameaccounts
                 searchResponse.GameAccounts.AddRange(gameAccountRepository.Query(query));
             }
 
-            return searchResponse;
+            return new OkObjectResult(searchResponse);
         }
     }
 }

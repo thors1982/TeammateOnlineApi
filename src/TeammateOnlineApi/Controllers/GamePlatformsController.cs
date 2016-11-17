@@ -19,9 +19,9 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<GamePlatform> GetCollection()
+        public IActionResult GetCollection()
         {
-            return gamePlatformRepository.GetAll();
+            return new OkObjectResult(gamePlatformRepository.GetAll());
         }
 
         [HttpPost]

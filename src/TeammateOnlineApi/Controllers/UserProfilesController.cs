@@ -21,7 +21,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserProfile> GetCollection([FromQuery]string emailAddress = null, [FromQuery]string googleId = null, [FromQuery]string facebookId = null, [FromQuery]string query = null)
+        public IActionResult GetCollection([FromQuery]string emailAddress = null, [FromQuery]string googleId = null, [FromQuery]string facebookId = null, [FromQuery]string query = null)
         {
             var userProfileList = new List<UserProfile>();
 
@@ -46,7 +46,7 @@ namespace TeammateOnlineApi.Controllers
                 userProfileList = userProfileRepository.GetAll().ToList();
             }
 
-            return userProfileList;
+            return new OkObjectResult(userProfileList);
         }
 
         [HttpPost]

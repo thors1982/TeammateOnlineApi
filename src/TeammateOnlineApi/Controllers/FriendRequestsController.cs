@@ -23,7 +23,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<FriendRequest> GetCollection(int userProfileId)
+        public IActionResult GetCollection(int userProfileId)
         {
             var friendRequestsFromDatabase = friendRequestRepository.GetAllIncomingAndOutgoingRequests(userProfileId).Where(r => r.IsPending == true && r.IsAccepted == false);
             var responseFriendRequests = new List<FriendRequest>();
@@ -32,7 +32,7 @@ namespace TeammateOnlineApi.Controllers
                 responseFriendRequests.Add(TranslateFriendRequestForResponse(userProfileId, request));
             }
 
-            return responseFriendRequests;
+            return new OkObjectResult(responseFriendRequests);
         }
 
         [HttpPost]

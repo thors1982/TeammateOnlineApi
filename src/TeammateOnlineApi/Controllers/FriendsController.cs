@@ -22,9 +22,9 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Friend> GetCollection(int userProfileId)
+        public IActionResult GetCollection(int userProfileId)
         {
-            return friendRepository.GetAllByUserProfileId(userProfileId);
+            return new OkObjectResult(friendRepository.GetAllByUserProfileId(userProfileId));
         }
 
         [HttpPost]

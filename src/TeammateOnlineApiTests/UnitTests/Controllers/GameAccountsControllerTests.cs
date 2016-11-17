@@ -41,8 +41,9 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
             mockGameAccountRepository.Setup(repo => repo.GetAllByUserProfileId(userProfileId)).Returns(gameAccounts);
 
             var result = controller.GetCollection(userProfileId, null);
+            var okResult = Assert.IsType<OkObjectResult>(result);
 
-            Assert.Equal(gameAccounts, result);
+            Assert.Equal(gameAccounts, okResult.Value);
         }
 
         [Theory]
@@ -55,8 +56,9 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
             mockGameAccountRepository.Setup(repo => repo.GetAllByUserProfileId(userProfileId)).Returns(gameAccounts);
 
             var result = controller.GetCollection(userProfileId, gamePlatformId);
+            var okResult = Assert.IsType<OkObjectResult>(result);
 
-            Assert.Equal(gameAccounts.Where(g => g.GamePlatformId == gamePlatformId), result);
+            Assert.Equal(gameAccounts.Where(g => g.GamePlatformId == gamePlatformId), okResult.Value);
         }
 
         [Fact]

@@ -22,7 +22,7 @@ namespace TeammateOnlineApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<GameAccount> GetCollection(int userProfileId, [FromQuery]int? gamePlatformId)
+        public IActionResult GetCollection(int userProfileId, [FromQuery]int? gamePlatformId)
         {
             var gameAccountList = gameAccountRepository.GetAllByUserProfileId(userProfileId);
 
@@ -31,7 +31,7 @@ namespace TeammateOnlineApi.Controllers
                 gameAccountList = gameAccountList.Where(x => x.GamePlatformId == gamePlatformId);
             }
 
-            return gameAccountList;
+            return new OkObjectResult(gameAccountList);
         }
 
         [HttpPost]

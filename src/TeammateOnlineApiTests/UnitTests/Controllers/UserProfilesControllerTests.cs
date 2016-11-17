@@ -38,8 +38,9 @@ namespace TeammateOnlineApiTests.UnitTests.Controllers
             mockUserProfileRepository.Setup(repo => repo.GetAll()).Returns(userProfiles);
 
             var result = controller.GetCollection();
+            var okResult = Assert.IsType<OkObjectResult>(result);
 
-            Assert.Equal(userProfiles, result);
+            Assert.Equal(userProfiles, okResult.Value);
         }
 
         [Fact]
