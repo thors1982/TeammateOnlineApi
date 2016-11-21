@@ -39,7 +39,7 @@ namespace TeammateOnlineApi.Controllers
             }
             else if (!string.IsNullOrEmpty(query))
             {
-                userProfileList.AddRange(userProfileRepository.Query(query));
+                userProfileList.AddRange(GetUserProfilesFromQuery(query));
             }
             else
             {
@@ -102,6 +102,12 @@ namespace TeammateOnlineApi.Controllers
             userProfileRepository.Update(userProfile);
 
             return new OkResult();
+        }
+
+        [NonAction]
+        public IEnumerable<UserProfile> GetUserProfilesFromQuery(string query)
+        {
+            return userProfileRepository.Query(query);
         }
     }
 }

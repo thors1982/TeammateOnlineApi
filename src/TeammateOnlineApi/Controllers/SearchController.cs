@@ -30,7 +30,8 @@ namespace TeammateOnlineApi.Controllers
             {
                 // Find user profiles
                 var userProfileController = new UserProfilesController(userProfileRepository);
-                var foundUserProfiles = (List<UserProfile>)userProfileController.GetCollection(query: query);
+
+                var foundUserProfiles = userProfileController.GetUserProfilesFromQuery(query);
                 searchResponse.UserProfiles.AddRange(foundUserProfiles);
 
                 // Find gameaccounts
