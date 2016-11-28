@@ -52,6 +52,8 @@ namespace TeammateOnlineApi
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IFriendRepository, FriendRepository>();
             services.AddScoped<IFriendRequestRepository, FriendRequestRepository>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IUserGroupRepository, UserGroupRepository>();
 
             // Configure SQL connection string
             services.AddDbContext<TeammateOnlineContext>(options =>

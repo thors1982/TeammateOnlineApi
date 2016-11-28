@@ -24,6 +24,7 @@ namespace TeammateOnlineApi.Controllers
         [HttpGet]
         public IActionResult GetCollection(int userProfileId, [FromQuery]int? gamePlatformId)
         {
+            //Todo check for existence of userProfileId
             var gameAccountList = gameAccountRepository.GetAllByUserProfileId(userProfileId);
 
             if (gamePlatformId != null)

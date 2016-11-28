@@ -17,6 +17,10 @@ namespace TeammateOnlineApi.Database
 
         public DbSet<FriendRequest> FriendRequests { get; set; }
 
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<UserGroup> UserGroups { get; set; }
+
         public TeammateOnlineContext(DbContextOptions<TeammateOnlineContext> options) : base(options)
         {
             Database.EnsureCreated();
@@ -54,6 +58,11 @@ namespace TeammateOnlineApi.Database
 
             modelBuilder.Entity<FriendRequest>().HasIndex(fr => fr.UserProfileId);
             modelBuilder.Entity<FriendRequest>().HasIndex(fr => fr.FriendUserProfileId);
+
+            modelBuilder.Entity<Group>().HasIndex(g => g.Name);
+
+            modelBuilder.Entity<UserGroup>().HasIndex(g => g.UserProfileId);
+            modelBuilder.Entity<UserGroup>().HasIndex(g => g.GroupId);
         }
     }
 }

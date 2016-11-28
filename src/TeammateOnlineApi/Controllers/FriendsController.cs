@@ -24,6 +24,7 @@ namespace TeammateOnlineApi.Controllers
         [HttpGet]
         public IActionResult GetCollection(int userProfileId)
         {
+            //Todo check for existence of userProfileId
             return new OkObjectResult(friendRepository.GetAllByUserProfileId(userProfileId));
         }
 
